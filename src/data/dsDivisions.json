@@ -1,0 +1,13 @@
+[
+  { "id": "horana", "districtId": "kalutara", "name": { "en": "Horana", "si": "හොරණ", "ta": "ஹொரணை" } },
+  { "id": "ingiriya", "districtId": "kalutara", "name": { "en": "Ingiriya", "si": "ඉංගිරිය", "ta": "இங்கிரிய" } },
+  { "id": "walallawita", "districtId": "kalutara", "name": { "en": "Walallawita", "si": "වලල්ලාවිට", "ta": "வலல்லாவிட்ட" } },
+  { "id": "beruwala", "districtId": "kalutara", "name": { "en": "Beruwala", "si": "බේරුවල", "ta": "பேருவளை" } },
+  { "id": "palindanuwara", "districtId": "kalutara", "name": { "en": "Palindanuwara", "si": "පාලින්දනුවර", "ta": "பாலிந்தநுவர" } },
+  { "id": "bulathsinhala", "districtId": "kalutara", "name": { "en": "Bulathsinhala", "si": "බුලත්සිංහල", "ta": "புலத்சிங்கள" } },
+  { "id": "bandaragama", "districtId": "kalutara", "name": { "en": "Bandaragama", "si": "බණ්ඩාරගම", "ta": "பண்டாரகம" } },
+  { "id": "millaniya", "districtId": "kalutara", "name": { "en": "Millaniya", "si": "මිල්ලනිය", "ta": "மில்லனிய" } },
+  { "id": "kalutara-ds", "districtId": "kalutara", "name": { "en": "Kalutara", "si": "කළුතර", "ta": "களுத்துறை" } },
+  { "id": "panadura", "districtId": "kalutara", "name": { "en": "Panadura", "si": "පානදුර", "ta": "பாணந்துறை" } },
+  { "id": "matugama", "districtId": "kalutara", "name": { "en": "Matugama", "si": "මතුගම", "ta": "மத்துகம" } }
+]

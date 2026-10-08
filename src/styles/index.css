@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* Class-based dark mode: <html class="dark"> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Noto families cover Latin, Sinhala and Tamil; bundled locally via @fontsource (no external font CDN). */
+  --font-sans: "Noto Sans", "Noto Sans Sinhala", "Noto Sans Tamil", ui-sans-serif, system-ui, sans-serif;
+
+  /* Calm teal/blue brand scale. Use brand-700+ for text on white to meet 4.5:1 contrast. */
+  --color-brand-50: #f0fdfa;
+  --color-brand-100: #ccfbf1;
+  --color-brand-200: #99f6e4;
+  --color-brand-300: #5eead4;
+  --color-brand-400: #2dd4bf;
+  --color-brand-500: #14b8a6;
+  --color-brand-600: #0d9488;
+  --color-brand-700: #0f766e;
+  --color-brand-800: #115e59;
+  --color-brand-900: #134e4a;
+  --color-brand-950: #042f2e;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+  }
+
+  /* Sinhala and Tamil scripts need extra line height to avoid clipped vowel signs. */
+  :lang(si),
+  :lang(ta) {
+    line-height: 1.7;
+  }
+
+  /* Visible focus for keyboard users on every interactive element (WCAG 2.4.7 / 2.4.11). */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600 dark:outline-brand-300;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/*
+ * Chart tokens — validated categorical order from the dataviz reference palette
+ * (adjacent-pair CVD ΔE ≥ 8 in both modes). Dark mode uses its own selected steps.
+ * Colour is never the only channel: every chart has a legend and a table view.
+ */
+:root {
+  --chart-surface: #fcfcfb;
+  --chart-grid: #e5e4e0;
+  --chart-text: #52514e;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #4a3aa7;
+  --series-8: #e34948;
+}
+.dark {
+  --chart-surface: #0f172a;
+  --chart-grid: #334155;
+  --chart-text: #c3c2b7;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+}

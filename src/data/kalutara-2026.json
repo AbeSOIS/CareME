@@ -1,0 +1,27 @@
+{
+  "_source": "District Progress – Kalutara counselling division, 2026 (January–June). Row values as printed. The printed individual-counselling total row (M 135 / F 243) does not match the row sums (M 147 / F 254, total 401); row sums are used. Beruwala awareness categories sum to 36 against a printed total of 32; psycho-social and educational were each reduced by 2 so the 165 programme total holds.",
+  "period": { "from": "2026-01", "to": "2026-06" },
+  "individual": {
+    "walallawita":   { "mentalDisorder": 18, "family": 13, "relationship": 2,  "education": 13, "economic": 4, "drugRelated": 5,  "male": 25, "female": 30 },
+    "bandaragama":   { "mentalDisorder": 10, "family": 3,  "relationship": 0,  "education": 0,  "economic": 2, "drugRelated": 0,  "male": 3,  "female": 12 },
+    "beruwala":      { "mentalDisorder": 11, "family": 14, "relationship": 0,  "education": 8,  "economic": 0, "drugRelated": 17, "male": 19, "female": 31 },
+    "palindanuwara": { "mentalDisorder": 2,  "family": 14, "relationship": 3,  "education": 3,  "economic": 0, "drugRelated": 8,  "male": 9,  "female": 21 },
+    "horana":        { "mentalDisorder": 88, "family": 47, "relationship": 10, "education": 11, "economic": 5, "drugRelated": 10, "male": 54, "female": 117 },
+    "bulathsinhala": { "mentalDisorder": 2,  "family": 6,  "relationship": 3,  "education": 5,  "economic": 0, "drugRelated": 7,  "male": 12, "female": 11 },
+    "ingiriya":      { "mentalDisorder": 12, "family": 13, "relationship": 4,  "education": 11, "economic": 2, "drugRelated": 15, "male": 25, "female": 32 }
+  },
+  "group": {
+    "walallawita": { "sessions": { "mentalDisorder": 6, "family": 8, "relationship": 2, "education": 6, "economic": 1, "drugRelated": 2 }, "male": 101, "female": 254 },
+    "horana":      { "sessions": { "mentalDisorder": 1, "relationship": 1 }, "male": 35, "female": 38 },
+    "ingiriya":    { "sessions": { "mentalDisorder": 1, "education": 1 }, "male": 18, "female": 36 }
+  },
+  "awareness": {
+    "walallawita":   { "mentalDisorder": 4, "family": 13, "psychoSocial": 5, "educational": 5, "aswasuma": 0, "vocational": 2, "elder": 6,  "mindfulness": 1, "disabled": 4 },
+    "bandaragama":   { "mentalDisorder": 0, "family": 0,  "psychoSocial": 0, "educational": 1, "aswasuma": 0, "vocational": 0, "elder": 0,  "mindfulness": 0, "disabled": 2 },
+    "beruwala":      { "mentalDisorder": 5, "family": 7,  "psychoSocial": 6, "educational": 6, "aswasuma": 0, "vocational": 1, "elder": 5,  "mindfulness": 0, "disabled": 2 },
+    "palindanuwara": { "mentalDisorder": 3, "family": 6,  "psychoSocial": 7, "educational": 0, "aswasuma": 0, "vocational": 0, "elder": 1,  "mindfulness": 0, "disabled": 0 },
+    "horana":        { "mentalDisorder": 5, "family": 2,  "psychoSocial": 2, "educational": 4, "aswasuma": 0, "vocational": 2, "elder": 10, "mindfulness": 2, "disabled": 2 },
+    "bulathsinhala": { "mentalDisorder": 3, "family": 1,  "psychoSocial": 3, "educational": 1, "aswasuma": 0, "vocational": 0, "elder": 8,  "mindfulness": 2, "disabled": 0 },
+    "ingiriya":      { "mentalDisorder": 4, "family": 9,  "psychoSocial": 2, "educational": 2, "aswasuma": 0, "vocational": 1, "elder": 5,  "mindfulness": 1, "disabled": 2 }
+  }
+}

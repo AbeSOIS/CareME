@@ -1,0 +1,174 @@
+[
+  {
+    "id": "res_breathing",
+    "kind": "article",
+    "topic": "stress",
+    "state": "published",
+    "versions": {
+      "en": {
+        "title": "A two-minute breathing exercise",
+        "summary": "A simple way to calm your body when you feel tense or overwhelmed.",
+        "body": "Sit comfortably and rest your hands on your lap.\n\nBreathe in slowly through your nose while you count to four. Hold the breath gently for a count of two. Breathe out through your mouth while you count to six.\n\nRepeat this five to ten times. If you feel dizzy, return to normal breathing.\n\nPractising once or twice a day, even when you feel fine, makes it easier to use when you are stressed."
+      },
+      "si": {
+        "title": "විනාඩි දෙකක හුස්ම ගැනීමේ ව්‍යායාමය",
+        "summary": "ආතතියක් හෝ බරක් දැනෙන විට ශරීරය සන්සුන් කර ගැනීමට සරල ක්‍රමයක්.",
+        "body": "පහසුවෙන් වාඩි වී දෑත් උකුළේ තබා ගන්න.\n\nහතර දක්වා ගණන් කරමින් නාසයෙන් සෙමින් හුස්ම ගන්න. දෙක දක්වා ගණන් කරන තුරු හුස්ම මෘදුව රඳවා ගන්න. හය දක්වා ගණන් කරමින් මුවින් හුස්ම පිට කරන්න.\n\nමෙය පස් සිට දස වතාවක් නැවත කරන්න. කරකැවිල්ලක් දැනේ නම් සාමාන්‍ය හුස්ම ගැනීමට යන්න.\n\nහොඳින් සිටින දිනවලත් දිනකට එක් වරක් හෝ දෙවරක් පුහුණු වීමෙන්, ආතතිය ඇති විට එය භාවිතා කිරීම පහසු වේ."
+      },
+      "ta": {
+        "title": "இரண்டு நிமிட மூச்சுப் பயிற்சி",
+        "summary": "பதட்டமாக அல்லது அழுத்தமாக உணரும்போது உடலை அமைதிப்படுத்த ஓர் எளிய வழி.",
+        "body": "வசதியாக அமர்ந்து கைகளை மடியில் வைத்துக்கொள்ளுங்கள்.\n\nநான்கு வரை எண்ணியபடி மூக்கின் வழியாக மெதுவாக மூச்சை உள்ளிழுங்கள். இரண்டு வரை எண்ணும் வரை மெதுவாக மூச்சை நிறுத்துங்கள். ஆறு வரை எண்ணியபடி வாயின் வழியாக மூச்சை வெளியிடுங்கள்.\n\nஇதை ஐந்து முதல் பத்து முறை செய்யுங்கள். தலைச்சுற்றல் ஏற்பட்டால் சாதாரணமாக மூச்சு விடுங்கள்.\n\nநன்றாக இருக்கும் நாட்களிலும் தினமும் ஒன்று அல்லது இரண்டு முறை பயிற்சி செய்தால், மன அழுத்தத்தின்போது இதைப் பயன்படுத்துவது எளிதாகும்."
+      }
+    }
+  },
+  {
+    "id": "res_sleep",
+    "kind": "article",
+    "topic": "sleep",
+    "state": "published",
+    "versions": {
+      "en": {
+        "title": "Sleeping better",
+        "summary": "Small changes to your routine that can help you sleep.",
+        "body": "Try to go to bed and wake up at the same time every day.\n\nAvoid tea, coffee and heavy meals in the evening. Keep the room dark and quiet where you can.\n\nIf you cannot sleep after about twenty minutes, get up, do something calm in dim light, and return to bed when you feel sleepy.\n\nIf poor sleep continues for several weeks, talk to a counsellor or doctor."
+      },
+      "si": {
+        "title": "හොඳින් නිදා ගැනීම",
+        "summary": "නින්දට උපකාර විය හැකි දෛනික චර්යාවේ කුඩා වෙනස්කම්.",
+        "body": "සෑම දිනකම එකම වේලාවට නින්දට යාමට සහ අවදි වීමට උත්සාහ කරන්න.\n\nසවස් කාලයේ තේ, කෝපි සහ බර ආහාර වේල් වළක්වා ගන්න. හැකි තරම් කාමරය අඳුරු සහ නිශ්ශබ්ද ලෙස තබා ගන්න.\n\nවිනාඩි විස්සකට පමණ පසුත් නින්ද නොයයි නම්, නැගිට අඳුරු ආලෝකයක සන්සුන් දෙයක් කර, නිදිමත දැනෙන විට නැවත ඇඳට යන්න.\n\nසති කිහිපයක් දුර්වල නින්ද දිගටම පවතී නම්, උපදේශකයෙකු හෝ වෛද්‍යවරයෙකු සමඟ කතා කරන්න."
+      },
+      "ta": {
+        "title": "நன்றாகத் தூங்குதல்",
+        "summary": "தூக்கத்திற்கு உதவக்கூடிய அன்றாட வழக்கத்தில் சிறிய மாற்றங்கள்.",
+        "body": "ஒவ்வொரு நாளும் ஒரே நேரத்தில் தூங்கச் சென்று எழ முயற்சி செய்யுங்கள்.\n\nமாலை வேளையில் தேநீர், கோப்பி மற்றும் கனமான உணவுகளைத் தவிர்க்கவும். முடிந்தவரை அறையை இருட்டாகவும் அமைதியாகவும் வைத்திருங்கள்.\n\nசுமார் இருபது நிமிடங்களுக்குப் பின்னும் தூக்கம் வராவிட்டால், எழுந்து மங்கலான வெளிச்சத்தில் அமைதியான ஒன்றைச் செய்து, தூக்கம் வரும்போது மீண்டும் படுக்கைக்குச் செல்லுங்கள்.\n\nபல வாரங்களாகத் தூக்கமின்மை தொடர்ந்தால், ஆலோசகர் அல்லது மருத்துவருடன் பேசுங்கள்."
+      }
+    }
+  },
+  {
+    "id": "res_worry",
+    "kind": "article",
+    "topic": "anxiety",
+    "state": "published",
+    "versions": {
+      "en": {
+        "title": "When worry takes over",
+        "summary": "Understanding anxiety and simple steps to manage it.",
+        "body": "Everyone worries sometimes. Worry becomes a problem when it is hard to stop and gets in the way of daily life.\n\nTry setting aside fifteen minutes a day as 'worry time'. When a worry comes at another time, note it down and save it for later.\n\nGentle exercise, regular meals and talking to someone you trust can all help.\n\nIf anxiety stops you doing things you need to do, a counsellor can help you find ways to cope."
+      },
+      "si": {
+        "title": "කනස්සල්ල පාලනය කරගත නොහැකි වූ විට",
+        "summary": "කාංසාව තේරුම් ගැනීම සහ එය කළමනාකරණය කිරීමට සරල පියවර.",
+        "body": "සෑම කෙනෙකුටම සමහර විට කනස්සල්ලක් ඇති වේ. එය නවත්වා ගැනීමට අපහසු වී දෛනික ජීවිතයට බාධා වන විට ගැටලුවක් වේ.\n\nදිනකට විනාඩි පහළොවක් 'කනස්සල්ල සඳහා කාලය' ලෙස වෙන් කර ගන්න. වෙනත් වේලාවක කනස්සල්ලක් ආ විට එය සටහන් කර පසුවට තබා ගන්න.\n\nසැහැල්ලු ව්‍යායාම, නියමිත ආහාර වේල් සහ ඔබ විශ්වාස කරන අයෙකු සමඟ කතා කිරීම උපකාරී වේ.\n\nකාංසාව නිසා අවශ්‍ය දේ කිරීමට නොහැකි නම්, උපදේශකයෙකුට ඔබට උපකාර කළ හැකිය."
+      }
+    }
+  },
+  {
+    "id": "res_family_talk",
+    "kind": "video",
+    "topic": "family",
+    "state": "published",
+    "versions": {
+      "en": {
+        "title": "Talking through family disagreements",
+        "summary": "A short video on listening and speaking calmly at home.",
+        "body": "This video shows a family using three steps: pause before reacting, listen to understand, and agree on one small next step.\n\n(Video placeholder — media is hosted on the Ministry platform in production.)"
+      },
+      "si": {
+        "title": "පවුලේ එකඟ නොවීම් ගැන කතා කිරීම",
+        "summary": "නිවසේදී සන්සුන්ව සවන් දීම සහ කතා කිරීම පිළිබඳ කෙටි වීඩියෝවක්.",
+        "body": "ප්‍රතිචාර දැක්වීමට පෙර නතර වීම, තේරුම් ගැනීමට සවන් දීම, සහ කුඩා ඊළඟ පියවරකට එකඟ වීම යන පියවර තුන භාවිතා කරන පවුලක් මෙම වීඩියෝවේ දැක්වේ.\n\n(වීඩියෝ ස්ථාන දරන්නා — නිෂ්පාදන පද්ධතියේ මාධ්‍ය අමාත්‍යාංශ වේදිකාවේ තබා ඇත.)"
+      },
+      "ta": {
+        "title": "குடும்பக் கருத்து வேறுபாடுகளைப் பேசித் தீர்த்தல்",
+        "summary": "வீட்டில் அமைதியாகக் கேட்பது மற்றும் பேசுவது பற்றிய குறுகிய காணொளி.",
+        "body": "எதிர்வினையாற்றும் முன் நிதானித்தல், புரிந்துகொள்ளக் கேட்டல், ஒரு சிறிய அடுத்த படியில் உடன்படுதல் ஆகிய மூன்று படிகளைப் பயன்படுத்தும் ஒரு குடும்பத்தை இக்காணொளி காட்டுகிறது.\n\n(காணொளி இடம் — உற்பத்திப் பதிப்பில் ஊடகம் அமைச்சின் தளத்தில் இருக்கும்.)"
+      }
+    }
+  },
+  {
+    "id": "res_relax_audio",
+    "kind": "audio",
+    "topic": "wellbeing",
+    "state": "published",
+    "versions": {
+      "en": {
+        "title": "Guided relaxation (10 minutes)",
+        "summary": "An audio guide to relax your muscles one group at a time.",
+        "body": "Find a quiet place, sit or lie down, and follow the voice as it guides you to tense and relax each part of your body.\n\n(Audio placeholder — media is hosted on the Ministry platform in production.)"
+      },
+      "si": {
+        "title": "මඟ පෙන්වන ලිහිල් කිරීම (විනාඩි 10)",
+        "summary": "මාංශ පේශි කණ්ඩායම් එකින් එක ලිහිල් කිරීමට ශ්‍රව්‍ය මාර්ගෝපදේශයක්.",
+        "body": "නිශ්ශබ්ද තැනක වාඩි වී හෝ වැතිර, ශරීරයේ එක් එක් කොටස තද කර ලිහිල් කිරීමට මඟ පෙන්වන හඬ අනුගමනය කරන්න.\n\n(ශ්‍රව්‍ය ස්ථාන දරන්නා — නිෂ්පාදන පද්ධතියේ මාධ්‍ය අමාත්‍යාංශ වේදිකාවේ තබා ඇත.)"
+      },
+      "ta": {
+        "title": "வழிகாட்டப்பட்ட தளர்வு (10 நிமிடங்கள்)",
+        "summary": "தசைகளை ஒவ்வொரு பகுதியாகத் தளர்த்த ஒலி வழிகாட்டி.",
+        "body": "அமைதியான இடத்தில் அமர்ந்து அல்லது படுத்து, உடலின் ஒவ்வொரு பகுதியையும் இறுக்கித் தளர்த்த வழிகாட்டும் குரலைப் பின்பற்றுங்கள்.\n\n(ஒலி இடம் — உற்பத்திப் பதிப்பில் ஊடகம் அமைச்சின் தளத்தில் இருக்கும்.)"
+      }
+    }
+  },
+  {
+    "id": "res_substance",
+    "kind": "download",
+    "topic": "substance",
+    "state": "published",
+    "versions": {
+      "en": {
+        "title": "Cutting down on alcohol: a planning sheet",
+        "summary": "A printable worksheet to plan and track small changes.",
+        "body": "Use this sheet to write down why you want to cut down, your weekly goal, the situations that make it harder, and who can support you.\n\nCounsellors can go through it with you in a session."
+      },
+      "si": {
+        "title": "මත්පැන් භාවිතය අඩු කිරීම: සැලසුම් පත්‍රිකාව",
+        "summary": "කුඩා වෙනස්කම් සැලසුම් කර සටහන් කිරීමට මුද්‍රණය කළ හැකි පත්‍රිකාවක්.",
+        "body": "අඩු කිරීමට අවශ්‍ය හේතුව, සතිපතා ඉලක්කය, එය දුෂ්කර කරන අවස්ථා, සහ ඔබට සහාය විය හැකි අය මෙම පත්‍රිකාවේ ලියන්න.\n\nසැසියකදී උපදේශකවරුන්ට එය ඔබ සමඟ සාකච්ඡා කළ හැකිය."
+      },
+      "ta": {
+        "title": "மதுபானப் பாவனையைக் குறைத்தல்: திட்டமிடல் தாள்",
+        "summary": "சிறிய மாற்றங்களைத் திட்டமிட்டுக் கண்காணிக்க அச்சிடக்கூடிய பயிற்சித் தாள்.",
+        "body": "குறைக்க விரும்பும் காரணம், வாராந்த இலக்கு, கடினமாக்கும் சூழ்நிலைகள், உங்களுக்கு உதவக்கூடியவர்கள் ஆகியவற்றை இத்தாளில் எழுதுங்கள்.\n\nஆலோசகர்கள் அமர்வின்போது உங்களுடன் இதைப் பார்க்கலாம்."
+      }
+    }
+  },
+  {
+    "id": "res_low_mood",
+    "kind": "article",
+    "topic": "mood",
+    "state": "published",
+    "versions": {
+      "en": {
+        "title": "Small steps for low mood",
+        "summary": "Planning small, achievable activities can lift your mood over time.",
+        "body": "When you feel low, it is natural to do less, but doing less can make you feel worse.\n\nChoose one small activity each day that you used to enjoy or that gives you a sense of achievement, such as a short walk, a phone call, or tidying one corner.\n\nNotice how you feel before and after. Build up slowly."
+      }
+    }
+  },
+  {
+    "id": "res_exam_stress",
+    "kind": "article",
+    "topic": "stress",
+    "state": "draft",
+    "versions": {
+      "en": {
+        "title": "Exam stress for students and parents",
+        "summary": "Draft article awaiting review.",
+        "body": "Draft content."
+      }
+    }
+  },
+  {
+    "id": "res_old_helpline",
+    "kind": "article",
+    "topic": "wellbeing",
+    "state": "withdrawn",
+    "versions": {
+      "en": {
+        "title": "Old helpline list (withdrawn)",
+        "summary": "Withdrawn after numbers changed.",
+        "body": "Withdrawn."
+      }
+    }
+  }
+]
