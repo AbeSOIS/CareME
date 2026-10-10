@@ -1,11 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="si">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Care Me – Ministry digital counselling platform (prototype)" />
+    <meta name="theme-color" content="#1e3a8a" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
     <title>Care Me</title>
+    <script>
+      // Apply the stored theme and language before first paint. Without this the
+      // page always flashes light, and Sinhala/Tamil briefly render at Latin
+      // heading sizes because the :lang() type scale has not matched yet.
+      // Mirrors store/ui.ts; failures are ignored so private mode still works.
+      ;(function () {
+        try {
+          var t = localStorage.getItem('careme:ui:theme')
+          if (t !== 'light' && t !== 'dark') {
+            t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          }
+          document.documentElement.classList.toggle('dark', t === 'dark')
+          document.documentElement.style.colorScheme = t
+          var l = localStorage.getItem('careme:ui:language')
+          document.documentElement.lang = l === 'ta' || l === 'en' || l === 'si' ? l : 'si'
+        } catch (e) {
+          /* preference simply won't apply before hydration */
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

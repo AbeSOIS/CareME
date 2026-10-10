@@ -37,7 +37,7 @@ export function FormSections<T extends FieldValues>({ sections, form, readOnly }
     <div className="space-y-8">
       {sections.map((section) => (
         <section key={section.id} aria-labelledby={`sec-${section.id}`} className="space-y-5">
-          <h3 id={`sec-${section.id}`} className="border-b border-slate-200 pb-2 text-lg font-semibold dark:border-slate-700">
+          <h3 id={`sec-${section.id}`} className="border-b border-slate-200 pb-2 text-h3 dark:border-slate-700">
             {pick(section.title, lang)}
           </h3>
           <div className="grid gap-5 md:grid-cols-2">

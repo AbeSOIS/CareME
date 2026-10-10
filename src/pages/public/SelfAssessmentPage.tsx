@@ -19,7 +19,7 @@ export function SelfAssessmentPage() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <Link to="/self-assessment" className="text-sm font-medium text-brand-800 hover:underline dark:text-brand-200">
+      <Link to="/self-assessment" className="text-body-sm font-medium text-brand-800 hover:underline dark:text-brand-200">
         ← {t('assess.title')}
       </Link>
       <PageHeader

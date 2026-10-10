@@ -46,7 +46,7 @@ export default function SystemSettingsPage() {
       <div className="grid gap-6 lg:grid-cols-2">
         {GROUPS.map((g) => (
           <Card key={g.id}>
-            <h2 className="mb-4 text-lg font-semibold">{t(`admin.settingsGroups.${g.id}`)}</h2>
+            <h2 className="mb-4 text-h3">{t(`admin.settingsGroups.${g.id}`)}</h2>
             <div className="space-y-4">
               {g.fields.map((f) => (
                 <Input key={f} label={t(`admin.fields.${f}`)} type="number" min={1} required value={draft[f]} onChange={(e) => setDraft({ ...draft, [f]: Number(e.target.value) })} />

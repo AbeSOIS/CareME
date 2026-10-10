@@ -52,13 +52,13 @@ export function ProfilePage() {
       />
       <div className="grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-1">
-          <h2 className="flex items-center gap-2 text-lg font-semibold">
+          <h2 className="flex items-center gap-2 text-h3">
             <CalendarDays aria-hidden className="size-5" /> {t('profile.nextAppointment')}
           </h2>
           {next ? (
             <div className="mt-3 space-y-1">
               <AppointmentStatusBadge status={next.status} />
-              <p className="text-lg font-semibold">{fmt.dateLong(next.start)}</p>
+              <p className="text-h3">{fmt.dateLong(next.start)}</p>
               <p>
                 {fmt.time(next.start)} · {next.counsellorName}
               </p>
@@ -72,7 +72,7 @@ export function ProfilePage() {
         </Card>
 
         <Card className="lg:col-span-2">
-          <h2 className="text-lg font-semibold">{t('profile.personal')}</h2>
+          <h2 className="text-h3">{t('profile.personal')}</h2>
           <form
             className="mt-4 grid gap-4 sm:grid-cols-2"
             onSubmit={async (e) => {
@@ -116,7 +116,7 @@ export function ProfilePage() {
             </div>
           </form>
           {b.guardianConsent?.consentGiven && (
-            <p className="mt-4 text-sm">
+            <p className="mt-4 text-body-sm">
               <Badge tone="info">{t('profile.guardianOnFile', { name: b.guardianConsent.guardianName })}</Badge>
             </p>
           )}
@@ -124,7 +124,7 @@ export function ProfilePage() {
       </div>
 
       <Card className="mt-6">
-        <h2 className="flex items-center gap-2 text-lg font-semibold">
+        <h2 className="flex items-center gap-2 text-h3">
           <ClipboardCheck aria-hidden className="size-5" /> {t('assess.historyTitle')}
         </h2>
         <div className="mt-4">

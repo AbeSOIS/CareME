@@ -19,7 +19,7 @@ export function RecoverPage() {
 
   return (
     <Card className="mx-auto max-w-lg">
-      <h1 className="text-2xl font-bold">{t('auth.recoverTitle')}</h1>
+      <h1 className="text-h1">{t('auth.recoverTitle')}</h1>
       {done ? (
         <div className="mt-4 space-y-4">
           <Callout tone="success" role="status">

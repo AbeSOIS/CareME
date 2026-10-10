@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
+import { Check } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Button, PageHeader, Spinner, Tabs } from '../../components/ui'
+import { cn, Button, PageHeader, Spinner, Tabs } from '../../components/ui'
 import { ACTIONS, DATA_TYPES, ROLES } from '../../domain/permissions'
 import { useApiError } from '../../hooks/useApiError'
 import { useAsync } from '../../hooks/useAsync'
@@ -70,7 +71,7 @@ export default function RolesPage() {
       />
       <Tabs label={t('admin.roles')} active={role} onChange={(r) => setRole(r as Role)} tabs={ROLES.map((r) => ({ id: r, label: t(`roles.${r}`) }))}>
         <div className="relative overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
-          <table className="w-full min-w-[40rem] text-sm">
+          <table className="w-full min-w-[40rem] text-body-sm">
             <caption className="sr-only">
               {t('admin.rolesTitle')} — {t(`roles.${role}`)}
             </caption>
@@ -99,18 +100,29 @@ export default function RolesPage() {
                         <label className="sr-only" htmlFor={`${role}-${dt}-${a}`}>
                           {t(`admin.dataTypes.${dt}`)} — {t(`admin.action.${a}`)}
                         </label>
-                        <select
-                          id={`${role}-${dt}-${a}`}
-                          value={value}
-                          onChange={(e) => set(dt, a, e.target.value as PermissionScope | 'none')}
-                          className={`min-h-9 w-full rounded-md border px-2 ${value === 'none' ? 'border-slate-200 text-slate-500 dark:border-slate-700' : 'border-brand-400 bg-brand-50 font-semibold text-brand-900 dark:bg-brand-950 dark:text-brand-100'}`}
-                        >
-                          {SCOPES.map((s) => (
-                            <option key={s} value={s}>
-                              {t(`admin.scope.${s}`)}
-                            </option>
-                          ))}
-                        </select>
+                        <span className="flex items-center gap-1.5">
+                          <Check
+                            aria-hidden
+                            className={cn('size-4 shrink-0', value === 'none' ? 'invisible' : 'text-brand-700 dark:text-brand-300')}
+                          />
+                          <select
+                            id={`${role}-${dt}-${a}`}
+                            value={value}
+                            onChange={(e) => set(dt, a, e.target.value as PermissionScope | 'none')}
+                            className={cn(
+                              'min-h-10 w-full rounded-lg border px-2 text-body-sm',
+                              value === 'none'
+                                ? 'border-slate-300 text-slate-600 dark:border-slate-600 dark:text-slate-300'
+                                : 'border-brand-400 bg-brand-50 font-semibold text-brand-900 dark:bg-brand-950 dark:text-brand-100',
+                            )}
+                          >
+                            {SCOPES.map((s) => (
+                              <option key={s} value={s}>
+                                {t(`admin.scope.${s}`)}
+                              </option>
+                            ))}
+                          </select>
+                        </span>
                       </td>
                     )
                   })}

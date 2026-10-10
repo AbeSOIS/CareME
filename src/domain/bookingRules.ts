@@ -3,7 +3,7 @@ import type { Appointment, Counsellor, CounsellingLanguage, ID, Settings, Slot }
 import { generateSlots, isBookable, type CounsellorAvailability } from './slots'
 
 /** Statuses that use up one of the client's sessions (late cancellations and no-shows count). */
-const COUNTS_TOWARDS_CAP: ReadonlySet<Appointment['status']> = new Set([
+export const COUNTS_TOWARDS_CAP: ReadonlySet<Appointment['status']> = new Set([
   'requested',
   'confirmed',
   'completed',

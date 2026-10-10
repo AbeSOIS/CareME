@@ -1,7 +1,7 @@
 import { Activity, CloudSun, Smile, Wind } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { Badge, Callout, PageHeader } from '../../components/ui'
+import { Badge, Callout, PageHeader, cardSurfaceLink, cn } from '../../components/ui'
 import { ASSESSMENTS, ASSESSMENT_TYPES } from '../../config/assessments'
 import { useAuth } from '../../store/auth'
 
@@ -24,10 +24,10 @@ export function SelfAssessmentIndex() {
             <li key={type}>
               <Link
                 to={`/self-assessment/${type}`}
-                className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 transition-shadow hover:border-brand-400 hover:shadow-md dark:border-slate-700 dark:bg-slate-900"
+                className={cn(cardSurfaceLink, "flex h-full flex-col p-5")}
               >
                 <Icon aria-hidden className="size-8 text-brand-700 dark:text-brand-300" />
-                <h2 className="mt-3 text-xl font-semibold">{t(`assess.${type}`)}</h2>
+                <h2 className="mt-3 text-h2">{t(`assess.${type}`)}</h2>
                 <p className="mt-1 flex-1 text-slate-600 dark:text-slate-300">{t(`assess.${type}Desc`)}</p>
                 <div className="mt-4 flex flex-wrap items-center gap-2">
                   <Badge tone="brand">{t('assess.questions', { count: tool.items.length })}</Badge>

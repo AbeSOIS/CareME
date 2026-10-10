@@ -80,7 +80,7 @@ export default function CasePage() {
 
   return (
     <>
-      <Link to="/counsellor/cases" className="text-sm font-medium text-brand-800 hover:underline dark:text-brand-200">
+      <Link to="/counsellor/cases" className="text-body-sm font-medium text-brand-800 hover:underline dark:text-brand-200">
         ← {t('portal.casesTitle')}
       </Link>
       <PageHeader
@@ -135,8 +135,8 @@ export default function CasePage() {
           {tab === 'overview' && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-lg font-semibold">{t('case.progress')}</h2>
-                <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">{t('case.progressLead')}</p>
+                <h2 className="text-h3">{t('case.progress')}</h2>
+                <p className="mb-3 text-body-sm text-slate-600 dark:text-slate-300">{t('case.progressLead')}</p>
                 {progress.length ? (
                   <TrendChart
                     title={t('case.progress')}
@@ -153,14 +153,14 @@ export default function CasePage() {
                   <EmptyState>{t('case.noProgress')}</EmptyState>
                 )}
                 {record.assessments.length > 0 && (
-                  <p className="mt-3 text-sm">
+                  <p className="mt-3 text-body-sm">
                     {t('case.symptomTotal')}:{' '}
                     {record.assessments.map((a) => `${fmt.date(a.date)} — ${scaleTotal(a.symptoms as Record<string, string>, SYMPTOM_SECTION.options)}/30`).join(' · ')}
                   </p>
                 )}
               </div>
               <div>
-                <h2 className="mb-3 text-lg font-semibold">{t('case.sessionHistory')}</h2>
+                <h2 className="mb-3 text-h3">{t('case.sessionHistory')}</h2>
                 <DataTable
                   caption={t('case.sessionHistory')}
                   rows={appointments}
@@ -176,7 +176,7 @@ export default function CasePage() {
               </div>
               {selfAssessments.length > 0 && (
                 <div>
-                  <h2 className="mb-3 text-lg font-semibold">{t('case.selfAssessments')}</h2>
+                  <h2 className="mb-3 text-h3">{t('case.selfAssessments')}</h2>
                   <ul className="flex flex-wrap gap-2">
                     {selfAssessments.map((s) => (
                       <li key={s.id}>
@@ -244,7 +244,7 @@ export default function CasePage() {
                 <ol className="space-y-3">
                   {[...record.notes].reverse().map((n) => (
                     <li key={n.id} className="rounded-xl border border-slate-200 p-4 dark:border-slate-700">
-                      <div className="flex flex-wrap items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                      <div className="flex flex-wrap items-center gap-2 text-body-sm text-slate-600 dark:text-slate-400">
                         <span className="font-semibold text-slate-900 dark:text-slate-100">{fmt.dateTime(n.date)}</span>
                         <Badge>{t(`category.${n.category}`)}</Badge>
                         <Badge tone="brand">{t(`booking.modes.${n.mode}`)}</Badge>
@@ -331,8 +331,8 @@ export default function CasePage() {
                   return (
                     <li key={f.id} className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between">
                       <div>
-                        <p className={f.status === 'done' ? 'text-slate-500 line-through' : 'font-medium'}>{f.title}</p>
-                        <p className="text-sm text-slate-600 dark:text-slate-400">
+                        <p className={f.status === 'done' ? 'text-slate-600 line-through dark:text-slate-400' : 'font-medium'}>{f.title}</p>
+                        <p className="text-body-sm text-slate-600 dark:text-slate-400">
                           {t('case.dueDate')}: {fmt.date(f.dueDate)} {overdue && <Badge tone="danger">{t('case.overdue')}</Badge>} {f.status === 'done' && <Badge tone="success">{t('case.done')}</Badge>}
                         </p>
                       </div>

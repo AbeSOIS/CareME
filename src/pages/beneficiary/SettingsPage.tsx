@@ -36,12 +36,12 @@ export function SettingsPage() {
     <div className="mx-auto max-w-3xl space-y-6">
       <PageHeader title={t('profile.settingsTitle')} />
       <Card>
-        <h2 className="text-lg font-semibold">{t('common.language')}</h2>
+        <h2 className="text-h3">{t('common.language')}</h2>
         <LanguageSwitcher className="mt-3" />
       </Card>
 
       <Card>
-        <h2 className="text-lg font-semibold">{t('profile.notificationsTitle')}</h2>
+        <h2 className="text-h3">{t('profile.notificationsTitle')}</h2>
         <div className="mt-4 space-y-3">
           {TYPES.map((type) => (
             <Checkbox
@@ -66,13 +66,13 @@ export function SettingsPage() {
       </Card>
 
       <Card>
-        <h2 className="text-lg font-semibold">{t('profile.privacyTitle')}</h2>
+        <h2 className="text-h3">{t('profile.privacyTitle')}</h2>
         <ul className="mt-4 divide-y divide-slate-200 dark:divide-slate-700">
           {b.consents.map((c) => (
             <li key={c.id} className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="font-medium">{t(`profile.consentPurpose.${c.purpose}`)}</p>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
+                <p className="text-body-sm text-slate-600 dark:text-slate-400">
                   {c.withdrawnAt ? t('profile.consentWithdrawn', { date: fmt.date(c.withdrawnAt) }) : t('profile.consentGiven', { date: fmt.date(c.givenAt) })}{' '}
                   <Badge>{c.wordingVersion}</Badge>
                 </p>
@@ -99,7 +99,7 @@ export function SettingsPage() {
       </Card>
 
       <Card>
-        <h2 className="text-lg font-semibold">{t('profile.erasureTitle')}</h2>
+        <h2 className="text-h3">{t('profile.erasureTitle')}</h2>
         <p className="mt-1 text-slate-600 dark:text-slate-300">{t('profile.erasureBody')}</p>
         {b.erasureRequestedAt ? (
           <Callout tone="info" className="mt-4">

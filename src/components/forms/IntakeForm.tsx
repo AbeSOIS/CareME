@@ -87,7 +87,7 @@ export function IntakeForm({ record, counsellorName, onSaved }: { record: CaseRe
 
       <section aria-labelledby="prs" className="space-y-4">
         <div className="flex flex-wrap items-end justify-between gap-3 border-b border-slate-200 pb-2 dark:border-slate-700">
-          <h3 id="prs" className="text-lg font-semibold">
+          <h3 id="prs" className="text-h3">
             {pick(RATING_SCALE_TITLE, lang)}
           </h3>
           <Button
@@ -105,7 +105,7 @@ export function IntakeForm({ record, counsellorName, onSaved }: { record: CaseRe
         </div>
 
         <div className="relative overflow-x-auto">
-          <table className="w-full min-w-96 text-sm">
+          <table className="w-full min-w-96 text-body-sm">
             <caption className="sr-only">{t('case.compare')}</caption>
             <thead>
               <tr className="text-left text-slate-600 dark:text-slate-300">
@@ -169,7 +169,7 @@ export function IntakeForm({ record, counsellorName, onSaved }: { record: CaseRe
         />
       </section>
 
-      <div className="sticky bottom-0 -mx-5 flex justify-end border-t border-slate-200 bg-white/95 px-5 py-3 backdrop-blur dark:border-slate-700 dark:bg-slate-900/95">
+      <div className="sticky bottom-0 -mx-4 sm:-mx-5 flex justify-end border-t border-slate-200 bg-white/95 px-4 py-3 backdrop-blur sm:px-5 dark:border-slate-700 dark:bg-slate-900/95">
         <Button type="submit" loading={form.formState.isSubmitting}>
           {t('common.save')}
         </Button>

@@ -84,14 +84,16 @@ function Root() {
 function CounsellorLayout() {
   const { t } = useTranslation()
   const isOfficer = useAuth((s) => s.session?.effectiveRoles.includes('emergencyOfficer'))
+  const scheduling = t('nav.groupScheduling')
+  const clients = t('nav.groupClients')
   const items: SidebarItem[] = [
     { to: '/counsellor', label: t('nav.overview'), icon: LayoutDashboard, end: true },
-    { to: '/counsellor/appointments', label: t('nav.appointments'), icon: CalendarDays },
-    { to: '/counsellor/availability', label: t('nav.availability'), icon: CalendarClock },
-    { to: '/counsellor/cases', label: t('nav.cases'), icon: FolderHeart },
-    { to: '/counsellor/referrals', label: t('nav.referrals'), icon: Share2 },
-    { to: '/counsellor/groups', label: t('nav.groups'), icon: UsersRound },
-    { to: '/counsellor/alerts', label: t('nav.alerts'), icon: isOfficer ? Siren : Bell },
+    { to: '/counsellor/appointments', label: t('nav.appointments'), icon: CalendarDays, group: scheduling },
+    { to: '/counsellor/availability', label: t('nav.availability'), icon: CalendarClock, group: scheduling },
+    { to: '/counsellor/cases', label: t('nav.cases'), icon: FolderHeart, group: clients },
+    { to: '/counsellor/referrals', label: t('nav.referrals'), icon: Share2, group: clients },
+    { to: '/counsellor/groups', label: t('nav.groups'), icon: UsersRound, group: clients },
+    { to: '/counsellor/alerts', label: t('nav.alerts'), icon: isOfficer ? Siren : Bell, group: t('nav.groupEmergency') },
   ]
   return <PortalLayout items={items} title={t('nav.counsellorPortal')} homeTo="/counsellor" />
 }
@@ -99,21 +101,25 @@ function CounsellorLayout() {
 function AdminLayout() {
   const { t } = useTranslation()
   const isAdmin = useAuth((s) => s.session?.effectiveRoles.includes('admin'))
+  const insights = t('nav.groupInsights')
+  const people = t('nav.groupPeople')
+  const service = t('nav.groupService')
+  const system = t('nav.groupSystem')
   const items: SidebarItem[] = [
-    { to: '/admin/dashboard', label: t('nav.dashboard'), icon: LayoutDashboard },
-    { to: '/admin/reports', label: t('nav.reports'), icon: FileText },
+    { to: '/admin/dashboard', label: t('nav.dashboard'), icon: LayoutDashboard, group: insights },
+    { to: '/admin/reports', label: t('nav.reports'), icon: FileText, group: insights },
     ...(isAdmin
       ? [
-          { to: '/admin/users', label: t('nav.users'), icon: Users },
-          { to: '/admin/counsellors', label: t('nav.counsellors'), icon: UserCog },
-          { to: '/admin/roles', label: t('nav.roles'), icon: ShieldCheck },
-          { to: '/admin/content', label: t('nav.content'), icon: ScrollText },
-          { to: '/admin/roster', label: t('nav.roster'), icon: Siren },
-          { to: '/admin/groups', label: t('nav.groups'), icon: UsersRound },
-          { to: '/admin/waitlist', label: t('nav.waitlist'), icon: PhoneCall },
-          { to: '/admin/settings', label: t('nav.systemSettings'), icon: Settings2 },
-          { to: '/admin/audit', label: t('nav.audit'), icon: ListChecks },
-          { to: '/counsellor/alerts', label: t('nav.alerts'), icon: ClipboardList },
+          { to: '/admin/users', label: t('nav.users'), icon: Users, group: people },
+          { to: '/admin/counsellors', label: t('nav.counsellors'), icon: UserCog, group: people },
+          { to: '/admin/roles', label: t('nav.roles'), icon: ShieldCheck, group: people },
+          { to: '/admin/content', label: t('nav.content'), icon: ScrollText, group: service },
+          { to: '/admin/groups', label: t('nav.groups'), icon: UsersRound, group: service },
+          { to: '/admin/waitlist', label: t('nav.waitlist'), icon: PhoneCall, group: service },
+          { to: '/admin/roster', label: t('nav.roster'), icon: Siren, group: t('nav.groupEmergency') },
+          { to: '/counsellor/alerts', label: t('nav.alerts'), icon: ClipboardList, group: t('nav.groupEmergency') },
+          { to: '/admin/settings', label: t('nav.systemSettings'), icon: Settings2, group: system },
+          { to: '/admin/audit', label: t('nav.audit'), icon: ListChecks, group: system },
         ]
       : []),
   ]

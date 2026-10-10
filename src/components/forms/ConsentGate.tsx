@@ -63,7 +63,7 @@ export function ConsentGate({ ageThreshold, onConsent, onBack }: { ageThreshold:
           <div>
             <Checkbox label={t('booking.guardianConsent')} checked={g.consentGiven} onChange={(e) => setG({ ...g, consentGiven: e.target.checked })} aria-invalid={errors.consentGiven ? true : undefined} />
             {errors.consentGiven && (
-              <p role="alert" className="mt-1 text-sm font-medium text-red-700 dark:text-red-400">
+              <p role="alert" className="mt-1 text-body-sm font-medium text-red-700 dark:text-red-400">
                 {errors.consentGiven}
               </p>
             )}

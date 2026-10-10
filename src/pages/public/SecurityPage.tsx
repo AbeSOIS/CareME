@@ -24,7 +24,7 @@ export function SecurityPage() {
     <div className="mx-auto max-w-3xl space-y-6">
       <PageHeader title={t('nav.security')} />
       <Card>
-        <h2 className="text-lg font-semibold">{t('auth.mfaSetting')}</h2>
+        <h2 className="text-h3">{t('auth.mfaSetting')}</h2>
         <Checkbox
           className="mt-3"
           label={t('auth.mfaSetting')}
@@ -43,7 +43,7 @@ export function SecurityPage() {
       </Card>
       <DeviceSessions />
       <Card>
-        <h2 className="text-lg font-semibold">{t('auth.changePassword')}</h2>
+        <h2 className="text-h3">{t('auth.changePassword')}</h2>
         <form
           className="mt-4 grid gap-4 sm:grid-cols-2"
           onSubmit={async (e) => {

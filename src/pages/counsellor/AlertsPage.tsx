@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AlertPanel } from '../../components/feature/AlertPanel'
 import { HandoverBanner } from '../../components/feature/HandoverBanner'
-import { Callout, EmptyState, PageHeader, Tabs } from '../../components/ui'
+import { Badge, Callout, EmptyState, PageHeader, Tabs } from '../../components/ui'
 import { useAlerts } from '../../store/alerts'
 import { useAuth } from '../../store/auth'
 
@@ -34,7 +34,7 @@ export default function AlertsPage() {
         active={tab}
         onChange={setTab}
         tabs={[
-          { id: 'active', label: t('alerts.tabs.active'), badge: active.length ? <span className="rounded-full bg-red-600 px-2 text-xs font-bold text-white">{active.length}</span> : null },
+          { id: 'active', label: t('alerts.tabs.active'), badge: active.length ? <Badge tone="danger">{active.length}</Badge> : null },
           { id: 'closed', label: t('alerts.tabs.closed') },
         ]}
       >

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Plus, Trash2 } from 'lucide-react'
+import { Ban, CalendarCheck, Circle, Plus, Trash2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Badge, Button, Card, Checkbox, Input, PageHeader, Select, Spinner } from '../../components/ui'
+import { cn, Badge, Button, Card, Checkbox, Input, PageHeader, Select, Spinner } from '../../components/ui'
 import type { AvailabilityPattern } from '../../domain/slots'
 import { useApiError } from '../../hooks/useApiError'
 import { useAsync } from '../../hooks/useAsync'
@@ -34,7 +34,7 @@ export default function AvailabilityPage() {
     <>
       <PageHeader title={t('portal.availabilityTitle')} lead={t('portal.availabilityLead')} />
       <Card>
-        <h2 className="text-lg font-semibold">{t('portal.weeklyPattern')}</h2>
+        <h2 className="text-h3">{t('portal.weeklyPattern')}</h2>
         <ul className="mt-4 space-y-3">
           {pattern
             .map((p, i) => ({ p, i }))
@@ -87,7 +87,7 @@ export default function AvailabilityPage() {
       </Card>
 
       <Card className="mt-6">
-        <h2 className="text-lg font-semibold">{t('portal.oneOff')}</h2>
+        <h2 className="text-h3">{t('portal.oneOff')}</h2>
         <form
           className="mt-4 grid items-end gap-3 sm:grid-cols-[1fr_10rem_auto]"
           onSubmit={async (e) => {
@@ -110,13 +110,52 @@ export default function AvailabilityPage() {
       </Card>
 
       <Card className="mt-6">
-        <h2 className="text-lg font-semibold">{t('portal.upcomingSlots')}</h2>
+        <h2 className="text-h3">{t('portal.upcomingSlots')}</h2>
+        <ul className="mt-3 flex flex-wrap gap-3" aria-label={t('portal.slotLegend')}>
+          <li className="inline-flex items-center gap-2 text-body-sm">
+            <span aria-hidden className="inline-flex size-6 items-center justify-center rounded-md border-2 border-green-600 bg-green-50 dark:bg-green-950">
+              <Circle className="size-3 text-green-700 dark:text-green-300" />
+            </span>
+            {t('portal.slotOpen')}
+          </li>
+          <li className="inline-flex items-center gap-2 text-body-sm">
+            <span aria-hidden className="inline-flex size-6 items-center justify-center rounded-md border-2 border-brand-600 bg-brand-50 dark:bg-brand-950">
+              <CalendarCheck className="size-3.5 text-brand-700 dark:text-brand-300" />
+            </span>
+            {t('portal.booked')}
+          </li>
+          <li className="inline-flex items-center gap-2 text-body-sm">
+            <span aria-hidden className="inline-flex size-6 items-center justify-center rounded-md border-2 border-slate-500 bg-slate-100 dark:bg-slate-800">
+              <Ban className="size-3.5 text-slate-700 dark:text-slate-300" />
+            </span>
+            {t('portal.slotBlocked')}
+          </li>
+        </ul>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {(data?.slots ?? []).map((s) => (
-            <li key={s.id} className="flex items-center justify-between gap-2 rounded-lg border border-slate-200 px-3 py-2 dark:border-slate-700">
-              <span className="text-sm">
-                <span className="block font-semibold">{fmt.dayShort(s.start)}</span>
-                {fmt.time(s.start)} · {t('common.minutes', { count: s.durationMin })}
+            <li
+              key={s.id}
+              className={cn(
+                'flex items-center justify-between gap-2 rounded-xl border border-s-4 px-3 py-2',
+                s.appointmentId
+                  ? 'border-slate-200 border-s-brand-600 bg-brand-50 dark:border-slate-700 dark:border-s-brand-400 dark:bg-brand-950/40'
+                  : s.blocked
+                    ? 'border-slate-200 border-s-slate-500 bg-slate-100 dark:border-slate-700 dark:bg-slate-800'
+                    : 'border-slate-200 border-s-green-600 bg-green-50 dark:border-slate-700 dark:bg-green-950/40',
+              )}
+            >
+              <span className="flex items-center gap-2 text-body-sm">
+                {s.appointmentId ? (
+                  <CalendarCheck aria-hidden className="size-4 shrink-0 text-brand-700 dark:text-brand-300" />
+                ) : s.blocked ? (
+                  <Ban aria-hidden className="size-4 shrink-0 text-slate-700 dark:text-slate-300" />
+                ) : (
+                  <Circle aria-hidden className="size-3 shrink-0 text-green-700 dark:text-green-300" />
+                )}
+                <span>
+                  <span className="block font-semibold">{fmt.dayShort(s.start)}</span>
+                  {fmt.time(s.start)} · {t('common.minutes', { count: s.durationMin })}
+                </span>
               </span>
               {s.appointmentId ? (
                 <Badge tone="brand">{t('portal.booked')}</Badge>

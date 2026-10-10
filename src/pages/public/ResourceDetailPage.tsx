@@ -31,14 +31,14 @@ export function ResourceDetailPage() {
 
   return (
     <article className="mx-auto max-w-3xl">
-      <Link to="/resources" className="text-sm font-medium text-brand-800 hover:underline dark:text-brand-200">
+      <Link to="/resources" className="text-body-sm font-medium text-brand-800 hover:underline dark:text-brand-200">
         ← {t('resources.backToList')}
       </Link>
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <Badge tone="brand">{t(`resources.kind.${data.kind}`)}</Badge>
         <Badge>{t(`resources.topic.${data.topic}`)}</Badge>
       </div>
-      <h1 className="mt-3 text-3xl font-bold" lang={fallback ? 'en' : undefined}>
+      <h1 className="mt-3 text-h1" lang={fallback ? 'en' : undefined}>
         {v.title}
       </h1>
       {fallback && (
@@ -46,18 +46,18 @@ export function ResourceDetailPage() {
           {t('resources.notInLanguage')}
         </Callout>
       )}
-      <p className="mt-4 text-lg text-slate-700 dark:text-slate-300" lang={fallback ? 'en' : undefined}>
+      <p className="mt-4 text-lead text-slate-700 dark:text-slate-200" lang={fallback ? 'en' : undefined}>
         {v.summary}
       </p>
       {(data.kind === 'video' || data.kind === 'audio') && (
         <div className="mt-6 flex aspect-video items-center justify-center rounded-2xl bg-slate-900 p-6 text-center text-slate-200">
           <div>
             <Icon aria-hidden className="mx-auto size-12" />
-            <p className="mt-3 text-sm">{t('resources.mediaPlaceholder')}</p>
+            <p className="mt-3 text-body-sm">{t('resources.mediaPlaceholder')}</p>
           </div>
         </div>
       )}
-      <div className="mt-6 space-y-4 text-lg leading-relaxed" lang={fallback ? 'en' : undefined}>
+      <div className="mt-6 max-w-prose space-y-4 text-lead" lang={fallback ? 'en' : undefined}>
         {v.body.split('\n\n').map((para, i) => (
           <p key={i}>{para}</p>
         ))}

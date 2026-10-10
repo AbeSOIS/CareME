@@ -62,7 +62,7 @@ export function AssessmentForm({ record, counsellorName, onSaved }: { record: Ca
                   type="button"
                   aria-pressed={draft.id === a.id}
                   onClick={() => setDraft(a)}
-                  className={cn('min-h-11 rounded-lg border px-3 text-sm', draft.id === a.id ? 'border-brand-600 bg-brand-50 dark:bg-brand-950' : 'border-slate-300 dark:border-slate-600')}
+                  className={cn('min-h-11 rounded-lg border px-3 text-body-sm', draft.id === a.id ? 'border-brand-600 bg-brand-50 dark:bg-brand-950' : 'border-slate-300 dark:border-slate-600')}
                 >
                   {fmt.date(a.date)} · <Badge>{scaleTotal(a.symptoms as Record<string, string>, SYMPTOM_SECTION.options)}/30</Badge>
                 </button>
@@ -78,7 +78,7 @@ export function AssessmentForm({ record, counsellorName, onSaved }: { record: Ca
       </div>
 
       <section aria-labelledby="sec-a" className="space-y-4">
-        <h3 id="sec-a" className="border-b border-slate-200 pb-2 text-lg font-semibold dark:border-slate-700">
+        <h3 id="sec-a" className="border-b border-slate-200 pb-2 text-h3 dark:border-slate-700">
           {pick(SUBSTANCE_SECTION.title, lang)}
         </h3>
         <div className="grid gap-4 md:grid-cols-2">
@@ -98,7 +98,7 @@ export function AssessmentForm({ record, counsellorName, onSaved }: { record: Ca
       </section>
 
       <section aria-labelledby="sec-e" className="space-y-4">
-        <h3 id="sec-e" className="border-b border-slate-200 pb-2 text-lg font-semibold dark:border-slate-700">
+        <h3 id="sec-e" className="border-b border-slate-200 pb-2 text-h3 dark:border-slate-700">
           {pick(SYMPTOM_SECTION.title, lang)}
         </h3>
         <RatingScale
@@ -109,13 +109,13 @@ export function AssessmentForm({ record, counsellorName, onSaved }: { record: Ca
           value={draft.symptoms as Record<string, string>}
           onChange={(item, v) => setDraft({ ...draft, symptoms: { ...draft.symptoms, [item]: v as Assessment['symptoms'][string] } })}
         />
-        <p className="text-sm font-medium">
+        <p className="text-body-sm font-medium">
           {t('case.symptomTotal')}: {scaleTotal(draft.symptoms as Record<string, string>, SYMPTOM_SECTION.options)}/30
         </p>
       </section>
 
       <section aria-labelledby="sec-f" className="space-y-4">
-        <h3 id="sec-f" className="border-b border-slate-200 pb-2 text-lg font-semibold dark:border-slate-700">
+        <h3 id="sec-f" className="border-b border-slate-200 pb-2 text-h3 dark:border-slate-700">
           {pick(FUNCTIONING_SECTION.title, lang)}
         </h3>
         {FUNCTIONING_SECTION.items.map((item) => {
@@ -137,7 +137,7 @@ export function AssessmentForm({ record, counsellorName, onSaved }: { record: Ca
         })}
       </section>
 
-      <div className="sticky bottom-0 -mx-5 flex justify-end border-t border-slate-200 bg-white/95 px-5 py-3 backdrop-blur dark:border-slate-700 dark:bg-slate-900/95">
+      <div className="sticky bottom-0 -mx-4 sm:-mx-5 flex justify-end border-t border-slate-200 bg-white/95 px-4 py-3 backdrop-blur sm:px-5 dark:border-slate-700 dark:bg-slate-900/95">
         <Button onClick={save} loading={busy}>
           {t('common.save')}
         </Button>

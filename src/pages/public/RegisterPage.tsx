@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button, Callout, Card, Checkbox, Input, Select } from '../../components/ui'
+import { Stepper, Button, Callout, Card, Checkbox, Input, Select } from '../../components/ui'
 import { DEMO_OTP } from '../../config/defaults'
 import { useLookups } from '../../hooks/useLookups'
 import { authApi } from '../../services/api'
@@ -45,12 +45,15 @@ export function RegisterPage() {
   const err = (code?: string) => (code ? (code === 'passwordsMustMatch' ? t('auth.passwordsMustMatch') : t(`errors.${code}`)) : undefined)
   const e = form.formState.errors
 
+  const registerSteps = [t('auth.stepDetails'), t('auth.stepVerify'), t('auth.stepDone')]
+
   return (
     <Card className="mx-auto max-w-2xl">
+      <Stepper className="mb-6" label={t('auth.registerSteps')} current={challenge ? 1 : 0} steps={registerSteps} />
       {!challenge ? (
         <>
-          <h1 className="text-2xl font-bold">{t('auth.registerTitle')}</h1>
-          <p className="mt-1 text-slate-600 dark:text-slate-300">{t('auth.registerLead')}</p>
+          <h1 className="text-h1">{t('auth.registerTitle')}</h1>
+          <p className="mt-1 max-w-prose text-lead text-slate-600 dark:text-slate-300">{t('auth.registerLead')}</p>
           <form
             noValidate
             className="mt-6 space-y-4"
@@ -100,7 +103,7 @@ export function RegisterPage() {
             <div>
               <Checkbox label={t('auth.agreeTerms')} {...form.register('agree')} />
               {e.agree && (
-                <p role="alert" className="mt-1 text-sm font-medium text-red-700 dark:text-red-400">
+                <p role="alert" className="mt-1 text-body-sm font-medium text-red-700 dark:text-red-400">
                   {t('errors.consentRequired')}
                 </p>
               )}
@@ -117,8 +120,8 @@ export function RegisterPage() {
         </>
       ) : (
         <>
-          <h1 className="text-2xl font-bold">{t('auth.verifyPhoneTitle')}</h1>
-          <p className="mt-1 text-slate-600 dark:text-slate-300">{t('auth.verifyPhoneLead', { phone: challenge.phone })}</p>
+          <h1 className="text-h1">{t('auth.verifyPhoneTitle')}</h1>
+          <p className="mt-1 max-w-prose text-lead text-slate-600 dark:text-slate-300">{t('auth.verifyPhoneLead', { phone: challenge.phone })}</p>
           <form
             className="mt-6 space-y-4"
             onSubmit={async (ev) => {

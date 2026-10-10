@@ -55,16 +55,16 @@ export default function DashboardPage() {
             <Button onClick={refresh} loading={refreshing} icon={<RefreshCw aria-hidden className="size-4" />}>
               {t('dashboard.refreshNow')}
             </Button>
-            <p className="text-sm text-slate-600 dark:text-slate-400" aria-live="polite">
+            <p className="text-body-sm text-slate-600 dark:text-slate-400" aria-live="polite">
               {data && t('dashboard.lastRefreshed', { time: fmt.dateTime(data.refreshedAt) })}
             </p>
-            <p className="text-xs text-slate-500">{t('dashboard.autoRefresh', { minutes: Math.min(refreshMin, 15) })}</p>
+            <p className="text-caption text-slate-600 dark:text-slate-300">{t('dashboard.autoRefresh', { minutes: Math.min(refreshMin, 15) })}</p>
           </div>
         }
       />
 
       <Card className="mb-6">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))]">
           <Select label={t('auth.district')} value={filters.districtId ?? ''} onChange={(e) => set({ districtId: e.target.value || undefined })} placeholder={t('dashboard.allDistricts')} options={districtOptions} />
           <Select
             label={t('auth.gender')}

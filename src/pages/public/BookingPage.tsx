@@ -8,8 +8,9 @@ import { CircleCheck } from 'lucide-react'
 import { EmergencyInfo } from '../../components/feature/EmergencyInfo'
 import { SlotPicker } from '../../components/feature/SlotPicker'
 import { ConsentGate } from '../../components/forms/ConsentGate'
-import { Badge, Button, ButtonLink, Callout, Card, Checkbox, Input, RadioGroup, Select, Spinner } from '../../components/ui'
+import { Badge, Button, ButtonLink, Callout, Card, Checkbox, Input, RadioGroup, Select, Spinner, Stepper } from '../../components/ui'
 import { isMinor } from '../../domain/age'
+import { COUNTS_TOWARDS_CAP } from '../../domain/bookingRules'
 import { useApiError } from '../../hooks/useApiError'
 import { useAsync } from '../../hooks/useAsync'
 import { useFormat } from '../../hooks/useFormat'
@@ -22,6 +23,14 @@ import type { AppointmentView, CounsellingLanguage, SessionMode, Slot } from '..
 import { NotFoundPage } from './NotFoundPage'
 
 type Step = 'time' | 'details' | 'consent' | 'review' | 'done'
+
+/** Labels for the visible stepper. `done` never appears in it. */
+const STEP_LABEL: Record<Exclude<Step, 'done'>, string> = {
+  time: 'booking.stepTime',
+  details: 'booking.stepDetails',
+  consent: 'booking.stepConsent',
+  review: 'booking.stepReview',
+}
 
 const detailsSchema = z.object({
   fullName: z.string().trim().min(2, 'requiredField'),
@@ -84,13 +93,14 @@ export function BookingPage() {
   if (data.loading) return <Spinner label={t('common.loading')} />
   if (data.error || !counsellor) return <NotFoundPage />
 
-  const sessionsUsed = (used.data ?? []).filter((a) => ['requested', 'confirmed', 'completed', 'noShow', 'lateCancelled'].includes(a.status)).length
+  const sessionsUsed = (used.data ?? []).filter((a) => COUNTS_TOWARDS_CAP.has(a.status)).length
   const capReached = isBeneficiary && sessionsUsed >= settings.maxSessionsPerClient
   const dob = profile.data?.dateOfBirth ?? details?.dateOfBirth
   const minor = isMinor(dob, settings.minorAgeThreshold)
   const needsGuardian = minor && !profile.data?.guardianConsent?.consentGiven
-  const steps: Step[] = ['time', 'details', ...(needsGuardian ? (['consent'] as Step[]) : []), 'review']
-  const stepIndex = steps.indexOf(step) + 1
+  const steps: Array<Exclude<Step, 'done'>> = ['time', 'details', ...(needsGuardian ? (['consent'] as const) : []), 'review']
+  const currentStep = steps.indexOf(step as Exclude<Step, 'done'>)
+  const stepIndex = currentStep + 1
 
   const afterDetails = () => setStep(needsGuardianFor(details?.dateOfBirth) ? 'consent' : 'review')
   function needsGuardianFor(birth?: string) {
@@ -129,16 +139,21 @@ export function BookingPage() {
 
   const header = (
     <div className="mb-6">
-      <Link to="/counsellors" className="text-sm font-medium text-brand-800 hover:underline dark:text-brand-200">
+      <Link to="/counsellors" className="text-body-sm font-medium text-brand-800 hover:underline dark:text-brand-200">
         ← {t('nav.findCounsellor')}
       </Link>
-      <h1 ref={headingRef} tabIndex={-1} className="mt-2 text-2xl font-bold focus:outline-none sm:text-3xl">
+      <h1 ref={headingRef} tabIndex={-1} className="mt-2 text-h1 focus:outline-none">
         {step === 'done' ? t('booking.requestedTitle') : t('booking.title')}
       </h1>
       <p className="text-slate-600 dark:text-slate-300">
         {t('booking.with', { name: counsellor.fullName })} · {districtName(counsellor.districtId)}
       </p>
-      {step !== 'done' && <p className="mt-1 text-sm font-medium text-brand-800 dark:text-brand-200">{t('booking.step', { current: stepIndex, total: steps.length })}</p>}
+      {step !== 'done' && (
+        <>
+          <p className="sr-only">{t('booking.step', { current: stepIndex, total: steps.length })}</p>
+          <Stepper className="mt-4" label={t('booking.title')} current={currentStep} steps={steps.map((id) => t(STEP_LABEL[id]))} />
+        </>
+      )}
     </div>
   )
 
@@ -175,8 +190,8 @@ export function BookingPage() {
       {step === 'time' && (
         <Card className="space-y-6">
           <div>
-            <h2 className="text-lg font-semibold">{t('booking.chooseTime')}</h2>
-            <p className="text-sm text-slate-600 dark:text-slate-300">{t('booking.chooseTimeLead', { minutes: settings.maxSessionDurationMin })}</p>
+            <h2 className="text-h3">{t('booking.chooseTime')}</h2>
+            <p className="text-body-sm text-slate-600 dark:text-slate-300">{t('booking.chooseTimeLead', { minutes: settings.maxSessionDurationMin })}</p>
           </div>
           <SlotPicker slots={data.data!.slots} value={slot?.id ?? null} onChange={(s) => {
             setSlot(s)
@@ -211,8 +226,8 @@ export function BookingPage() {
       {step === 'details' && (
         <Card className="space-y-5">
           <div>
-            <h2 className="text-lg font-semibold">{t('booking.yourDetails')}</h2>
-            <p className="text-sm text-slate-600 dark:text-slate-300">{t('booking.detailsLead')}</p>
+            <h2 className="text-h3">{t('booking.yourDetails')}</h2>
+            <p className="text-body-sm text-slate-600 dark:text-slate-300">{t('booking.detailsLead')}</p>
           </div>
           {isBeneficiary ? (
             <>
@@ -251,7 +266,7 @@ export function BookingPage() {
               <div>
                 <Checkbox label={t('booking.consentCounselling')} {...form.register('consent')} aria-invalid={form.formState.errors.consent ? true : undefined} />
                 {form.formState.errors.consent && (
-                  <p role="alert" className="mt-1 text-sm font-medium text-red-700 dark:text-red-400">
+                  <p role="alert" className="mt-1 text-body-sm font-medium text-red-700 dark:text-red-400">
                     {t('errors.consentRequired')}
                   </p>
                 )}
@@ -282,7 +297,7 @@ export function BookingPage() {
 
       {step === 'review' && slot && (
         <Card className="space-y-5">
-          <h2 className="text-lg font-semibold">{t('booking.review')}</h2>
+          <h2 className="text-h3">{t('booking.review')}</h2>
           <dl className="grid gap-3 sm:grid-cols-2">
             <Row label={t('common.date')} value={fmt.dateLong(slot.start)} />
             <Row label={t('common.time')} value={`${fmt.time(slot.start)} · ${t('common.minutes', { count: slot.durationMin })}`} />
@@ -291,7 +306,7 @@ export function BookingPage() {
             <Row label={t('portal.client')} value={details?.fullName ?? profile.data?.fullName ?? ''} />
             {guardian && <Row label={t('booking.guardianName')} value={`${guardian.guardianName} (${t(`booking.relationships.${guardian.relationship}`)})`} />}
           </dl>
-          {isBeneficiary && <p className="text-sm">{t('booking.sessionNumber', { n: sessionsUsed + 1, max: settings.maxSessionsPerClient })}</p>}
+          {isBeneficiary && <p className="text-body-sm">{t('booking.sessionNumber', { n: sessionsUsed + 1, max: settings.maxSessionsPerClient })}</p>}
           <div className="flex flex-wrap justify-between gap-2">
             <Button variant="secondary" onClick={() => setStep(needsGuardian || guardian ? 'consent' : 'details')}>
               {t('common.back')}
@@ -321,8 +336,8 @@ export function BookingPage() {
           </Card>
           <Card>
             <h2 className="font-semibold">{t('booking.previewTitle')}</h2>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{t('booking.previewBody')}</p>
-            <div className="mt-3 max-w-sm rounded-2xl bg-slate-100 p-3 text-sm dark:bg-slate-800">
+            <p className="mt-1 text-body-sm text-slate-600 dark:text-slate-300">{t('booking.previewBody')}</p>
+            <div className="mt-3 max-w-sm rounded-2xl bg-slate-100 p-3 text-body-sm dark:bg-slate-800">
               <Badge>SMS</Badge>
               <p className="mt-2">{t('booking.previewSms', { date: fmt.date(result.start), time: fmt.time(result.start) })}</p>
             </div>
@@ -347,7 +362,7 @@ export function BookingPage() {
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-lg bg-slate-50 p-3 dark:bg-slate-800">
-      <dt className="text-sm text-slate-600 dark:text-slate-400">{label}</dt>
+      <dt className="text-body-sm text-slate-600 dark:text-slate-400">{label}</dt>
       <dd className="font-semibold">{value}</dd>
     </div>
   )

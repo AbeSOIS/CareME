@@ -80,7 +80,7 @@ export default function UsersPage() {
       <Tabs label={t('admin.usersTitle')} active={tab} onChange={setTab} tabs={[{ id: 'accounts', label: t('admin.usersTitle') }, { id: 'beneficiaries', label: t('admin.beneficiaryRecords') }]}>
         {tab === 'accounts' ? (
           <>
-            <div className="mb-4 grid gap-4 sm:grid-cols-2 lg:max-w-2xl">
+            <div className="mb-4 grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))] lg:max-w-2xl">
               <Input label={t('common.search')} type="search" value={q} onChange={(e) => setQ(e.target.value)} />
               <Select label={t('admin.roles')} value={roleFilter} onChange={(e) => setRoleFilter(e.target.value)} placeholder={t('common.all')} options={ASSIGNABLE.map((r) => ({ value: r, label: t(`roles.${r}`) }))} />
             </div>
@@ -99,7 +99,7 @@ export default function UsersPage() {
                     render: (u) => (
                       <span>
                         <span className="block font-semibold">{u.displayName}</span>
-                        <span className="text-xs break-all text-slate-500">{u.username}</span>
+                        <span className="text-caption break-all text-slate-600 dark:text-slate-300">{u.username}</span>
                       </span>
                     ),
                   },

@@ -4,7 +4,8 @@
     "tagline": "Free, confidential counselling from the Ministry",
     "prototype": "Prototype with fabricated demo data only",
     "skipToContent": "Skip to main content",
-    "ministry": "Counselling Division · Ministry of Social Services"
+    "ministry": "Ministry of Rural Development, Social Security and Community Empowerment",
+    "division": "Counselling Division"
   },
   "nav": {
     "home": "Home",
@@ -41,8 +42,15 @@
     "roster": "Emergency roster",
     "systemSettings": "System settings",
     "audit": "Audit log",
-    "waitlist": "Callbacks and waitlist",
-    "publicSite": "Public site"
+    "waitlist": "Waitlist",
+    "publicSite": "Public site",
+    "groupScheduling": "Scheduling",
+    "groupClients": "Clients",
+    "groupEmergency": "Emergency",
+    "groupInsights": "Insights",
+    "groupPeople": "People",
+    "groupService": "Service",
+    "groupSystem": "System"
   },
   "common": {
     "language": "Language",
@@ -106,7 +114,9 @@
     "goHome": "Go to the home page",
     "loginToContinue": "Please log in to continue.",
     "maintenance": "Planned maintenance",
-    "emergencyAlwaysAvailable": "In an emergency call 119 at any time."
+    "emergencyAlwaysAvailable": "In an emergency call 119 at any time.",
+    "footerEmergency": "In danger right now?",
+    "footerPrivacy": "You do not need to give your name to use this service."
   },
   "lang": {
     "si": "සිංහල",
@@ -134,7 +144,19 @@
     "statsTitle": "Counselling across Sri Lanka",
     "statsCounsellors": "counsellors",
     "statsDistricts": "districts",
-    "statsLanguages": "languages, plus sign language"
+    "statsLanguages": "languages, plus sign language",
+    "emergencyStrip": "In danger right now?",
+    "emergencyHelp": "Get emergency help",
+    "quickCheckTitle": "Take a quick self-check",
+    "quickCheckLead": "A few short questions, just for you. Nothing is saved.",
+    "anonBadge": "Anonymous · not saved",
+    "resourcesTitle": "Things you can read",
+    "resourcesLead": "Short, practical guides in your language.",
+    "resourcesAll": "See all resources",
+    "findTitle": "Find a counsellor near you",
+    "findLead": "Choose your district and the language you would like to talk in.",
+    "stepsLabel": "How Care Me works",
+    "anonBadgeShort": "Anonymous"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -196,7 +218,11 @@
     "changePassword": "Change password",
     "currentPassword": "Current password",
     "passwordChanged": "Password changed.",
-    "guestNotice": "You booked without an account. To come back later, create an account with the same mobile number."
+    "guestNotice": "You booked without an account. To come back later, create an account with the same mobile number.",
+    "stepDetails": "Your details",
+    "stepVerify": "Verify phone",
+    "stepDone": "Done",
+    "registerSteps": "Registration progress"
   },
   "roles": {
     "anonymous": "Anonymous visitor",
@@ -283,7 +309,10 @@
       "mild": "Some things are affecting you. Self-help resources may help, and you can talk to a counsellor at any time.",
       "moderate": "This is affecting your daily life. Talking to a counsellor is a good next step.",
       "severe": "This is having a big effect on you. Please consider booking a counsellor soon."
-    }
+    },
+    "questionOf": "Question {{current}} of {{total}}",
+    "answersNotSaved": "Your answers are not saved.",
+    "skipped": "Please answer this question to continue."
   },
   "resources": {
     "title": "Resource centre",
@@ -395,7 +424,11 @@
     "previewBody": "Reminders never mention counselling:",
     "previewSms": "Reminder: you have an appointment on {{date}} at {{time}}. Sign in for details.",
     "goToAppointments": "Go to my appointments",
-    "capReached": "You have reached the maximum of {{max}} sessions. Please talk to your counsellor or the Ministry about further support."
+    "capReached": "You have reached the maximum of {{max}} sessions. Please talk to your counsellor or the Ministry about further support.",
+    "stepTime": "Choose a time",
+    "stepDetails": "Your details",
+    "stepConsent": "Consent",
+    "stepReview": "Confirm"
   },
   "appointments": {
     "title": "My appointments",
@@ -426,7 +459,10 @@
       "lateCancelled": "Late cancellation",
       "completed": "Completed",
       "noShow": "Missed"
-    }
+    },
+    "cancelledTab": "Cancelled",
+    "nextSession": "Your next session",
+    "sessionsLeft": "{{left}} of {{max}} sessions left"
   },
   "profile": {
     "title": "My account",
@@ -503,7 +539,9 @@
     "step1": "If you can, go somewhere safe and stay with someone you trust.",
     "step2": "Keep your phone close and switched on.",
     "step3": "Breathe slowly: in for four, out for six.",
-    "notEmergency": "Not an emergency? You can book a counsellor or ask for a callback."
+    "notEmergency": "Not an emergency? You can book a counsellor or ask for a callback.",
+    "callNow": "This is the fastest way to get help right now.",
+    "otherNumbers": "Other numbers you can call"
   },
   "session": {
     "title": "Session room",
@@ -530,7 +568,12 @@
     "notJoinable": "This session is not open to join.",
     "you": "You",
     "counsellor": "Counsellor",
-    "client": "Client"
+    "client": "Client",
+    "micLabel": "Microphone",
+    "cameraLabel": "Camera",
+    "chatLabel": "Chat",
+    "leaveLabel": "Leave",
+    "reconnecting": "Reconnecting…"
   },
   "portal": {
     "greeting": "Good day, {{name}}",
@@ -594,7 +637,12 @@
     "sessions": "Sessions",
     "opened": "Opened",
     "minor": "Minor",
-    "pendingRegistration": "Pending registration"
+    "pendingRegistration": "Pending registration",
+    "riskFlagged": "Needs attention first",
+    "riskAlertOpen": "Open alert",
+    "slotOpen": "Open",
+    "slotBlocked": "Blocked",
+    "slotLegend": "What the colours mean"
   },
   "case": {
     "title": "Case record",
@@ -954,7 +1002,9 @@
       "closed": "Closed"
     },
     "markContacted": "Mark contacted",
-    "markClosed": "Close"
+    "markClosed": "Close",
+    "translationMissing": "Translation missing",
+    "granted": "Granted"
   },
   "dashboard": {
     "title": "Dashboard",

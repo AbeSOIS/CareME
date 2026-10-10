@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useFormat } from '../../hooks/useFormat'
+import { EMERGENCY_NUMBERS } from '../../config/defaults'
 import { useAlerts } from '../../store/alerts'
 import { Badge, Button, Callout } from '../ui'
 
@@ -28,12 +29,12 @@ export function AlertStatusCard() {
   return (
     <Callout tone={tone} role="status" title={t('emergency.statusTitle')}>
       <p aria-live="polite">{text}</p>
-      <p className="mt-1 text-xs">
+      <p className="mt-1 text-caption">
         <Badge>{t('emergency.raisedAt', { time: fmt.relative(status.raisedAt) })}</Badge>
       </p>
       {status.escalated && status.status !== 'closed' && (
-        <a href="tel:119" className="mt-3 inline-flex min-h-11 items-center rounded-lg bg-red-600 px-4 font-bold text-white">
-          {t('emergency.call', { number: '119' })}
+        <a href={`tel:${EMERGENCY_NUMBERS[0].number}`} className="mt-3 inline-flex min-h-13 items-center gap-2 rounded-xl bg-red-600 px-5 text-body font-bold text-white">
+          {t('emergency.call', { number: EMERGENCY_NUMBERS[0].number })}
         </a>
       )}
       {status.status === 'closed' && (

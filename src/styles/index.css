@@ -7,38 +7,170 @@
   /* Noto families cover Latin, Sinhala and Tamil; bundled locally via @fontsource (no external font CDN). */
   --font-sans: "Noto Sans", "Noto Sans Sinhala", "Noto Sans Tamil", ui-sans-serif, system-ui, sans-serif;
 
-  /* Calm teal/blue brand scale. Use brand-700+ for text on white to meet 4.5:1 contrast. */
-  --color-brand-50: #f0fdfa;
-  --color-brand-100: #ccfbf1;
-  --color-brand-200: #99f6e4;
-  --color-brand-300: #5eead4;
-  --color-brand-400: #2dd4bf;
-  --color-brand-500: #14b8a6;
-  --color-brand-600: #0d9488;
-  --color-brand-700: #0f766e;
-  --color-brand-800: #115e59;
-  --color-brand-900: #134e4a;
-  --color-brand-950: #042f2e;
+  /*
+   * Calm, trustworthy blue. The token name stays `brand` so every existing
+   * brand-* utility keeps working. Contrast on white: 600 = 5.2:1 (links),
+   * 700 = 6.7:1 (buttons, active nav), 800 = 8.7:1, 900 = 9.5:1.
+   * brand-500 is for charts and illustrations only — never text on white.
+   */
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+  --color-brand-950: #172554;
+
+  /*
+   * Semantic tones map onto Tailwind's stock scales, which already carry the
+   * exact values this design calls for — so there is one name per colour, not two:
+   *   success  green-600  #16a34a (fills) / green-700  #15803d (text)
+   *   warning  amber-600  #d97706 (fills) / amber-700  #b45309 (text)
+   *   danger   red-600    #dc2626 (fills) / red-700    #b91c1c (text)
+   *   info     brand blue (never sky — it would clash with the blue brand)
+   * Red is reserved for emergency and destructive actions only, and every tone
+   * is always paired with an icon or label: colour is never the only signal.
+   */
+
+  /*
+   * One type scale, used everywhere instead of ad-hoc text-xs … text-5xl.
+   * Fluid via clamp(), so there is a single token per role rather than a
+   * mobile/desktop pair. Root stays 16px and every size is in rem, so browser
+   * text zoom still works at 200%.
+   */
+  --text-display: clamp(1.75rem, 1.3rem + 1.6vw, 2.25rem);
+  --text-display--line-height: 1.2;
+  --text-display--font-weight: 700;
+
+  --text-h1: clamp(1.5rem, 1.35rem + 0.6vw, 1.75rem);
+  --text-h1--line-height: 1.25;
+  --text-h1--font-weight: 700;
+
+  --text-h2: clamp(1.25rem, 1.2rem + 0.25vw, 1.375rem);
+  --text-h2--line-height: 1.3;
+  --text-h2--font-weight: 600;
+
+  --text-h3: 1.125rem;
+  --text-h3--line-height: 1.4;
+  --text-h3--font-weight: 600;
+
+  --text-lead: 1.0625rem;
+  --text-lead--line-height: 1.6;
+  --text-lead--font-weight: 400;
+
+  /*
+   * Form controls are pinned to 16px in EVERY language and are deliberately not
+   * overridden in the :lang block below: Safari on iOS zooms the page whenever a
+   * focused field is under 16px, which throws the layout around mid-form.
+   */
+  --text-control: 1rem;
+  --text-control--line-height: 1.5;
+
+  /* Default for all reading text and buttons. */
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+  --text-body--font-weight: 400;
+
+  /* Dense staff tables, sidebar links, card meta. */
+  --text-body-sm: 0.9375rem;
+  --text-body-sm--line-height: 1.55;
+  --text-body-sm--font-weight: 400;
+
+  /*
+   * Remove the 12px utility entirely. The floor is 14px (text-caption), and
+   * deleting text-xs makes that structural rather than a review convention —
+   * `text-xs` now simply does not exist as a class.
+   */
+  --text-xs: initial;
+
+  /* Badges, timestamps, helper text, footnotes. 14px is the floor — nothing smaller. */
+  --text-caption: 0.875rem;
+  --text-caption--line-height: 1.5;
+  --text-caption--font-weight: 500;
 }
 
 @layer base {
+  :root {
+    /* Portal header height. The sticky sidebar offsets by this, so it lives in
+       one place rather than being repeated as a magic 57px in two selectors. */
+    --header-h: 3.75rem;
+  }
+
   html {
     -webkit-text-size-adjust: 100%;
   }
 
   body {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
     @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
   }
 
-  /* Sinhala and Tamil scripts need extra line height to avoid clipped vowel signs. */
+  /*
+   * Sinhala and Tamil glyphs have a much larger apparent size than Latin at the
+   * same point size, so the whole scale steps down — not just the headings.
+   * 15px Sinhala reads like 16–17px Latin, and a 13px Sinhala caption is the
+   * visual equivalent of a 14px Latin one. The "14px floor" is therefore a
+   * statement about LATIN text; these smaller numbers are the same apparent size.
+   *
+   * Only custom properties are set here. Never set font-size on a :lang()
+   * selector: :lang matches every descendant, so a font-size here would hit
+   * every heading too and flatten the whole hierarchy to one size.
+   *
+   * --text-control is deliberately absent: form fields stay 16px in every
+   * language so iOS does not zoom on focus.
+   */
   :lang(si),
   :lang(ta) {
-    line-height: 1.7;
+    --text-display: clamp(1.5rem, 1.15rem + 1.4vw, 1.9rem);
+    --text-h1: clamp(1.3rem, 1.2rem + 0.5vw, 1.5rem);
+    --text-h2: clamp(1.125rem, 1.08rem + 0.2vw, 1.2rem);
+    --text-h3: 1.0625rem;
+    --text-lead: 1rem;
+    --text-body: 0.9375rem;
+    --text-body-sm: 0.875rem;
+    --text-caption: 0.8125rem;
+    --text-display--line-height: 1.35;
+    --text-h1--line-height: 1.35;
+    --text-h2--line-height: 1.35;
+    --text-h3--line-height: 1.45;
+    --text-body--line-height: 1.75;
+    --text-body-sm--line-height: 1.7;
+    line-height: 1.75;
+  }
+
+  /*
+   * Latin content inside a Sinhala or Tamil page — counsellor bios, the
+   * English-only assessment items, resource text falling back to English —
+   * is marked lang="en" and gets the Latin scale back. Custom properties
+   * inherit, so without this reset that English prose would be rendered at
+   * Sinhala sizes, which is a genuine 15px→16px readability loss.
+   */
+  :lang(en) {
+    --text-display: clamp(1.75rem, 1.3rem + 1.6vw, 2.25rem);
+    --text-h1: clamp(1.5rem, 1.35rem + 0.6vw, 1.75rem);
+    --text-h2: clamp(1.25rem, 1.2rem + 0.25vw, 1.375rem);
+    --text-h3: 1.125rem;
+    --text-lead: 1.0625rem;
+    --text-body: 1rem;
+    --text-body-sm: 0.9375rem;
+    --text-caption: 0.875rem;
+  }
+
+  /* Tamil words are long: let headings wrap evenly rather than overflow. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
 
   /* Visible focus for keyboard users on every interactive element (WCAG 2.4.7 / 2.4.11). */
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand-600 dark:outline-brand-300;
+    @apply outline-2 outline-offset-2 outline-brand-600 dark:outline-brand-400;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -54,15 +186,64 @@
 }
 
 /*
+ * Noto Sans Sinhala and Tamil are bundled at 400/600 only, so asking for 700
+ * would synthesise a smeared fake bold. Use the real SemiBold face instead;
+ * Latin keeps true 700. This costs no extra font files.
+ *
+ * Deliberately UNLAYERED: Tailwind emits @layer utilities after @layer base, so
+ * a rule inside base would lose to the .font-bold utility. Unlayered styles beat
+ * every layer, which is the only way to win against font-bold here.
+ */
+:lang(si) :is(h1, h2, h3, h4, .font-bold, .font-semibold),
+:lang(ta) :is(h1, h2, h3, h4, .font-bold, .font-semibold),
+:lang(si):is(h1, h2, h3, h4, .font-bold, .font-semibold),
+:lang(ta):is(h1, h2, h3, h4, .font-bold, .font-semibold) {
+  font-weight: 600;
+}
+
+/*
+ * Thin, subtle scrollbars for in-app scroll areas (sidebar, drawers, dropdowns,
+ * wide tables). The thumb only shows when there is something to scroll. Applied
+ * via a class so the main document scrollbar keeps the OS default.
+ */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, currentColor 25%, transparent) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: color-mix(in oklab, currentColor 22%, transparent);
+  border-radius: 9999px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/*
+ * Hide the scrollbar on a horizontal strip (tab rows, day pickers) while keeping it
+ * scrollable by touch and keyboard. Used where a visible scrollbar would be noise.
+ */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/*
  * Chart tokens — validated categorical order from the dataviz reference palette
  * (adjacent-pair CVD ΔE ≥ 8 in both modes). Dark mode uses its own selected steps.
  * Colour is never the only channel: every chart has a legend and a table view.
+ * series-1 is the brand blue; series-2..8 are unchanged.
  */
 :root {
   --chart-surface: #fcfcfb;
   --chart-grid: #e5e4e0;
   --chart-text: #52514e;
-  --series-1: #2a78d6;
+  --series-1: #2563eb;
   --series-2: #eb6834;
   --series-3: #1baf7a;
   --series-4: #eda100;
@@ -75,7 +256,7 @@
   --chart-surface: #0f172a;
   --chart-grid: #334155;
   --chart-text: #c3c2b7;
-  --series-1: #3987e5;
+  --series-1: #60a5fa;
   --series-2: #d95926;
   --series-3: #199e70;
   --series-4: #c98500;

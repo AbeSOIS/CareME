@@ -1,16 +1,26 @@
 import { useMemo, useState } from 'react'
+import { Check } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 import { CallbackForm } from '../../components/feature/CallbackForm'
 import { CounsellorCard } from '../../components/feature/CounsellorCard'
 import { EmergencyInfo } from '../../components/feature/EmergencyInfo'
-import { Button, Card, Checkbox, PageHeader, Select, Spinner } from '../../components/ui'
+import { Callout, Button, Card, Checkbox, PageHeader, Select, Spinner } from '../../components/ui'
 import { useAsync } from '../../hooks/useAsync'
 import { useLookups } from '../../hooks/useLookups'
 import { bookingApi } from '../../services/api'
 import type { CounsellingLanguage } from '../../types'
 
 const LANGS: CounsellingLanguage[] = ['si', 'ta', 'en', 'sign']
+
+/** Numbered marker for the no-counsellor fallback options, so the order is explicit. */
+function StepNumber({ n }: { n: number }) {
+  return (
+    <span aria-hidden className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-700 text-caption font-bold text-white dark:bg-brand-400 dark:text-slate-950">
+      {n}
+    </span>
+  )
+}
 
 export function CounsellorSearchPage() {
   const { t } = useTranslation()
@@ -62,7 +72,7 @@ export function CounsellorSearchPage() {
         <Spinner label={t('common.loading')} />
       ) : withSlots.length > 0 ? (
         <>
-          <p aria-live="polite" className="mb-4 font-medium">
+          <p aria-live="polite" className="mb-4 text-body font-semibold">
             {t('search.results', { count: withSlots.length })}
           </p>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -75,14 +85,15 @@ export function CounsellorSearchPage() {
         </>
       ) : (
         <div className="space-y-6" aria-live="polite">
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-h2">
             {t('search.fallbackTitle', { district: districtId ? districtName(districtId) : t('search.anyDistrict'), language: t(`lang.${effectiveLang}`) })}
           </h2>
 
           {fallback.data?.kind === 'remote' && (
             <section aria-labelledby="remote-offer" className="space-y-3">
-              <h3 id="remote-offer" className="font-semibold">
-                1. {t('search.remoteOfferTitle', { language: t(`lang.${effectiveLang}`) })}
+              <h3 id="remote-offer" className="flex items-center gap-2 text-h3">
+                <StepNumber n={1} />
+                {t('search.remoteOfferTitle', { language: t(`lang.${effectiveLang}`) })}
               </h3>
               <p className="text-slate-600 dark:text-slate-300">
                 {t('search.remoteOfferBody', { name: fallback.data.offer.counsellor.fullName, district: districtName(fallback.data.offer.counsellor.districtId) })}
@@ -94,12 +105,23 @@ export function CounsellorSearchPage() {
           )}
 
           <Card>
-            <h3 className="font-semibold">{t('search.otherLanguageTitle')}</h3>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{t('search.otherLanguageBody')}</p>
+            <h3 className="flex items-center gap-2 text-h3">
+              <StepNumber n={2} />
+              {t('search.otherLanguageTitle')}
+            </h3>
+            <p className="mt-2 max-w-prose text-body text-slate-600 dark:text-slate-300">{t('search.otherLanguageBody')}</p>
             <div className="mt-4 flex flex-wrap gap-2">
               {otherLangs.map((l) => (
-                <Button key={l} variant={confirmedLang === l ? 'primary' : 'secondary'} size="sm" aria-pressed={confirmedLang === l} onClick={() => setConfirmedLang(confirmedLang === l ? null : l)}>
-                  {t('search.confirmLanguage', { language: t(`lang.${l}`) })}
+                <Button
+                  key={l}
+                  variant={confirmedLang === l ? 'primary' : 'secondary'}
+                  size="sm"
+                  aria-pressed={confirmedLang === l}
+                  aria-label={t('search.confirmLanguage', { language: t(`lang.${l}`) })}
+                  icon={<Check aria-hidden className="size-4" />}
+                  onClick={() => setConfirmedLang(confirmedLang === l ? null : l)}
+                >
+                  {t(`lang.${l}`)}
                 </Button>
               ))}
             </div>
@@ -124,8 +146,14 @@ export function CounsellorSearchPage() {
           </Card>
 
           <Card>
-            <h3 className="font-semibold">{t('search.callbackTitle')}</h3>
-            <p className="mt-1 mb-4 text-sm text-slate-600 dark:text-slate-300">{t('search.callbackBody')}</p>
+            <h3 className="flex items-center gap-2 text-h3">
+              <StepNumber n={3} />
+              {t('search.callbackTitle')}
+            </h3>
+            <p className="mt-2 max-w-prose text-body text-slate-600 dark:text-slate-300">{t('search.callbackBody')}</p>
+            <Callout tone="warning" className="my-4">
+              {t('emergency.notEmergency')}
+            </Callout>
             <CallbackForm districtId={districtId || undefined} language={effectiveLang} />
           </Card>
 

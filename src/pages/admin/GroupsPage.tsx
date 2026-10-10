@@ -69,8 +69,8 @@ export default function GroupsPage() {
               <Card as="li" key={g.id} className="space-y-3">
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
-                    <h2 className="text-lg font-semibold">{g.title}</h2>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                    <h2 className="text-h3">{g.title}</h2>
+                    <p className="text-body-sm text-slate-600 dark:text-slate-400">
                       {fmt.dateLong(g.start)} · {fmt.time(g.start)} · {t(`booking.modes.${g.mode}`)} · {g.counsellorName}
                     </p>
                   </div>
@@ -80,11 +80,11 @@ export default function GroupsPage() {
                   <div className="h-full bg-brand-600" style={{ width: `${Math.min(100, (g.enrolledBeneficiaryIds.length / g.capacity) * 100)}%` }} />
                 </div>
                 <Badge>{t(`category.${g.category}`)}</Badge>
-                <ul className="divide-y divide-slate-100 text-sm dark:divide-slate-800">
+                <ul className="divide-y divide-slate-100 text-body-sm dark:divide-slate-800">
                   {g.enrolled.map((p) => (
                     <li key={p.id} className="flex items-center justify-between gap-2 py-1.5">
                       <span>
-                        <span className="font-mono text-xs">{p.clientCode}</span> {p.name}
+                        <span className="font-mono text-caption">{p.clientCode}</span> {p.name}
                       </span>
                       {started ? (
                         <Checkbox label={t('admin.attended')} checked={g.attendance[p.id] ?? false} onChange={(e) => op(g, { attendance: { beneficiaryId: p.id, attended: e.target.checked } })} />
@@ -195,7 +195,7 @@ export default function GroupsPage() {
             return (
               <li key={m.id} className="flex items-center justify-between gap-2 py-2">
                 <span>
-                  <span className="font-mono text-xs">{m.clientCode}</span> {m.name}
+                  <span className="font-mono text-caption">{m.clientCode}</span> {m.name}
                 </span>
                 <Button size="sm" disabled={already || (enrolFor?.enrolledBeneficiaryIds.length ?? 0) >= (enrolFor?.capacity ?? 0)} onClick={() => enrolFor && op(enrolFor, { enrol: m.id })}>
                   {already ? '✓' : t('common.add')}

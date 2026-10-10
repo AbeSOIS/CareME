@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { parseISO } from 'date-fns'
-import { ArrowUpCircle, CheckCircle2, ClipboardCheck, Phone } from 'lucide-react'
+import { ArrowUpCircle, CheckCircle2, CircleAlert, CircleCheck, ClipboardCheck, Phone } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { nextEscalationAt } from '../../domain/alerts'
 import { useApiError } from '../../hooks/useApiError'
@@ -14,6 +14,8 @@ import type { AlertOutcome, AlertView } from '../../types'
 import { Badge, Button, Card, Checkbox, Input, Modal, Select, TextArea, type Tone } from '../ui'
 
 const STATUS_TONE: Record<AlertView['status'], Tone> = { open: 'danger', acknowledged: 'warning', escalated: 'danger', closed: 'success' }
+/* open and escalated share a tone, so an icon is what actually tells them apart. */
+const STATUS_ICON: Record<AlertView['status'], typeof CircleAlert> = { open: CircleAlert, acknowledged: CheckCircle2, escalated: ArrowUpCircle, closed: CircleCheck }
 
 type OutcomeDraft = Omit<AlertOutcome, 'recordedAt' | 'recordedByUserId'>
 const EMPTY: OutcomeDraft = { psychologicalFirstAid: false, individualCounselling: false, referral: 'none', referralDetails: '', externalServiceNotified: '', outcome: 'safe', summary: '' }
@@ -46,24 +48,30 @@ export function AlertPanel({ alert, canAct }: { alert: AlertView; canAct: boolea
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="space-y-2">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge tone={STATUS_TONE[alert.status]}>{t(`alerts.status.${alert.status}`)}</Badge>
+            <Badge tone={STATUS_TONE[alert.status]}>
+              {(() => {
+                const StatusIcon = STATUS_ICON[alert.status]
+                return <StatusIcon aria-hidden className="size-3.5 shrink-0" />
+              })()}
+              {t(`alerts.status.${alert.status}`)}
+            </Badge>
             <Badge tone="brand">{t(`alerts.source.${alert.source}`)}</Badge>
-            {alert.clientCode && <span className="font-mono text-sm">{alert.clientCode}</span>}
+            {alert.clientCode && <span className="font-mono text-body-sm">{alert.clientCode}</span>}
             {alert.clientName && <span className="font-semibold">{alert.clientName}</span>}
           </div>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
+          <p className="text-body-sm text-slate-600 dark:text-slate-400">
             {t('alerts.raised', { time: fmt.dateTime(alert.raisedAt) })}
             {!alert.acknowledgedAt && alert.status !== 'closed' && <strong className="ml-2 text-red-700 dark:text-red-400">{t('alerts.waiting', { duration: fmt.duration(waitingSec) })}</strong>}
             {alert.acknowledgedAt && ` · ${t('alerts.acknowledgedAt', { time: fmt.dateTime(alert.acknowledgedAt) })}`}
           </p>
-          {alert.assignedOfficerName && <p className="text-sm">{t('alerts.assignedTo', { name: alert.assignedOfficerName })}</p>}
-          {nextEsc && <p className="text-sm font-medium text-amber-800 dark:text-amber-300">{t('alerts.nextEscalation', { time: fmt.time(nextEsc) })}</p>}
+          {alert.assignedOfficerName && <p className="text-body-sm">{t('alerts.assignedTo', { name: alert.assignedOfficerName })}</p>}
+          {nextEsc && <p className="text-body-sm font-medium text-amber-800 dark:text-amber-300">{t('alerts.nextEscalation', { time: fmt.time(nextEsc) })}</p>}
           {alert.message && (
             <p className="rounded-lg bg-slate-50 p-3 dark:bg-slate-800">
               <span className="sr-only">{t('alerts.message')}: </span>“{alert.message}”
             </p>
           )}
-          <p className="flex items-center gap-2 text-sm">
+          <p className="flex items-center gap-2 text-body-sm">
             <Phone aria-hidden className="size-4" />
             {alert.contactPhone ? (
               <a href={`tel:${alert.contactPhone}`} className="font-semibold text-brand-800 underline dark:text-brand-200">
@@ -74,7 +82,7 @@ export function AlertPanel({ alert, canAct }: { alert: AlertView; canAct: boolea
             )}
           </p>
           {alert.escalations.length > 0 && (
-            <ul className="space-y-1 text-sm">
+            <ul className="space-y-1 text-body-sm">
               {alert.escalations.map((e) => (
                 <li key={e.level} className="flex items-center gap-2 text-red-800 dark:text-red-300">
                   <ArrowUpCircle aria-hidden className="size-4" />
@@ -84,7 +92,7 @@ export function AlertPanel({ alert, canAct }: { alert: AlertView; canAct: boolea
             </ul>
           )}
           {alert.outcome && (
-            <div className="rounded-lg bg-emerald-50 p-3 text-sm dark:bg-emerald-950">
+            <div className="rounded-lg bg-emerald-50 p-3 text-body-sm dark:bg-emerald-950">
               <p className="font-semibold">
                 {t('alerts.outcome')}: {t(`alerts.outcomes.${alert.outcome.outcome}`)}
               </p>

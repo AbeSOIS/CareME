@@ -105,20 +105,20 @@ export function ReferralForm({ onSaved }: { onSaved: () => void }) {
         <h3 id="dup" className="font-semibold">
           {t('referrals.matchTitle')}
         </h3>
-        <p className="text-sm text-slate-600 dark:text-slate-300">{t('referrals.matchLead')}</p>
+        <p className="text-body-sm text-slate-600 dark:text-slate-300">{t('referrals.matchLead')}</p>
         <Button size="sm" variant="secondary" icon={<Search aria-hidden className="size-4" />} onClick={check} disabled={!f.contactName && !f.contactPhone}>
           {t('common.search')}
         </Button>
         {matches && (
           <div aria-live="polite" className="space-y-2">
-            {matches.length === 0 && <p className="text-sm">{t('referrals.noMatches')}</p>}
+            {matches.length === 0 && <p className="text-body-sm">{t('referrals.noMatches')}</p>}
             {matches.map((m) => (
               <div key={m.id} className="flex flex-col gap-2 rounded-lg bg-slate-50 p-3 sm:flex-row sm:items-center sm:justify-between dark:bg-slate-800">
                 <div>
                   <p className="font-medium">
-                    {m.name} <span className="font-mono text-sm">{m.clientCode}</span> {m.pendingRegistration && <Badge tone="info">{t('portal.pendingRegistration')}</Badge>}
+                    {m.name} <span className="font-mono text-body-sm">{m.clientCode}</span> {m.pendingRegistration && <Badge tone="info">{t('portal.pendingRegistration')}</Badge>}
                   </p>
-                  <p className="text-xs text-slate-600 dark:text-slate-400">{t('referrals.matchedOn', { fields: m.matchedOn.map((x) => t(`referrals.matchFields.${x}`)).join(', ') })}</p>
+                  <p className="text-caption text-slate-600 dark:text-slate-400">{t('referrals.matchedOn', { fields: m.matchedOn.map((x) => t(`referrals.matchFields.${x}`)).join(', ') })}</p>
                 </div>
                 <Button size="sm" variant={linked?.id === m.id ? 'primary' : 'secondary'} aria-pressed={linked?.id === m.id} onClick={() => setLinked(linked?.id === m.id ? null : m)}>
                   {linked?.id === m.id ? t('referrals.linked', { code: m.clientCode }) : t('referrals.link')}

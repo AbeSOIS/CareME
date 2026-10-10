@@ -73,11 +73,11 @@ export function LoginPage() {
   }
 
   return (
-    <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1fr_22rem]">
-      <Card className="max-w-xl">
+    <div className="mx-auto grid max-w-4xl items-start gap-6 lg:grid-cols-[minmax(0,27.5rem)_1fr]">
+      <Card className="w-full">
         {!challenge ? (
           <>
-            <h1 className="text-2xl font-bold">{t('auth.loginTitle')}</h1>
+            <h1 className="text-h1">{t('auth.loginTitle')}</h1>
             <p className="mt-1 text-slate-600 dark:text-slate-300">{t('auth.loginLead')}</p>
             {endedReason && (
               <Callout tone="info" className="mt-4" role="status">
@@ -99,7 +99,7 @@ export function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <label className="flex min-h-9 items-center gap-2 text-sm">
+              <label className="flex min-h-11 items-center gap-2 text-body">
                 <input type="checkbox" className="size-5 accent-brand-700" checked={showPassword} onChange={(e) => setShowPassword(e.target.checked)} />
                 {t('auth.showPassword')}
               </label>
@@ -112,7 +112,7 @@ export function LoginPage() {
                 {t('auth.loginButton')}
               </Button>
             </form>
-            <div className="mt-4 flex flex-col gap-2 text-sm sm:flex-row sm:justify-between">
+            <div className="mt-4 flex flex-col gap-2 text-body-sm sm:flex-row sm:justify-between">
               <Link to="/recover" className="font-medium text-brand-800 underline-offset-2 hover:underline dark:text-brand-200">
                 {t('auth.forgotPassword')}
               </Link>
@@ -126,7 +126,7 @@ export function LoginPage() {
           </>
         ) : (
           <>
-            <h1 className="text-2xl font-bold">{t('auth.mfaTitle')}</h1>
+            <h1 className="text-h1">{t('auth.mfaTitle')}</h1>
             <p className="mt-1 text-slate-600 dark:text-slate-300">{t('auth.mfaLead')}</p>
             <form className="mt-6 space-y-4" onSubmit={verify}>
               <Input
@@ -158,11 +158,11 @@ export function LoginPage() {
         )}
       </Card>
 
-      <aside aria-labelledby="demo-accounts" className="rounded-2xl border border-dashed border-brand-300 bg-brand-50/60 p-5 dark:border-brand-800 dark:bg-slate-900">
+      <aside aria-labelledby="demo-accounts" className="rounded-2xl border border-dashed border-brand-300 bg-brand-50/60 p-5 dark:border-brand-700 dark:bg-slate-900">
         <h2 id="demo-accounts" className="font-semibold">
           {t('auth.demoAccounts')}
         </h2>
-        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{t('auth.demoAccountsLead', { password: DEMO_PASSWORD })}</p>
+        <p className="mt-1 text-body-sm text-slate-600 dark:text-slate-300">{t('auth.demoAccountsLead', { password: DEMO_PASSWORD })}</p>
         <ul className="mt-3 space-y-2">
           {DEMO.map((d) => (
             <li key={d.username}>
@@ -174,13 +174,13 @@ export function LoginPage() {
                   setChallenge(null)
                   setError(null)
                 }}
-                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-left hover:border-brand-400 dark:border-slate-700 dark:bg-slate-950"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-left transition-colors duration-150 hover:border-brand-400 dark:border-slate-700 dark:bg-slate-950"
               >
                 <span className="flex flex-wrap items-center gap-2">
                   <Badge tone="brand">{t(`roles.${d.role}`)}</Badge>
-                  <span className="text-sm font-medium break-all">{d.username}</span>
+                  <span className="text-body-sm font-medium break-all">{d.username}</span>
                 </span>
-                <span className="mt-1 block text-xs text-slate-600 dark:text-slate-400" lang="en">
+                <span className="mt-1 block text-caption text-slate-600 dark:text-slate-400" lang="en">
                   {d.note}
                 </span>
               </button>

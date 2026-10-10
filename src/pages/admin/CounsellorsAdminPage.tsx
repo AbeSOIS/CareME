@@ -46,7 +46,7 @@ export default function CounsellorsAdminPage() {
           </Button>
         }
       />
-      <div className="mb-4 grid gap-4 sm:grid-cols-2 lg:max-w-2xl">
+      <div className="mb-4 grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))] lg:max-w-2xl">
         <Input label={t('common.search')} type="search" value={q} onChange={(e) => setQ(e.target.value)} />
         <Select label={t('auth.district')} value={district} onChange={(e) => setDistrict(e.target.value)} placeholder={t('dashboard.allDistricts')} options={districtOptions} />
       </div>

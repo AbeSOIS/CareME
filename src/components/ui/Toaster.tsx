@@ -33,15 +33,15 @@ function ToastItem({ tone, message, onClose, closeLabel }: { tone: 'success' | '
   return (
     <div
       className={cn(
-        'pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-xl border p-3 shadow-lg',
-        tone === 'success' && 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-100',
+        'pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-2xl border p-4 shadow-lg',
+        tone === 'success' && 'border-green-200 bg-green-50 text-green-900 dark:border-green-800 dark:bg-green-950 dark:text-green-100',
         tone === 'error' && 'border-red-200 bg-red-50 text-red-900 dark:border-red-800 dark:bg-red-950 dark:text-red-100',
         tone === 'info' && 'border-slate-200 bg-white text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100',
       )}
     >
       <Icon aria-hidden className="mt-0.5 size-5 shrink-0" />
-      <p className="flex-1 text-sm">{message}</p>
-      <button type="button" onClick={onClose} aria-label={closeLabel} className="-m-1 inline-flex size-8 items-center justify-center rounded-md hover:bg-black/5 dark:hover:bg-white/10">
+      <p className="flex-1 text-body">{message}</p>
+      <button type="button" onClick={onClose} aria-label={closeLabel} className="-m-1 inline-flex size-10 shrink-0 items-center justify-center rounded-xl hover:bg-black/5 dark:hover:bg-white/10">
         <X aria-hidden className="size-4" />
       </button>
     </div>

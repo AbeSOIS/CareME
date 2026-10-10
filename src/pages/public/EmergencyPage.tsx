@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Siren } from 'lucide-react'
+import { Phone, Siren } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { AlertStatusCard } from '../../components/feature/AlertStatusCard'
 import { EmergencyInfo } from '../../components/feature/EmergencyInfo'
 import { Button, ButtonLink, Card, Input, TextArea } from '../../components/ui'
 import { useApiError } from '../../hooks/useApiError'
+import { EMERGENCY_NUMBERS } from '../../config/defaults'
 import { useAlerts } from '../../store/alerts'
 import { useAuth } from '../../store/auth'
 import { useUi } from '../../store/ui'
@@ -25,19 +26,36 @@ export function EmergencyPage() {
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <div>
-        <h1 className="flex items-center gap-3 text-3xl font-bold text-red-800 dark:text-red-300">
+        <h1 className="flex items-center gap-3 text-h1 text-red-800 dark:text-red-300">
           <Siren aria-hidden className="size-8" />
           {t('emergency.title')}
         </h1>
-        <p className="mt-2 text-lg">{t('emergency.lead')}</p>
+        <p className="mt-2 text-lead">{t('emergency.lead')}</p>
       </div>
 
-      <EmergencyInfo compact />
+      {/* The single fastest route to help, given the most visual weight on the page. */}
+      <a
+        href={`tel:${EMERGENCY_NUMBERS[0].number}`}
+        className="flex min-h-20 items-center justify-center gap-4 rounded-2xl bg-red-600 px-6 py-4 text-center text-white shadow-lg transition-colors duration-150 hover:bg-red-700"
+      >
+        <Phone aria-hidden className="size-8 shrink-0" />
+        <span>
+          <span className="block text-h1">{t('emergency.call', { number: EMERGENCY_NUMBERS[0].number })}</span>
+          <span className="block text-body-sm text-red-50">{t('emergency.callNow')}</span>
+        </span>
+      </a>
+
+      <section aria-labelledby="other-numbers">
+        <h2 id="other-numbers" className="mb-2 text-h3 text-slate-900 dark:text-white">
+          {t('emergency.otherNumbers')}
+        </h2>
+        <EmergencyInfo compact />
+      </section>
       <AlertStatusCard />
 
       {!active && (
         <Card>
-          <h2 className="text-xl font-semibold">{t('emergency.alertTitle')}</h2>
+          <h2 className="text-h2">{t('emergency.alertTitle')}</h2>
           <p className="mt-1 text-slate-600 dark:text-slate-300">{t('emergency.alertBody')}</p>
           <form
             className="mt-4 space-y-4"
@@ -69,7 +87,7 @@ export function EmergencyPage() {
       )}
 
       <Card>
-        <h2 className="text-lg font-semibold">{t('emergency.stepsTitle')}</h2>
+        <h2 className="text-h3">{t('emergency.stepsTitle')}</h2>
         <ol className="mt-3 list-decimal space-y-2 pl-6">
           <li>{t('emergency.step1')}</li>
           <li>{t('emergency.step2')}</li>

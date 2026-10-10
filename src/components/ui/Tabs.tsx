@@ -34,7 +34,7 @@ export function Tabs({ tabs, active, onChange, label, children }: TabsProps) {
 
   return (
     <div>
-      <div role="tablist" aria-label={label} className="-mx-1 flex gap-1 relative overflow-x-auto border-b border-slate-200 px-1 dark:border-slate-700">
+      <div role="tablist" aria-label={label} className="no-scrollbar -mx-1 flex gap-1 relative overflow-x-auto border-b border-slate-200 px-1 dark:border-slate-700">
         {tabs.map((tab, i) => {
           const selected = tab.id === active
           return (
@@ -52,7 +52,7 @@ export function Tabs({ tabs, active, onChange, label, children }: TabsProps) {
               onClick={() => onChange(tab.id)}
               onKeyDown={(e) => onKey(e, i)}
               className={cn(
-                '-mb-px inline-flex min-h-11 shrink-0 items-center gap-2 border-b-2 px-3 text-sm font-semibold whitespace-nowrap transition-colors',
+                '-mb-px inline-flex min-h-11 shrink-0 items-center gap-2 border-b-2 px-4 text-body font-semibold whitespace-nowrap transition-colors duration-150',
                 selected
                   ? 'border-brand-700 text-brand-800 dark:border-brand-300 dark:text-brand-200'
                   : 'border-transparent text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100',

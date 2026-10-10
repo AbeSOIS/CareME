@@ -102,17 +102,18 @@ export function SessionRoomPage() {
   if (!apt) return <Spinner label={t('common.loading')} />
 
   const other = isCounsellor ? (apt.clientName ?? t('session.client')) : apt.counsellorName
-  const ctrl = 'inline-flex size-14 flex-col items-center justify-center rounded-full text-white focus-visible:outline-white'
+  const ctrl = 'inline-flex size-13 flex-col items-center justify-center rounded-full text-white transition-colors duration-150 focus-visible:outline-white'
+  const ctrlLabel = 'text-caption text-slate-300'
 
   return (
     <div className="flex min-h-dvh flex-col bg-slate-950 text-slate-100">
       <header className="flex flex-wrap items-center gap-3 border-b border-slate-800 px-4 py-3">
-        <h1 className="font-semibold">{t('session.title')}</h1>
+        <h1 className="text-h3">{t('session.title')}</h1>
         <Badge tone="success">
           <CircleOff aria-hidden className="size-3" />
           {t('session.notRecorded')}
         </Badge>
-        <div className="ml-auto flex items-center gap-3 text-sm" aria-live="off">
+        <div className="ml-auto flex items-center gap-3 text-body-sm" aria-live="off">
           <span>
             {t('session.elapsed')}: <span className="font-mono">{fmt.duration(elapsed)}</span>
           </span>
@@ -124,12 +125,12 @@ export function SessionRoomPage() {
         <section className="relative flex min-h-[50dvh] flex-1 items-center justify-center rounded-2xl bg-slate-900" aria-label={other}>
           <div className="text-center">
             <span className="mx-auto inline-flex size-24 items-center justify-center rounded-full bg-brand-800 text-3xl font-bold">{other.slice(0, 1)}</span>
-            <p className="mt-3 text-lg font-semibold">{other}</p>
-            <p className="text-sm text-slate-400">{t('session.waiting')}</p>
-            <p className="mt-6 max-w-sm text-xs text-slate-500">{t('session.placeholder')}</p>
+            <p className="mt-3 text-h3">{other}</p>
+            <p className="text-body text-slate-300">{t('session.waiting')}</p>
+            <p className="mt-6 max-w-sm text-body-sm text-slate-300">{t('session.placeholder')}</p>
           </div>
-          <div className="absolute right-4 bottom-4 flex h-28 w-40 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-sm">
-            {camera ? t('session.you') : <VideoOff aria-hidden className="size-6 text-slate-500" />}
+          <div className="absolute right-4 bottom-4 flex h-28 w-40 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-body-sm">
+            {camera ? t('session.you') : <VideoOff aria-hidden className="size-6 text-slate-300" />}
           </div>
           {ended && (
             <div role="alert" className="absolute inset-x-4 top-4 rounded-xl bg-amber-500 p-3 font-semibold text-slate-950">
@@ -141,12 +142,12 @@ export function SessionRoomPage() {
         {chatOpen && (
           <aside className="flex w-full flex-col rounded-2xl bg-slate-900 p-4 lg:w-80" aria-label={t('session.chat')}>
             <h2 className="font-semibold">{t('session.chat')}</h2>
-            <p className="text-xs text-slate-400">{t('session.chatNote')}</p>
+            <p className="text-caption text-slate-300">{t('session.chatNote')}</p>
             <ul className="mt-3 flex-1 space-y-2 overflow-y-auto" aria-live="polite">
               {messages.map((m, i) => (
-                <li key={i} className="ml-auto max-w-[85%] rounded-xl bg-brand-700 px-3 py-2 text-sm">
+                <li key={i} className="ml-auto max-w-[85%] rounded-2xl bg-brand-700 px-3 py-2 text-body">
                   {m.text}
-                  <span className="block text-right text-[10px] opacity-70">{fmt.time(m.at)}</span>
+                  <span className="mt-1 block text-right text-caption text-brand-100">{fmt.time(m.at)}</span>
                 </li>
               ))}
             </ul>
@@ -167,7 +168,7 @@ export function SessionRoomPage() {
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 placeholder={t('session.chatPlaceholder')}
-                className="min-h-11 flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 text-sm"
+                className="min-h-12 flex-1 rounded-xl border border-slate-600 bg-slate-950 px-3 text-body text-slate-100 placeholder:text-slate-400"
               />
               <Button type="submit" size="sm">
                 {t('session.send')}
@@ -178,15 +179,24 @@ export function SessionRoomPage() {
       </main>
 
       <footer className="flex flex-wrap items-center justify-center gap-3 border-t border-slate-800 px-4 py-4">
-        <button type="button" aria-pressed={!mic} onClick={() => setMic((m) => !m)} className={cn(ctrl, mic ? 'bg-slate-700 hover:bg-slate-600' : 'bg-amber-600')} aria-label={mic ? t('session.micOff') : t('session.micOn')}>
-          {mic ? <Mic aria-hidden className="size-6" /> : <MicOff aria-hidden className="size-6" />}
-        </button>
-        <button type="button" aria-pressed={!camera} onClick={() => setCamera((c) => !c)} className={cn(ctrl, camera ? 'bg-slate-700 hover:bg-slate-600' : 'bg-amber-600')} aria-label={camera ? t('session.cameraOff') : t('session.cameraOn')}>
-          {camera ? <Video aria-hidden className="size-6" /> : <VideoOff aria-hidden className="size-6" />}
-        </button>
-        <button type="button" aria-pressed={chatOpen} onClick={() => setChatOpen((c) => !c)} className={cn(ctrl, chatOpen ? 'bg-brand-600' : 'bg-slate-700 hover:bg-slate-600')} aria-label={t('session.chat')}>
-          <MessageSquare aria-hidden className="size-6" />
-        </button>
+        <span className="flex flex-col items-center gap-1">
+          <button type="button" aria-pressed={!mic} onClick={() => setMic((m) => !m)} className={cn(ctrl, mic ? 'bg-slate-700 hover:bg-slate-600' : 'bg-amber-600')} aria-label={mic ? t('session.micOff') : t('session.micOn')}>
+            {mic ? <Mic aria-hidden className="size-6" /> : <MicOff aria-hidden className="size-6" />}
+          </button>
+          <span aria-hidden className={ctrlLabel}>{t('session.micLabel')}</span>
+        </span>
+        <span className="flex flex-col items-center gap-1">
+          <button type="button" aria-pressed={!camera} onClick={() => setCamera((c) => !c)} className={cn(ctrl, camera ? 'bg-slate-700 hover:bg-slate-600' : 'bg-amber-600')} aria-label={camera ? t('session.cameraOff') : t('session.cameraOn')}>
+            {camera ? <Video aria-hidden className="size-6" /> : <VideoOff aria-hidden className="size-6" />}
+          </button>
+          <span aria-hidden className={ctrlLabel}>{t('session.cameraLabel')}</span>
+        </span>
+        <span className="flex flex-col items-center gap-1">
+          <button type="button" aria-pressed={chatOpen} onClick={() => setChatOpen((c) => !c)} className={cn(ctrl, chatOpen ? 'bg-brand-600' : 'bg-slate-700 hover:bg-slate-600')} aria-label={t('session.chat')}>
+            <MessageSquare aria-hidden className="size-6" />
+          </button>
+          <span aria-hidden className={ctrlLabel}>{t('session.chatLabel')}</span>
+        </span>
         {isCounsellor ? (
           <Button variant="secondary" onClick={() => setRiskOpen(true)} icon={<Siren aria-hidden className="size-5 text-red-600" />}>
             {t('session.riskAlert')}
@@ -197,9 +207,12 @@ export function SessionRoomPage() {
             {t('emergency.button')}
           </Link>
         )}
-        <button type="button" onClick={leave} className={cn(ctrl, 'w-auto bg-red-700 px-6 hover:bg-red-800')} aria-label={isCounsellor ? t('session.endForAll') : t('session.end')}>
-          <PhoneOff aria-hidden className="size-6" />
-        </button>
+        <span className="flex flex-col items-center gap-1">
+          <button type="button" onClick={leave} className={cn(ctrl, 'w-auto bg-red-700 px-6 hover:bg-red-800')} aria-label={isCounsellor ? t('session.endForAll') : t('session.end')}>
+            <PhoneOff aria-hidden className="size-6" />
+          </button>
+          <span aria-hidden className={ctrlLabel}>{t('session.leaveLabel')}</span>
+        </span>
       </footer>
 
       <Modal

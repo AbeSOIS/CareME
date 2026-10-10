@@ -18,7 +18,7 @@ export default function AuditPage() {
   return (
     <>
       <PageHeader title={t('admin.auditTitle')} lead={t('admin.auditLead')} />
-      <div className="mb-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mb-4 grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))]">
         <Select label={t('admin.auditUser')} value={q.userId} onChange={(e) => setQ({ ...q, userId: e.target.value })} placeholder={t('common.all')} options={(users.data ?? []).map((u) => ({ value: u.id, label: u.displayName }))} />
         <Select label={t('admin.auditType')} value={q.type} onChange={(e) => setQ({ ...q, type: e.target.value })} placeholder={t('common.all')} options={TYPES.map((x) => ({ value: x, label: x }))} />
         <Input label={t('common.from')} type="date" value={q.from} onChange={(e) => setQ({ ...q, from: e.target.value })} />
@@ -36,7 +36,7 @@ export default function AuditPage() {
             { key: 'at', header: t('admin.auditWhen'), primary: true, render: (e) => fmt.dateTime(e.at) },
             { key: 'type', header: t('admin.auditType'), render: (e) => <Badge tone={e.type.startsWith('alert') ? 'danger' : e.type.includes('failure') || e.type.includes('locked') ? 'warning' : 'neutral'}>{e.type}</Badge> },
             { key: 'actor', header: t('admin.auditUser'), render: (e) => e.actorName ?? t('admin.system') },
-            { key: 'target', header: t('admin.auditTarget'), render: (e) => <span className="font-mono text-xs break-all">{e.target}</span> },
+            { key: 'target', header: t('admin.auditTarget'), render: (e) => <span className="font-mono text-caption break-all">{e.target}</span> },
             { key: 'detail', header: t('admin.auditDetail'), render: (e) => e.detail },
           ]}
         />

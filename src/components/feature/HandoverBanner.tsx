@@ -26,7 +26,7 @@ export function HandoverBanner() {
     <Callout tone="warning" title={t('alerts.handoverTitle', { count: handover.openAlertIds.length })} className="mb-6">
       <p>{t('alerts.handoverBody')}</p>
       <div className="mt-3 flex flex-wrap gap-2">
-        <Link to="/counsellor/alerts" className="inline-flex min-h-9 items-center rounded-lg border border-amber-400 px-3 text-sm font-semibold">
+        <Link to="/counsellor/alerts" className="inline-flex min-h-9 items-center rounded-lg border border-amber-400 px-3 text-body-sm font-semibold">
           {t('nav.alerts')}
         </Link>
         <Button

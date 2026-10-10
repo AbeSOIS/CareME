@@ -3,7 +3,7 @@ import { parseISO } from 'date-fns'
 import { Video } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { AppointmentStatusBadge } from '../../components/feature/AppointmentStatusBadge'
-import { Button, ButtonLink, Card, EmptyState, Modal, PageHeader, Select, Spinner, Tabs, TextArea } from '../../components/ui'
+import { Badge, Button, ButtonLink, Card, EmptyState, Modal, PageHeader, Select, Spinner, Tabs, TextArea } from '../../components/ui'
 import { canJoin } from '../../domain/bookingRules'
 import { useApiError } from '../../hooks/useApiError'
 import { useFormat } from '../../hooks/useFormat'
@@ -59,7 +59,7 @@ export default function CounsellorAppointments() {
         active={tab}
         onChange={setTab}
         tabs={[
-          { id: 'requests', label: t('portal.requests'), badge: groups.requests.length ? <span className="rounded-full bg-amber-200 px-2 text-xs text-amber-950">{groups.requests.length}</span> : null },
+          { id: 'requests', label: t('portal.requests'), badge: groups.requests.length ? <Badge tone="warning">{groups.requests.length}</Badge> : null },
           { id: 'upcoming', label: t('portal.upcoming') },
           { id: 'history', label: t('portal.history') },
         ]}
@@ -77,9 +77,9 @@ export default function CounsellorAppointments() {
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
                       <AppointmentStatusBadge status={a.status} />
-                      <span className="font-mono text-sm text-slate-500">{a.clientCode}</span>
+                      <span className="font-mono text-body-sm text-slate-600 dark:text-slate-300">{a.clientCode}</span>
                     </div>
-                    <p className="mt-1 text-lg font-semibold">
+                    <p className="mt-1 text-h3">
                       {fmt.dateLong(a.start)} · {fmt.time(a.start)}
                     </p>
                     <p className="text-slate-600 dark:text-slate-300">

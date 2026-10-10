@@ -32,7 +32,7 @@ export function SlotPicker({ slots, value, onChange, label }: Props) {
 
   return (
     <div role="group" aria-label={label} className="space-y-4">
-      <div className="-mx-1 flex gap-2 relative overflow-x-auto px-1 pb-1">
+      <div className="no-scrollbar -mx-1 flex gap-2 relative overflow-x-auto px-1 pb-1">
         {days.map(([d, list]) => (
           <button
             key={d}
@@ -40,12 +40,12 @@ export function SlotPicker({ slots, value, onChange, label }: Props) {
             aria-pressed={d === day}
             onClick={() => setDay(d)}
             className={cn(
-              'min-h-16 min-w-24 shrink-0 rounded-xl border px-3 py-2 text-center text-sm',
+              'min-h-16 min-w-24 shrink-0 rounded-xl border px-3 py-2 text-center text-body-sm',
               d === day ? 'border-brand-600 bg-brand-700 text-white dark:bg-brand-500 dark:text-slate-950' : 'border-slate-300 bg-white hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-900 dark:hover:bg-slate-800',
             )}
           >
             <span className="block font-semibold">{fmt.dayShort(list[0].start)}</span>
-            <span className="block text-xs opacity-80">{list.length}</span>
+            <span className="block text-caption opacity-80">{list.length}</span>
           </button>
         ))}
       </div>
@@ -61,7 +61,7 @@ export function SlotPicker({ slots, value, onChange, label }: Props) {
                 s.id === value ? 'border-brand-600 bg-brand-50 text-brand-900 ring-2 ring-brand-600 dark:bg-brand-950 dark:text-brand-100' : 'border-slate-300 hover:bg-slate-50 dark:border-slate-600 dark:hover:bg-slate-800',
               )}
             >
-              {fmt.time(s.start)} <span className="text-xs font-normal">· {t('common.minutes', { count: s.durationMin })}</span>
+              {fmt.time(s.start)} <span className="text-caption font-normal">· {t('common.minutes', { count: s.durationMin })}</span>
             </button>
           </li>
         ))}

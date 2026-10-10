@@ -18,15 +18,21 @@ const VARIANT: Record<ButtonVariant, string> = {
   outlineOnDark: 'border-2 border-white/80 bg-transparent text-white hover:bg-white/10',
 }
 
+/*
+ * Heights are the touch-target floor, not decoration: `sm` (40px) is for dense
+ * staff tables only; `md` (44px) meets WCAG 2.2 target size; `lg` (52px) is for
+ * primary public actions. All three use 16px text so buttons never shrink below
+ * reading size, and wrap to two lines rather than truncate (Tamil words are long).
+ */
 const SIZE: Record<ButtonSize, string> = {
-  sm: 'min-h-9 px-3 text-sm gap-1.5',
-  md: 'min-h-11 px-4 text-base gap-2',
-  lg: 'min-h-12 px-5 text-lg gap-2',
+  sm: 'min-h-10 px-3.5 text-body gap-2',
+  md: 'min-h-11 px-4 text-body gap-2',
+  lg: 'min-h-13 px-5 text-body gap-2',
 }
 
 export function buttonClass(variant: ButtonVariant = 'primary', size: ButtonSize = 'md', extra?: string) {
   return cn(
-    'inline-flex items-center justify-center rounded-lg font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60',
+    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl font-semibold transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-60',
     VARIANT[variant],
     SIZE[size],
     extra,
@@ -44,7 +50,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export function Button({ variant = 'primary', size = 'md', loading, icon, className, children, disabled, type = 'button', ...rest }: ButtonProps) {
   return (
     <button type={type} className={buttonClass(variant, size, className)} disabled={disabled || loading} aria-busy={loading || undefined} {...rest}>
-      {loading ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : icon}
+      {loading ? <LoaderCircle aria-hidden className="size-5 animate-spin" /> : icon}
       {children}
     </button>
   )

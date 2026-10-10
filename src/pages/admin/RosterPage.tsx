@@ -46,7 +46,7 @@ export default function RosterPage() {
                 {current && <Badge tone="brand">{t('admin.currentWeek')}</Badge>}
               </div>
               <div>
-                <label htmlFor={`off-${w}`} className="mb-1 block text-sm font-medium">
+                <label htmlFor={`off-${w}`} className="mb-1 block text-body-sm font-medium">
                   {t('admin.officer')}
                 </label>
                 <select
@@ -65,7 +65,7 @@ export default function RosterPage() {
                 </select>
               </div>
               <div>
-                <label htmlFor={`bak-${w}`} className="mb-1 block text-sm font-medium">
+                <label htmlFor={`bak-${w}`} className="mb-1 block text-body-sm font-medium">
                   {t('admin.backup')}
                 </label>
                 <select
@@ -90,7 +90,7 @@ export default function RosterPage() {
         })}
       </ul>
       <Card className="mt-6">
-        <h2 className="text-lg font-semibold">{t('admin.handovers')}</h2>
+        <h2 className="text-h3">{t('admin.handovers')}</h2>
         {data.handovers.length === 0 ? (
           <p className="mt-2 text-slate-600 dark:text-slate-400">{t('common.noResults')}</p>
         ) : (

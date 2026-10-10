@@ -84,7 +84,7 @@ src/
   domain/      pure, unit-tested rules: bookingRules, slots, alerts, permissions, scoring, age
   services/    storage.ts (localStorage), mockApi.ts (axios adapter + router), handlers/* (mock REST API), api.ts (typed client), exportCsv.ts
   store/       zustand: auth, appointments, cases, alerts, ui, settings
-  i18n/        en.json, si.json, ta.json (971 keys each)
+  i18n/        en.json, si.json, ta.json (1020 keys each)
   components/  ui/ (Button, Input, Select, Modal, Tabs, Badge, DataTable…), layout/, forms/, charts/, feature/
   pages/       public/, beneficiary/, counsellor/, admin/
   routes/      router.tsx, RequireRole.tsx
@@ -104,15 +104,42 @@ Every request goes through the axios instance in `services/mockApi.ts`. Set `VIT
 - Fonts are bundled locally (`@fontsource`), so no third-party font CDN is used.
 - The login token lives in `sessionStorage`: closing the tab signs you out. Idle timeout is 15 minutes, with a 60-second warning.
 
+### Design system
+
+- **Colour.** One `brand` scale (blue) defined in `src/styles/index.css`. `brand-700` is the
+  primary action and `brand-600` the focus ring; `brand-500` is for charts only, never text on
+  white. Semantic tones map onto Tailwind's stock `green` / `amber` / `red`, and red is reserved
+  for emergency and destructive actions. Every tone is paired with an icon or label, never colour
+  alone. All pairs are verified against WCAG AA in both themes.
+- **Type.** Eight semantic tokens — `display`, `h1`, `h2`, `h3`, `lead`, `body`, `body-sm`,
+  `caption` — used instead of raw `text-xs … text-5xl`. Sizes are fluid (`clamp`) and in `rem`, so
+  browser zoom still works at 200%. `text-xs` is removed from the build entirely
+  (`--text-xs: initial`), so it cannot be used by accident.
+- **The floor is a Latin floor.** 14px (`text-caption`) is the minimum for **Latin** text. Sinhala
+  and Tamil glyphs have a much larger apparent size at the same point size, so under `:lang(si)` /
+  `:lang(ta)` the whole scale steps down: body is 15px and captions are 13px. Those are the same
+  *apparent* size as 16px and 14px Latin, not a smaller one.
+- **Sinhala and Tamil.** The `:lang()` blocks set **custom properties only** — never `font-size`
+  directly, because `:lang` matches every descendant and a `font-size` there would hit every
+  heading too and flatten the hierarchy. Line height increases so vowel signs are never clipped,
+  and weight 700 maps to the real 600 face: Noto Sans Sinhala/Tamil ship 400/600 only, so asking
+  for 700 would synthesise a smeared bold. A `:lang(en)` block restores the Latin scale for English
+  content embedded in a Sinhala or Tamil page (assessment items, untranslated resources).
+- **Form controls are pinned to 16px in every language** via a separate `--text-control` token that
+  the `:lang` blocks deliberately do not override — Safari on iOS zooms the page whenever a focused
+  field is under 16px.
+- **Theme and language are applied before first paint** by a small inline script in `index.html`,
+  so dark mode does not flash light and Sinhala does not render one frame at Latin heading sizes.
+
 ### Accessibility (WCAG 2.2 target)
 
-- Visible focus rings; targets of at least 24px (most are 44px); a skip link.
+- Visible focus rings; touch targets of at least 44px (40px only in dense staff tables); a skip link.
 - Every input has a label; errors are linked with `aria-describedby`.
 - ARIA tabs with arrow-key navigation; native `<dialog>` modals that return focus to the opener.
 - Rating scales are native radio groups.
 - Charts have a legend and a data-table view, and use a CVD-validated palette with separate dark-mode steps.
 - `prefers-reduced-motion` is respected; dark mode is available.
-- Layouts are checked at 375, 768 and 1280px with no horizontal page scroll.
+- Layouts are checked at 360, 390, 768 and 1280px with no horizontal page scroll.
 
 ## Requirement map (main IDs)
 

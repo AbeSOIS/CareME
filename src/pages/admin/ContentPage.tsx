@@ -150,7 +150,12 @@ export default function ContentPage() {
                 options={(['stress', 'anxiety', 'mood', 'family', 'sleep', 'substance', 'wellbeing'] as const).map((k) => ({ value: k, label: t(`resources.topic.${k}`) }))}
               />
             </div>
-            <Tabs label={t('common.language')} active={editLang} onChange={(l) => setEditLang(l as LanguageCode)} tabs={(['en', 'si', 'ta'] as const).map((l) => ({ id: l, label: <span lang={l}>{t(`lang.${l}`)}</span>, badge: editing.versions[l] ? null : <span aria-hidden className="size-2 rounded-full bg-amber-500" /> }))}>
+            <Tabs label={t('common.language')} active={editLang} onChange={(l) => setEditLang(l as LanguageCode)} tabs={(['en', 'si', 'ta'] as const).map((l) => ({ id: l, label: <span lang={l}>{t(`lang.${l}`)}</span>, badge: editing.versions[l] ? null : (
+          <span className="inline-flex items-center" title={t('admin.translationMissing')}>
+            <span aria-hidden className="size-2 rounded-full bg-amber-500" />
+            <span className="sr-only">{t('admin.translationMissing')}</span>
+          </span>
+        ) }))}>
               <div className="space-y-4" lang={editLang}>
                 <Input label={t('admin.titleField')} required={editLang === 'en'} value={editing.versions[editLang]?.title ?? ''} onChange={(e) => setVersion({ title: e.target.value })} />
                 <Input label={t('admin.summary')} value={editing.versions[editLang]?.summary ?? ''} onChange={(e) => setVersion({ summary: e.target.value })} />

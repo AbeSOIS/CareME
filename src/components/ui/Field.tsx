@@ -1,9 +1,14 @@
 import { useId, type InputHTMLAttributes, type ReactNode, type Ref, type SelectHTMLAttributes, type TextareaHTMLAttributes } from 'react'
 import { useTranslation } from 'react-i18next'
+import { CircleAlert } from 'lucide-react'
 import { cn } from './cn'
 
+/*
+ * 48px tall, and text-control (16px in every language — see index.css): anything
+ * smaller makes iOS zoom the page when a field takes focus.
+ */
 export const controlClass =
-  'block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 placeholder:text-slate-500 focus-visible:border-brand-600 disabled:bg-slate-100 aria-[invalid=true]:border-red-600 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-400 dark:disabled:bg-slate-800'
+  'block min-h-12 w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-control text-slate-900 placeholder:text-slate-500 focus-visible:border-brand-600 disabled:bg-slate-100 aria-[invalid=true]:border-red-600 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-400 dark:disabled:bg-slate-800'
 
 interface FieldShellProps {
   id: string
@@ -20,7 +25,7 @@ export function FieldShell({ id, label, hint, error, required, children, classNa
   const { t } = useTranslation()
   return (
     <div className={cn('space-y-1.5', className)}>
-      <label htmlFor={id} className="block font-medium text-slate-800 dark:text-slate-200">
+      <label htmlFor={id} className="block text-body font-medium text-slate-800 dark:text-slate-200">
         {label}
         {required ? (
           <span className="text-red-700 dark:text-red-400" aria-hidden>
@@ -32,13 +37,14 @@ export function FieldShell({ id, label, hint, error, required, children, classNa
         )}
       </label>
       {hint && (
-        <p id={`${id}-hint`} className="text-sm text-slate-600 dark:text-slate-400">
+        <p id={`${id}-hint`} className="text-caption text-slate-600 dark:text-slate-300">
           {hint}
         </p>
       )}
       {children}
       {error && (
-        <p id={`${id}-error`} role="alert" className="text-sm font-medium text-red-700 dark:text-red-400">
+        <p id={`${id}-error`} role="alert" className="flex items-start gap-1.5 text-caption font-medium text-red-700 dark:text-red-400">
+          <CircleAlert aria-hidden className="mt-px size-4 shrink-0" />
           {error}
         </p>
       )}
@@ -150,25 +156,24 @@ export function Checkbox({ label, description, id, className, ...rest }: Checkbo
   const auto = useId()
   const fid = id ?? auto
   return (
-    <div className={cn('flex items-start gap-3', className)}>
+    // The whole row is one <label>, so the entire 44px-tall row is the tap target.
+    <label htmlFor={fid} className={cn('flex min-h-11 cursor-pointer items-start gap-3 py-1.5', className)}>
       <input
         id={fid}
         type="checkbox"
         aria-describedby={description ? `${fid}-desc` : undefined}
-        className="mt-0.5 size-6 shrink-0 rounded border-slate-400 accent-brand-700 dark:accent-brand-400"
+        className="mt-0.5 size-5 shrink-0 rounded border-slate-400 accent-brand-700 dark:accent-brand-400"
         {...rest}
       />
-      <div>
-        <label htmlFor={fid} className="font-medium text-slate-800 dark:text-slate-200">
-          {label}
-        </label>
+      <span className="min-w-0">
+        <span className="block text-body font-medium text-slate-800 dark:text-slate-200">{label}</span>
         {description && (
-          <p id={`${fid}-desc`} className="text-sm text-slate-600 dark:text-slate-400">
+          <span id={`${fid}-desc`} className="block text-caption text-slate-600 dark:text-slate-300">
             {description}
-          </p>
+          </span>
         )}
-      </div>
-    </div>
+      </span>
+    </label>
   )
 }
 
@@ -189,7 +194,7 @@ export function RadioGroup({ name, legend, options, value, onChange, required, e
   const auto = useId()
   return (
     <fieldset className="space-y-2" aria-describedby={error ? `${auto}-error` : undefined} aria-invalid={error ? true : undefined}>
-      <legend className="mb-1 font-medium text-slate-800 dark:text-slate-200">
+      <legend className="mb-1 text-body font-medium text-slate-800 dark:text-slate-200">
         {legend}
         {required && (
           <span className="text-red-700 dark:text-red-400" aria-hidden>
@@ -203,7 +208,7 @@ export function RadioGroup({ name, legend, options, value, onChange, required, e
           <label
             key={o.value}
             className={cn(
-              'flex min-h-11 cursor-pointer items-center gap-3 rounded-lg border px-3 py-2 transition-colors',
+              'flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border px-3 py-2 text-body transition-colors duration-150',
               value === o.value
                 ? 'border-brand-600 bg-brand-50 dark:border-brand-400 dark:bg-brand-950'
                 : 'border-slate-300 hover:bg-slate-50 dark:border-slate-600 dark:hover:bg-slate-800',
@@ -224,7 +229,8 @@ export function RadioGroup({ name, legend, options, value, onChange, required, e
         ))}
       </div>
       {error && (
-        <p id={`${auto}-error`} role="alert" className="text-sm font-medium text-red-700 dark:text-red-400">
+        <p id={`${auto}-error`} role="alert" className="flex items-start gap-1.5 text-caption font-medium text-red-700 dark:text-red-400">
+          <CircleAlert aria-hidden className="mt-px size-4 shrink-0" />
           {error}
         </p>
       )}

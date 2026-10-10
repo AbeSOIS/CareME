@@ -28,7 +28,7 @@ export function RatingScale({ items, options, value, onChange, label, disabled, 
   const cols = 'md:grid-cols-[minmax(0,1fr)_repeat(4,6.5rem)]'
   return (
     <div role="group" aria-label={label} className="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700">
-      <div aria-hidden className={cn('hidden gap-2 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 md:grid dark:bg-slate-800 dark:text-slate-200', cols)}>
+      <div aria-hidden className={cn('hidden gap-2 bg-slate-50 px-3 py-2 text-caption font-semibold text-slate-700 md:grid dark:bg-slate-800 dark:text-slate-200', cols)}>
         <span />
         {options.map((o) => (
           <span key={o.value} className="text-center">
@@ -55,7 +55,7 @@ export function RatingScale({ items, options, value, onChange, label, disabled, 
                 <label
                   key={o.value}
                   className={cn(
-                    'flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg border px-2 text-sm md:border-transparent',
+                    'flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg border px-2 text-body-sm md:border-transparent',
                     checked ? 'border-brand-600 bg-brand-50 dark:bg-brand-950 md:bg-transparent' : 'border-slate-300 dark:border-slate-600',
                   )}
                 >

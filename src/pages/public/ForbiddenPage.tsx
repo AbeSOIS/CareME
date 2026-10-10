@@ -6,11 +6,12 @@ export function ForbiddenPage() {
   const { t } = useTranslation()
   return (
     <div className="mx-auto max-w-xl py-16 text-center">
-      <ShieldAlert aria-hidden className="mx-auto size-12 text-amber-600" />
-      <h1 className="mt-4 text-2xl font-bold">{t('common.forbidden')}</h1>
-      <p className="mt-2 text-slate-600 dark:text-slate-300">{t('common.forbiddenBody')}</p>
-      <p className="mt-1 text-sm text-slate-500">403</p>
-      <ButtonLink to="/" className="mt-6">
+      <span className="mx-auto inline-flex size-20 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/60">
+        <ShieldAlert aria-hidden className="size-10 text-amber-700 dark:text-amber-200" />
+      </span>
+      <h1 className="mt-6 text-h1">{t('common.forbidden')}</h1>
+      <p className="mx-auto mt-2 max-w-prose text-body text-slate-600 dark:text-slate-300">{t('common.forbiddenBody')}</p>
+      <ButtonLink to="/" size="lg" className="mt-6">
         {t('common.goHome')}
       </ButtonLink>
     </div>

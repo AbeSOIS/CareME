@@ -65,8 +65,8 @@ export function ScreeningForm({ record, prefill, onSaved, updatedAt }: { record:
     >
       {!record.screening && <Callout tone="info">{t('case.notStarted')}</Callout>}
       <FormSections sections={SCREENING_SECTIONS} form={form} />
-      <div className="sticky bottom-0 -mx-5 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 bg-white/95 px-5 py-3 backdrop-blur dark:border-slate-700 dark:bg-slate-900/95">
-        <span className="text-sm text-slate-600 dark:text-slate-400">{record.screening && updatedAt ? t('case.lastSaved', { time: fmt.dateTime(updatedAt) }) : ''}</span>
+      <div className="sticky bottom-0 -mx-4 sm:-mx-5 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 bg-white/95 px-4 py-3 backdrop-blur sm:px-5 dark:border-slate-700 dark:bg-slate-900/95">
+        <span className="text-body-sm text-slate-600 dark:text-slate-400">{record.screening && updatedAt ? t('case.lastSaved', { time: fmt.dateTime(updatedAt) }) : ''}</span>
         <Button type="submit" loading={form.formState.isSubmitting}>
           {t('common.save')}
         </Button>

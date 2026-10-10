@@ -59,12 +59,12 @@ export default function ReferralsPage() {
                     </div>
                     <p className="font-semibold">{r.sourceOrganisation ?? r.destination}</p>
                     <p>{r.reason}</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                    <p className="text-body-sm text-slate-600 dark:text-slate-400">
                       {fmt.date(r.referralDate)}
                       {r.receivingDistrictId && ` · ${districtName(r.receivingDistrictId)}`}
                       {r.receivingDsDivisionId && ` / ${dsName(r.receivingDsDivisionId)}`} · {t('referrals.consent')}: {t(`referrals.consents.${r.consentStatus}`)}
                     </p>
-                    <p className="text-sm">
+                    <p className="text-body-sm">
                       {r.clientCode ? (
                         <span className="font-mono">
                           {r.clientCode} {r.clientName}
@@ -74,7 +74,7 @@ export default function ReferralsPage() {
                       )}
                     </p>
                     {r.actions.length > 0 && (
-                      <details className="text-sm">
+                      <details className="text-body-sm">
                         <summary className="min-h-9 cursor-pointer font-medium">
                           {t('referrals.actions')} ({r.actions.length})
                         </summary>
@@ -92,7 +92,7 @@ export default function ReferralsPage() {
                     {(() => {
                       const caseLink = r.caseId ? `/counsellor/cases/${r.caseId}` : null
                       return caseLink ? (
-                        <Link to={caseLink} className="inline-flex min-h-9 items-center rounded-lg px-3 text-sm font-semibold text-brand-800 hover:bg-brand-50 dark:text-brand-200 dark:hover:bg-slate-800">
+                        <Link to={caseLink} className="inline-flex min-h-9 items-center rounded-lg px-3 text-body-sm font-semibold text-brand-800 hover:bg-brand-50 dark:text-brand-200 dark:hover:bg-slate-800">
                           {t('portal.openCase')}
                         </Link>
                       ) : null

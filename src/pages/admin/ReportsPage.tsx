@@ -179,11 +179,11 @@ export default function ReportsPage() {
         <section aria-labelledby="report-title" className="space-y-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 id="report-title" className="text-xl font-semibold">
+              <h2 id="report-title" className="text-h2">
                 {t(`reports.types.${type}`)}
                 {usesMonth && ` — ${fmt.month(month)} · ${districtName(districtId)}`}
               </h2>
-              <p className="text-sm text-slate-600 dark:text-slate-400">{t('reports.rows', { count: result.rows.length })}</p>
+              <p className="text-body-sm text-slate-600 dark:text-slate-400">{t('reports.rows', { count: result.rows.length })}</p>
             </div>
             <div className="flex flex-wrap gap-2">
               <Button
@@ -216,7 +216,16 @@ export default function ReportsPage() {
             caption={t(`reports.types.${type}`)}
             rows={result.rows}
             rowKey={(r) => JSON.stringify(r)}
-            columns={result.columns.map((c, i) => ({ key: c.key, header: c.label, primary: i === 0, render: (r: ReportRow) => (r[c.key] === null ? '—' : String(r[c.key] ?? '')) }))}
+            columns={result.columns.map((c, i) => {
+              const numeric = result.rows.some((r) => typeof r[c.key] === 'number')
+              return {
+                key: c.key,
+                header: c.label,
+                primary: i === 0,
+                className: numeric ? 'text-right tabular-nums' : undefined,
+                render: (r: ReportRow) => (r[c.key] === null ? '—' : String(r[c.key] ?? '')),
+              }
+            })}
           />
         </section>
       )}

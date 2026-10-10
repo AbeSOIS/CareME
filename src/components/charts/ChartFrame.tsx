@@ -19,13 +19,13 @@ export function ChartFrame({ title, children, columns, rows }: { title: string; 
         <figcaption id={id} className="font-semibold">
           {title}
         </figcaption>
-        <button type="button" aria-pressed={showTable} onClick={() => setShowTable((s) => !s)} className="min-h-8 rounded-md px-2 text-sm font-medium text-brand-800 hover:bg-brand-50 dark:text-brand-200 dark:hover:bg-slate-800">
+        <button type="button" aria-pressed={showTable} onClick={() => setShowTable((s) => !s)} className="min-h-8 rounded-md px-2 text-body-sm font-medium text-brand-800 hover:bg-brand-50 dark:text-brand-200 dark:hover:bg-slate-800">
           {t('dashboard.chartTable')}
         </button>
       </div>
       {showTable ? (
-        <div className="relative max-h-80 overflow-auto">
-          <table className="w-full text-sm">
+        <div className="scrollbar-thin relative max-h-80 overflow-auto">
+          <table className="w-full text-body-sm">
             <caption className="sr-only">{title}</caption>
             <thead>
               <tr>
