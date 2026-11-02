@@ -46,36 +46,36 @@ export function HomePage() {
   return (
     <div className="space-y-12 sm:space-y-16">
       {/* ---------- Hero: one message, two next steps ---------- */}
-      <section className="relative overflow-hidden rounded-3xl bg-white/45 px-6 py-12 backdrop-blur-[3px] sm:px-10 sm:py-16 dark:bg-slate-950/55">
+      <section className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-br from-white/60 via-brand-50/40 to-brand-100/50 px-6 py-12 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset] backdrop-blur-[2px] sm:px-10 sm:py-16 dark:border-white/10 dark:from-slate-950/70 dark:via-slate-900/50 dark:to-brand-950/50">
         <div className="relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div className="max-w-2xl">
-            <p className="flex items-center gap-3 text-caption font-extrabold tracking-[0.2em] text-brand-700 uppercase dark:text-brand-200">
-              <span aria-hidden className="h-0.5 w-9 bg-brand-600 dark:bg-brand-400" />
+            <p className="inline-flex items-center gap-3 rounded-full bg-white/70 py-1.5 pr-4 pl-3 text-caption font-extrabold tracking-[0.2em] text-brand-700 uppercase shadow-sm backdrop-blur-sm dark:bg-white/10 dark:text-brand-200">
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-brand-600 dark:bg-brand-400" />
               {t('app.tagline')}
             </p>
-            <h1 className="mt-5 text-[clamp(2.25rem,6vw,4.75rem)] leading-[1.05] font-extrabold tracking-tight text-balance text-slate-900 dark:text-white">
+            <h1 className="mt-6 text-[clamp(2.25rem,6vw,4.75rem)] leading-[1.05] font-extrabold tracking-tight text-balance text-slate-900 dark:text-white">
               {t('home.title')}
             </h1>
             <p className="mt-5 max-w-prose text-lead text-slate-600 dark:text-slate-300">{t('home.lead')}</p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <ButtonLink to="/self-assessment" size="lg" className="shadow-xl shadow-brand-900/10">
+              <ButtonLink to="/self-assessment" size="lg" className="shadow-xl shadow-brand-900/15 transition-transform duration-150 hover:-translate-y-0.5">
                 {t('home.ctaAssess')}
               </ButtonLink>
-              <ButtonLink to="/counsellors" size="lg" variant="secondary">
+              <ButtonLink to="/counsellors" size="lg" variant="secondary" className="bg-white/70 backdrop-blur-sm transition-transform duration-150 hover:-translate-y-0.5 dark:bg-white/5">
                 {t('home.ctaFind')}
               </ButtonLink>
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-caption text-slate-600 dark:text-slate-300">
-              <span className="inline-flex items-center gap-2">
-                <EyeOff aria-hidden className="size-4 shrink-0" />
+            <div className="mt-8 flex flex-wrap gap-2 text-caption text-slate-700 dark:text-slate-200">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/60 px-3 py-1.5 shadow-sm backdrop-blur-sm dark:bg-white/5">
+                <EyeOff aria-hidden className="size-4 shrink-0 text-brand-600 dark:text-brand-300" />
                 {t('home.anonBadgeShort')}
               </span>
-              <span className="inline-flex items-center gap-2">
-                <LockKeyhole aria-hidden className="size-4 shrink-0" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/60 px-3 py-1.5 shadow-sm backdrop-blur-sm dark:bg-white/5">
+                <LockKeyhole aria-hidden className="size-4 shrink-0 text-brand-600 dark:text-brand-300" />
                 {t('home.privacyTitle')}
               </span>
-              <span className="inline-flex items-center gap-2">
-                <Languages aria-hidden className="size-4 shrink-0" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/60 px-3 py-1.5 shadow-sm backdrop-blur-sm dark:bg-white/5">
+                <Languages aria-hidden className="size-4 shrink-0 text-brand-600 dark:text-brand-300" />
                 {fmt.number(3)} {t('home.statsLanguages')}
               </span>
             </div>
@@ -83,8 +83,10 @@ export function HomePage() {
           {/* Floating highlight card: the visual counterpart to the hero copy, standing in for
               a photo so the hero never depends on a remote image. */}
           <div className="relative hidden lg:block">
-            <Tilt3D maxDeg={5} className="relative ml-auto w-64 rounded-2xl border border-brand-900/10 bg-white/90 p-6 shadow-2xl backdrop-blur-sm dark:border-white/15 dark:bg-slate-900/90">
-              <HeartHandshake aria-hidden className="size-8 text-brand-600 dark:text-brand-300" />
+            <Tilt3D maxDeg={5} className="relative ml-auto w-64 rounded-2xl border border-white/60 bg-white/85 p-6 shadow-2xl backdrop-blur-md dark:border-white/15 dark:bg-slate-900/85">
+              <span className="inline-flex size-12 items-center justify-center rounded-xl bg-brand-100 dark:bg-brand-900/60">
+                <HeartHandshake aria-hidden className="size-6 text-brand-700 dark:text-brand-200" />
+              </span>
               <p className="mt-4 text-[3.25rem] leading-none font-extrabold tracking-tight text-slate-900 dark:text-white">{fmt.number(174)}</p>
               <p className="mt-2 text-body-sm text-slate-600 dark:text-slate-300">{t('home.statsCounsellors')}</p>
               <p className="mt-4 border-t border-brand-900/10 pt-4 text-caption font-semibold tracking-wide text-brand-700 uppercase dark:border-white/15 dark:text-brand-300">
@@ -95,17 +97,20 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ---------- Emergency, kept visually separate from normal booking ---------- */}
-      <section aria-labelledby="home-emergency" className="rounded-2xl border border-l-4 border-red-200 border-l-red-600 bg-red-50 p-5 dark:border-red-900 dark:border-l-red-600 dark:bg-red-950/60">
+      {/* ---------- Emergency, kept visually separate from normal booking ----------
+          Pink rather than the site's usual red for this one banner, by request — the
+          floating EmergencyButton, /emergency page and danger-styled controls elsewhere
+          keep red, since that's still the safety-critical convention everywhere else. */}
+      <section aria-labelledby="home-emergency" className="rounded-2xl border border-l-4 border-[#e6cfb8] border-l-pink-400 bg-[#f2e4d9] p-5 dark:border-pink-900 dark:border-l-pink-500 dark:bg-pink-950/40">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p id="home-emergency" className="flex items-center gap-3 text-h3 text-red-900 dark:text-red-100">
+          <p id="home-emergency" className="flex items-center gap-3 text-h3 text-pink-900 dark:text-pink-100">
             <Siren aria-hidden className="size-6 shrink-0" />
             {t('home.emergencyStrip')}
           </p>
           <div className="flex flex-wrap gap-3">
             <a
               href={`tel:${EMERGENCY_NUMBERS[0].number}`}
-              className="inline-flex min-h-13 items-center gap-2 rounded-xl bg-red-600 px-5 text-body font-bold text-white transition-colors duration-150 hover:bg-red-700"
+              className="inline-flex min-h-13 items-center gap-2 rounded-xl bg-pink-600 px-5 text-body font-bold text-white transition-colors duration-150 hover:bg-pink-700"
             >
               <Phone aria-hidden className="size-5" />
               {t('emergency.call', { number: EMERGENCY_NUMBERS[0].number })}

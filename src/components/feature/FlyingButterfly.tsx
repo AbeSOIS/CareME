@@ -4,38 +4,70 @@ const prefersReducedMotion = () => typeof window !== 'undefined' && window.match
 
 type Tone = 'navy' | 'mid' | 'pale'
 
-const TONES: Record<Tone, { wing: string; band: string; spot: string; spot2: string }> = {
-  navy: { wing: 'var(--color-brand-900)', band: 'var(--color-brand-500)', spot: 'var(--color-brand-200)', spot2: 'var(--color-brand-300)' },
-  mid: { wing: 'var(--color-brand-700)', band: 'var(--color-brand-400)', spot: 'var(--color-brand-100)', spot2: 'var(--color-brand-200)' },
-  pale: { wing: 'var(--color-brand-600)', band: 'var(--color-brand-300)', spot: 'var(--color-brand-50)', spot2: 'var(--color-brand-200)' },
+// Three shades of the same wing-blue so a group of these reads as a little variety, not
+// clones — the dark trim, white dots and rainbow accent (matching the reference image)
+// stay constant across all three, since that's the recognisable part of the mark.
+const WING_FILL: Record<Tone, string> = {
+  navy: 'var(--color-brand-400)',
+  mid: 'var(--color-brand-300)',
+  pale: 'var(--color-brand-200)',
 }
 
 /**
- * A stylised version of the butterfly at the centre of the CareMe logo (public/careme-logo.png),
- * redrawn as flat brand-colour wings rather than cropped from the badge artwork, so it stays crisp
- * at any size and recolours with the theme. Two wing pairs + antennae, nothing else. `tone` picks
- * one of three brand-palette colourways so a group of these reads as a little variety, not clones.
+ * One mirrored wing (upper lobe + lower lobe with a tail streamer), reflected for the other
+ * side. The mirror lives on this outer, unanimated group; the flap animation goes on the
+ * inner group instead, because a CSS animation's transform replaces (rather than combines
+ * with) an SVG `transform` attribute on the same element — putting both on one <g> would
+ * silently drop the mirroring every time the wing flapped.
+ */
+function Wing({ fill, mirror, className }: { fill: string; mirror?: boolean; className?: string }) {
+  return (
+    <g transform={mirror ? 'translate(120,0) scale(-1,1)' : undefined}>
+      <g className={className}>
+        {/* upper (fore) wing: dark trim, pale field, white dot row, rainbow accent near the body */}
+        <path d="M60,40 C46,16 16,6 6,20 C-2,32 6,46 24,47 C38,48 52,45 60,40 Z" fill="var(--color-brand-950)" />
+        <path d="M58,37 C47,20 23,13 14,23 C8,31 13,40 26,41 C37,42 50,40 58,37 Z" fill={fill} />
+        <circle cx="10" cy="22" r="1.6" fill="white" />
+        <circle cx="7" cy="28" r="1.6" fill="white" />
+        <circle cx="11" cy="36" r="1.6" fill="white" />
+        <circle cx="20" cy="42" r="1.6" fill="white" />
+        <g transform="translate(34,26) rotate(12)">
+          <ellipse rx="6.5" ry="3.4" fill="white" />
+          <path d="M-5,-2.4 A5.6,2.9 0 0 1 5,-2.4 L4,-0.3 L-4,-0.3 Z" fill="#f4c430" />
+          <path d="M-4.3,-0.3 L4.3,-0.3 L3.6,1.1 L-3.6,1.1 Z" fill="#c23b3b" />
+          <path d="M-3.4,1.1 A4.6,2.1 0 0 0 3.4,1.1 L2.6,2.6 L-2.6,2.6 Z" fill="#e8823c" />
+        </g>
+        {/* lower (hind) wing: scalloped dark trim, a teal inner band, one thin tail streamer */}
+        <path d="M60,44 C49,50 24,53 13,68 C4,81 10,95 22,92 C27,91 27,83 25,78 C33,90 29,102 22,109 C26,108 33,100 36,90 C40,96 48,93 60,76 Z" fill="var(--color-brand-950)" />
+        <path d="M59,46 C50,51 29,54 20,67 C13,77 18,88 27,85 C33,83 34,74 33,68 C40,78 48,78 58,65 Z" fill={fill} opacity="0.92" />
+        <circle cx="16" cy="66" r="1.5" fill="white" />
+        <circle cx="12" cy="76" r="1.5" fill="white" />
+        <circle cx="17" cy="86" r="1.5" fill="white" />
+      </g>
+    </g>
+  )
+}
+
+/**
+ * A faithful redraw of the butterfly supplied for this feature (swallowtail wings, navy
+ * scalloped trim with white dots, a small rainbow accent near the body, tail streamers,
+ * and the little raised-arms "person" figure as the body), as flat SVG rather than the
+ * source JPEG — a photo with a solid white background wouldn't composite over the site's
+ * light, dark and translucent surfaces, where an SVG just recolours and stays crisp.
  */
 function ButterflySvg({ className, tone = 'navy' }: { className?: string; tone?: Tone }) {
-  const c = TONES[tone]
+  const fill = WING_FILL[tone]
   return (
-    <svg viewBox="0 0 120 100" className={className} aria-hidden>
-      <g className="wing-left">
-        <path d="M60,45 C40,18 8,12 5,38 C3,58 34,66 60,50 Z" fill={c.wing} />
-        <path d="M60,50 C44,54 23,68 27,86 C31,97 50,89 60,66 Z" fill={c.band} />
-        <ellipse cx="28" cy="36" rx="7" ry="5" fill={c.spot} opacity="0.85" />
-        <ellipse cx="42" cy="68" rx="4" ry="3" fill={c.spot2} opacity="0.85" />
-      </g>
-      <g className="wing-right">
-        <path d="M60,45 C80,18 112,12 115,38 C117,58 86,66 60,50 Z" fill={c.wing} />
-        <path d="M60,50 C76,54 97,68 93,86 C89,97 70,89 60,66 Z" fill={c.band} />
-        <ellipse cx="92" cy="36" rx="7" ry="5" fill={c.spot} opacity="0.85" />
-        <ellipse cx="78" cy="68" rx="4" ry="3" fill={c.spot2} opacity="0.85" />
-      </g>
-      <path d="M57,30 C54,22 49,18 45,20" fill="none" stroke={c.wing} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M63,30 C66,22 71,18 75,20" fill="none" stroke={c.wing} strokeWidth="1.5" strokeLinecap="round" />
-      <ellipse cx="60" cy="52" rx="3.2" ry="21" fill="var(--color-brand-950)" />
-      <circle cx="60" cy="31" r="4" fill="var(--color-brand-950)" />
+    <svg viewBox="0 0 120 112" className={className} aria-hidden>
+      <Wing fill={fill} className="wing-left" />
+      <Wing fill={fill} mirror className="wing-right" />
+      {/* the mascot body: a small figure with raised arms, standing in for an insect body */}
+      <path d="M60,26 C57,46 56,78 60,100 C64,78 63,46 60,26 Z" fill="var(--color-brand-700)" />
+      <circle cx="60" cy="18" r="4.4" fill="var(--color-brand-700)" />
+      <path d="M60,24 C55,19 47,15 42,17" fill="none" stroke="var(--color-brand-700)" strokeWidth="2.4" strokeLinecap="round" />
+      <path d="M60,24 C65,19 73,15 78,17" fill="none" stroke="var(--color-brand-700)" strokeWidth="2.4" strokeLinecap="round" />
+      <circle cx="42" cy="17" r="2.2" fill="var(--color-brand-700)" />
+      <circle cx="78" cy="17" r="2.2" fill="var(--color-brand-700)" />
     </svg>
   )
 }
