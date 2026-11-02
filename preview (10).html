@@ -1,0 +1,1590 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Care Me — You Matter</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy: #080e23;
+  --navy2: #101c3b;
+  --blue: #438df5;
+  --light-blue: #a6ccff;
+  --white: #f8faff;
+  --muted: #9baac4;
+  --red: #ed3546;
+  --line: rgba(255,255,255,.13);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  background:var(--navy);
+  color:var(--white);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+}
+
+button,select { font:inherit; }
+button { cursor:pointer; }
+a { text-decoration:none; color:inherit; }
+
+.container {
+  width:min(1380px,91%);
+  margin:auto;
+}
+
+/* NAVIGATION */
+
+header {
+  height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 4.5%;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(8,14,35,.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);
+}
+
+.logo {
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-size:19px;
+  font-weight:800;
+}
+
+.logo-symbol {
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--blue);
+  display:grid;
+  place-items:center;
+  font-size:21px;
+}
+
+.nav {
+  display:flex;
+  align-items:center;
+  gap:35px;
+  color:#b8c5dc;
+  font-size:13px;
+}
+
+.nav a { transition:.2s; }
+.nav a:hover { color:white; }
+
+.nav-right {
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.language {
+  background:none;
+  color:white;
+  border:0;
+  padding:9px;
+}
+
+.login {
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:10px 21px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.menu {
+  display:none;
+  border:0;
+  background:none;
+  color:white;
+  font-size:25px;
+}
+
+/* HERO */
+
+.hero {
+  min-height:680px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  position:relative;
+  padding:65px 0 80px;
+}
+
+.hero-copy {
+  position:relative;
+  z-index:3;
+  padding-right:35px;
+  animation:enter .9s ease both;
+}
+
+.kicker {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--light-blue);
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  font-weight:800;
+  margin-bottom:30px;
+}
+
+.kicker:before {
+  content:'';
+  width:36px;
+  height:2px;
+  background:var(--blue);
+}
+
+.hero h1 {
+  font-family:Manrope,sans-serif;
+  font-size:clamp(54px,7vw,91px);
+  letter-spacing:-5px;
+  line-height:1.04;
+  font-weight:800;
+  max-width:690px;
+}
+
+.hero h1 span {
+  display:block;
+  color:var(--blue);
+  font-style:italic;
+}
+
+.hero-copy > p {
+  font-size:16px;
+  line-height:1.9;
+  color:#b5c2d9;
+  max-width:460px;
+  margin:30px 0;
+}
+
+.hero-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+}
+
+.btn {
+  padding:15px 23px;
+  border-radius:5px;
+  border:1px solid transparent;
+  font-size:13px;
+  font-weight:700;
+  transition:.3s;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+
+.btn-blue {
+  background:var(--blue);
+  color:#07142e;
+}
+
+.btn-blue:hover {
+  background:#8bbdff;
+  transform:translateY(-3px);
+}
+
+.btn-border {
+  color:white;
+  border-color:#61718f;
+  background:transparent;
+}
+
+.btn-border:hover { background:#1a2c50; }
+
+.hero-trust {
+  display:flex;
+  gap:22px;
+  margin-top:45px;
+  font-size:11px;
+  color:#b3c1d9;
+}
+
+.hero-trust span {
+  display:flex;
+  gap:7px;
+  align-items:center;
+}
+
+/* IMAGE COMPOSITION */
+
+.hero-art {
+  height:560px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-image {
+  position:absolute;
+  width:78%;
+  height:88%;
+  right:3%;
+  top:6%;
+  border-radius:48% 48% 5px 5px;
+  overflow:hidden;
+  background:#263e70;
+}
+
+.hero-image img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  filter:saturate(.78);
+}
+
+.hero-image:after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 55%,rgba(7,15,37,.65));
+}
+
+.image-decoration {
+  position:absolute;
+  width:75%;
+  height:85%;
+  border:1px solid #4b85ce;
+  right:0;
+  top:2%;
+  border-radius:48% 48% 5px 5px;
+  transform:rotate(5deg);
+}
+
+.floating-note {
+  position:absolute;
+  z-index:4;
+  left:0;
+  bottom:70px;
+  background:#f8faff;
+  color:#13254b;
+  width:215px;
+  padding:19px;
+  border-radius:8px;
+  box-shadow:0 15px 50px rgba(0,0,0,.3);
+  animation:float 5s ease-in-out infinite;
+}
+
+.floating-note strong {
+  font-size:14px;
+  display:block;
+}
+
+.floating-note small {
+  font-size:11px;
+  color:#647895;
+}
+
+.floating-note .heart {
+  font-size:24px;
+  color:var(--blue);
+  margin-bottom:7px;
+}
+
+.image-caption {
+  position:absolute;
+  bottom:30px;
+  right:6%;
+  z-index:4;
+  font-size:11px;
+  letter-spacing:2px;
+  color:white;
+  text-transform:uppercase;
+}
+
+@keyframes float {
+  50% { transform:translateY(-12px); }
+}
+
+@keyframes enter {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* QUICK EMERGENCY */
+
+.emergency-bar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:23px 30px;
+  background:#280d1b;
+  border-left:4px solid var(--red);
+  margin:10px 0 100px;
+}
+
+.emergency-bar h3 { font-size:15px; }
+.emergency-bar p { color:#c6aab5; font-size:12px; margin-top:4px; }
+
+.emergency-action {
+  display:flex;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.emergency-action a {
+  background:var(--red);
+  color:white;
+  border-radius:5px;
+  padding:13px 22px;
+  font-size:13px;
+  font-weight:800;
+}
+
+/* MOOD CHECK */
+
+.mood-section {
+  padding:65px 0 120px;
+}
+
+.section-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:20px;
+  margin-bottom:45px;
+}
+
+.section-number {
+  color:var(--blue);
+  font-size:11px;
+  letter-spacing:2px;
+  font-weight:800;
+  margin-bottom:13px;
+}
+
+.section-top h2 {
+  font-family:Manrope,sans-serif;
+  font-size:clamp(32px,4vw,48px);
+  letter-spacing:-1.8px;
+}
+
+.section-top p {
+  font-size:13px;
+  color:var(--muted);
+  margin-top:10px;
+}
+
+.mood-area {
+  background:#111e3a;
+  border:1px solid var(--line);
+  padding:45px;
+  border-radius:8px;
+}
+
+.mood-question {
+  font-family:Manrope,sans-serif;
+  font-size:24px;
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.mood-options {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:15px;
+}
+
+.mood {
+  border:1px solid transparent;
+  background:transparent;
+  color:white;
+  padding:25px 10px;
+  transition:.3s;
+  border-radius:8px;
+}
+
+.mood:hover,.mood.active {
+  background:#1c3158;
+  border-color:var(--blue);
+  transform:translateY(-6px);
+}
+
+.mood-icon {
+  font-size:38px;
+  display:block;
+  margin-bottom:12px;
+  filter:grayscale(.3);
+}
+
+.mood strong { font-size:13px; }
+
+.mood-result {
+  display:none;
+  margin:30px auto 0;
+  padding:22px;
+  background:#1a3159;
+  border-left:3px solid var(--blue);
+  max-width:650px;
+  text-align:center;
+}
+
+.mood-result.show { display:block; animation:enter .4s; }
+
+.mood-result p {
+  color:#c4d5ef;
+  font-size:13px;
+  margin:8px 0 17px;
+}
+
+/* CONVERSATIONAL ASSESSMENT */
+
+.conversation {
+  padding:100px 0;
+  background:#101b35;
+}
+
+.conversation-layout {
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:70px;
+  align-items:center;
+}
+
+.conversation-intro h2 {
+  font-family:Manrope,sans-serif;
+  font-size:clamp(37px,4vw,55px);
+  line-height:1.18;
+  letter-spacing:-2px;
+}
+
+.conversation-intro h2 span { color:var(--blue); }
+
+.conversation-intro p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.9;
+  margin:22px 0;
+  max-width:400px;
+}
+
+.chat-window {
+  background:#080f22;
+  border:1px solid #344669;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.chat-header {
+  padding:18px 22px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.chat-avatar {
+  width:39px;
+  height:39px;
+  background:#23467c;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-size:19px;
+}
+
+.chat-header strong { font-size:13px; display:block; }
+.chat-header small { font-size:10px; color:#80d7ad; }
+
+.chat-body { padding:27px 22px; min-height:290px; }
+
+.chat-message {
+  max-width:85%;
+  padding:15px 17px;
+  border-radius:12px;
+  font-size:13px;
+  line-height:1.7;
+  margin-bottom:15px;
+}
+
+.chat-message.bot { background:#182946; }
+.chat-message.user {
+  background:#245a9e;
+  margin-left:auto;
+}
+
+.chat-choices {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.chat-choices button {
+  border:1px solid #4d78b2;
+  color:#a9ceff;
+  background:transparent;
+  padding:10px 15px;
+  border-radius:25px;
+  font-size:11px;
+}
+
+.chat-choices button:hover {
+  background:var(--blue);
+  color:#07142e;
+}
+
+.chat-disclaimer {
+  padding:12px 20px;
+  font-size:10px;
+  color:#8294b3;
+  border-top:1px solid var(--line);
+}
+
+/* COUNSELLOR SECTION */
+
+.people-section {
+  padding:120px 0;
+}
+
+.people-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:40px;
+}
+
+.people-heading h2 {
+  font-family:Manrope,sans-serif;
+  font-size:clamp(35px,4vw,52px);
+  letter-spacing:-2px;
+  line-height:1.15;
+}
+
+.people-heading p {
+  font-size:13px;
+  color:var(--muted);
+  margin-top:12px;
+}
+
+.people-controls {
+  display:flex;
+  gap:10px;
+}
+
+.arrow-btn {
+  width:46px;
+  height:46px;
+  background:#172745;
+  border:1px solid #3b5277;
+  color:white;
+  border-radius:50%;
+  font-size:20px;
+}
+
+.arrow-btn:hover { background:var(--blue); color:var(--navy); }
+
+.people-track {
+  display:flex;
+  gap:22px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  padding-bottom:15px;
+}
+
+.people-track::-webkit-scrollbar { display:none; }
+
+.person-card {
+  flex:0 0 calc(33.333% - 15px);
+  scroll-snap-align:start;
+  background:#101c35;
+  border-bottom:2px solid transparent;
+  transition:.3s;
+}
+
+.person-card:hover { border-color:var(--blue); }
+
+.person-photo {
+  height:330px;
+  overflow:hidden;
+  background:#1d3157;
+  position:relative;
+}
+
+.person-photo img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.5s;
+}
+
+.person-card:hover img { transform:scale(1.05); }
+
+.person-detail { padding:23px; }
+
+.person-detail small {
+  color:var(--blue);
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.person-detail h3 {
+  font-size:21px;
+  margin:9px 0 5px;
+}
+
+.person-detail p {
+  font-size:12px;
+  color:var(--muted);
+}
+
+.languages {
+  display:flex;
+  gap:8px;
+  margin:17px 0;
+}
+
+.languages span {
+  padding:6px 11px;
+  border:1px solid #35486a;
+  border-radius:25px;
+  font-size:10px;
+  color:#bed4f3;
+}
+
+.person-detail button {
+  border:0;
+  background:none;
+  color:var(--blue);
+  font-size:12px;
+  font-weight:800;
+}
+
+/* HUMAN MESSAGE */
+
+.message-section {
+  padding:90px 0;
+}
+
+.message-layout {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:470px;
+  background:#1c3670;
+  overflow:hidden;
+}
+
+.message-image {
+  min-height:400px;
+  overflow:hidden;
+}
+
+.message-image img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.message-copy {
+  padding:65px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.message-copy .quote {
+  font-size:62px;
+  color:#8ebcff;
+  line-height:1;
+}
+
+.message-copy h2 {
+  font-family:Manrope,sans-serif;
+  font-size:clamp(30px,3.5vw,44px);
+  line-height:1.25;
+  letter-spacing:-1.5px;
+}
+
+.message-copy p {
+  color:#c0d2f0;
+  font-size:13px;
+  line-height:1.9;
+  margin:20px 0;
+}
+
+/* RESOURCES */
+
+.resources {
+  padding:100px 0;
+}
+
+.resource-layout {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--line);
+}
+
+.resource {
+  padding:27px 20px 27px 0;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  transition:.2s;
+}
+
+.resource:hover { padding-left:12px; background:#101a32; }
+
+.resource small {
+  color:var(--blue);
+  font-size:10px;
+}
+
+.resource h3 {
+  font-size:16px;
+  margin:5px 0;
+}
+
+.resource p { font-size:11px; color:var(--muted); }
+
+.resource .plus {
+  font-size:26px;
+  color:var(--blue);
+}
+
+/* STATISTICS */
+
+.impact {
+  padding:75px 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.impact-row {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+}
+
+.impact-item {
+  text-align:center;
+  border-right:1px solid var(--line);
+  padding:20px;
+}
+
+.impact-item:last-child { border:0; }
+
+.impact-item strong {
+  font-family:Manrope,sans-serif;
+  font-size:clamp(42px,5vw,65px);
+  color:var(--light-blue);
+}
+
+.impact-item span {
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* EMERGENCY FOOTER */
+
+footer {
+  padding:70px 0 25px;
+  background:#111f41;
+}
+
+.footer-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:start;
+  gap:40px;
+  padding-bottom:55px;
+}
+
+.footer-brand h2 { font-size:25px; }
+.footer-brand p {
+  max-width:360px;
+  color:#a9bad5;
+  font-size:12px;
+  line-height:1.9;
+  margin-top:13px;
+}
+
+.footer-emergency h3 { font-size:15px; margin-bottom:15px; }
+.footer-emergency a {
+  display:block;
+  margin:10px 0;
+  color:#c2d4ef;
+  font-size:13px;
+}
+
+.footer-links { display:flex; gap:25px; flex-wrap:wrap; }
+.footer-links a { font-size:12px; color:#b5c5dd; }
+
+.footer-bottom {
+  border-top:1px solid var(--line);
+  padding-top:20px;
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  color:#8397b7;
+}
+
+/* MODAL */
+
+.modal {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:300;
+  padding:20px;
+}
+
+.modal.open { display:flex; }
+
+.modal-box {
+  background:#111e39;
+  border:1px solid #405478;
+  padding:35px;
+  border-radius:12px;
+  width:min(480px,100%);
+  position:relative;
+  animation:enter .3s;
+}
+
+.modal-close {
+  position:absolute;
+  right:18px;
+  top:12px;
+  background:none;
+  border:0;
+  color:white;
+  font-size:26px;
+}
+
+.modal-box h2 { font-size:25px; margin:15px 0; }
+.modal-box p { font-size:13px; color:#b5c5df; line-height:1.8; }
+
+.modal-options {
+  display:grid;
+  gap:10px;
+  margin:25px 0;
+}
+
+.modal-options button {
+  background:#1b2c4a;
+  border:1px solid #354d71;
+  padding:14px;
+  text-align:left;
+  border-radius:6px;
+  color:white;
+}
+
+.modal-options button:hover,
+.modal-options button.selected {
+  background:#204c83;
+  border-color:var(--blue);
+}
+
+.toast {
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  z-index:500;
+  padding:15px 22px;
+  background:#193d38;
+  color:#b5f0d4;
+  border:1px solid #34836c;
+  border-radius:7px;
+  font-size:12px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.3s;
+  pointer-events:none;
+}
+
+.toast.show { opacity:1; transform:translateY(0); }
+
+@media(max-width:900px) {
+  .hero { grid-template-columns:1fr 1fr; }
+  .hero h1 { font-size:58px; }
+  .conversation-layout { gap:30px; }
+  .message-copy { padding:35px; }
+}
+
+@media(max-width:700px) {
+  header { height:68px; }
+  .menu { display:block; }
+  .nav {
+    display:none;
+    position:absolute;
+    top:68px;
+    left:0;
+    right:0;
+    background:#111d37;
+    padding:25px;
+    flex-direction:column;
+    align-items:start;
+  }
+  .nav.open { display:flex; }
+  .nav-right .language { display:none; }
+
+  .hero {
+    grid-template-columns:1fr;
+    padding-top:65px;
+    padding-bottom:35px;
+  }
+  .hero h1 { font-size:58px; letter-spacing:-3px; }
+  .hero-copy { padding:0; }
+  .hero-art { height:400px; margin-top:35px; }
+  .hero-image { width:82%; }
+  .emergency-bar { flex-direction:column; align-items:start; margin-bottom:60px; }
+  .mood-section,.people-section,.resources { padding:65px 0; }
+  .mood-area { padding:22px 12px; }
+  .mood-options { grid-template-columns:repeat(3,1fr); gap:5px; }
+  .mood { padding:15px 5px; }
+  .mood-icon { font-size:29px; }
+  .conversation-layout { grid-template-columns:1fr; }
+  .people-heading { align-items:start; flex-direction:column; }
+  .person-card { flex:0 0 82%; }
+  .person-photo { height:300px; }
+  .message-layout { grid-template-columns:1fr; }
+  .message-image { height:330px; }
+  .message-copy { padding:35px 25px; }
+  .resource-layout { grid-template-columns:1fr; }
+  .impact-row { grid-template-columns:1fr; }
+  .impact-item { border-right:0; border-bottom:1px solid var(--line); }
+  .footer-top { flex-direction:column; }
+  .footer-bottom { gap:15px; flex-direction:column; }
+  .section-top { flex-direction:column; align-items:start; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="#" class="logo">
+    <span class="logo-symbol">♡</span>
+    Care Me
+  </a>
+
+  <nav class="nav" id="nav">
+    <a href="#mood">Your wellbeing</a>
+    <a href="#conversation">Self-assessment</a>
+    <a href="#people">Our counsellors</a>
+    <a href="#resources">Resources</a>
+  </nav>
+
+  <div class="nav-right">
+    <select class="language" aria-label="Language">
+      <option>English</option>
+      <option>සිංහල</option>
+      <option>தமிழ்</option>
+    </select>
+    <a class="login" href="#people">Log in ↗</a>
+    <button class="menu" id="menu">☰</button>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<div class="container">
+<section class="hero">
+
+  <div class="hero-copy">
+    <div class="kicker">Ministry counselling services</div>
+
+    <h1>
+      Your story.
+      <span>Your space.</span>
+      Your wellbeing.
+    </h1>
+
+    <p>
+      Life can sometimes feel overwhelming. You don't need to
+      carry everything by yourself. Find someone who will listen,
+      understand and support you.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn btn-blue" onclick="document.querySelector('#mood').scrollIntoView({behavior:'smooth'})">
+        Let's start with you <span>→</span>
+      </button>
+
+      <a href="#people" class="btn btn-border">
+        Meet our counsellors
+      </a>
+    </div>
+
+    <div class="hero-trust">
+      <span>♡ Free support</span>
+      <span>◉ Confidential</span>
+      <span>⌁ Three languages</span>
+    </div>
+  </div>
+
+  <div class="hero-art">
+    <div class="image-decoration"></div>
+
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&auto=format&fit=crop&q=85" alt="Friends sharing a meaningful conversation">
+    </div>
+
+    <div class="floating-note">
+      <div class="heart">♡</div>
+      <strong>It's okay to talk.</strong>
+      <small>Someone is ready to listen.</small>
+    </div>
+
+    <div class="image-caption">A little support goes a long way.</div>
+  </div>
+
+</section>
+</div>
+
+<!-- EMERGENCY -->
+<div class="container">
+  <div class="emergency-bar">
+    <div>
+      <h3>Are you in immediate danger?</h3>
+      <p>Your safety comes first. Reach out to emergency services if you need urgent help.</p>
+    </div>
+    <div class="emergency-action">
+      <a href="tel:119">☎ Call 119</a>
+      <span style="font-size:11px;color:#d8b9c1">Emergency assistance</span>
+    </div>
+  </div>
+</div>
+
+<!-- MOOD INTERACTION -->
+<section class="mood-section container" id="mood">
+
+  <div class="section-top">
+    <div>
+      <div class="section-number">01 — A MOMENT FOR YOU</div>
+      <h2>How are you, really?</h2>
+      <p>Take a breath. There is no judgement here.</p>
+    </div>
+  </div>
+
+  <div class="mood-area">
+    <h3 class="mood-question">How have you been feeling lately?</h3>
+
+    <div class="mood-options">
+
+      <button class="mood" data-mood="Happy">
+        <span class="mood-icon">😊</span>
+        <strong>Happy</strong>
+      </button>
+
+      <button class="mood" data-mood="Okay">
+        <span class="mood-icon">🙂</span>
+        <strong>Okay</strong>
+      </button>
+
+      <button class="mood" data-mood="Anxious">
+        <span class="mood-icon">😟</span>
+        <strong>Anxious</strong>
+      </button>
+
+      <button class="mood" data-mood="Stressed">
+        <span class="mood-icon">😣</span>
+        <strong>Stressed</strong>
+      </button>
+
+      <button class="mood" data-mood="Sad">
+        <span class="mood-icon">😔</span>
+        <strong>Sad</strong>
+      </button>
+
+    </div>
+
+    <div class="mood-result" id="moodResult">
+      <h3 id="moodTitle">Thank you for sharing.</h3>
+      <p id="moodDescription"></p>
+      <button class="btn btn-blue" onclick="startChat()">Let's talk about it →</button>
+    </div>
+  </div>
+
+</section>
+
+<!-- CONVERSATIONAL ASSESSMENT -->
+<section class="conversation" id="conversation">
+<div class="container">
+  <div class="conversation-layout">
+
+    <div class="conversation-intro">
+      <div class="section-number">02 — UNDERSTAND YOURSELF</div>
+
+      <h2>Sometimes, the first step is simply <span>talking.</span></h2>
+
+      <p>
+        Explore a few questions about your feelings, thoughts
+        and everyday experiences. Take your time and answer
+        at your own pace.
+      </p>
+
+      <button class="btn btn-blue" onclick="startChat()">
+        Start a conversation →
+      </button>
+
+      <p style="font-size:11px">
+        No registration required for this demonstration.
+      </p>
+    </div>
+
+    <div class="chat-window">
+
+      <div class="chat-header">
+        <div class="chat-avatar">♡</div>
+        <div>
+          <strong>Care Me Assistant</strong>
+          <small>● Here to guide you</small>
+        </div>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <div class="chat-message bot">
+          Hello! Welcome to Care Me. 💙
+          <br><br>
+          This is your space. Let's begin with a simple question.
+          <br><br>
+          What would you like to explore today?
+        </div>
+
+        <div class="chat-choices">
+          <button onclick="chatAnswer('Stress and pressure')">Stress and pressure</button>
+          <button onclick="chatAnswer('Anxiety and worry')">Anxiety and worry</button>
+          <button onclick="chatAnswer('My overall wellbeing')">Overall wellbeing</button>
+        </div>
+      </div>
+
+      <div class="chat-disclaimer">
+        Demonstration interface. This assistant is not a clinical service or emergency response channel.
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- COUNSELLORS -->
+<section class="people-section container" id="people">
+
+  <div class="people-heading">
+    <div>
+      <div class="section-number">03 — PEOPLE WHO CARE</div>
+      <h2>Meet someone<br>who understands.</h2>
+      <p>Real conversations begin with the right person.</p>
+    </div>
+
+    <div class="people-controls">
+      <button class="arrow-btn" onclick="slidePeople(-1)" aria-label="Previous counsellors">←</button>
+      <button class="arrow-btn" onclick="slidePeople(1)" aria-label="Next counsellors">→</button>
+    </div>
+  </div>
+
+  <div class="people-track" id="peopleTrack">
+
+    <article class="person-card">
+      <div class="person-photo">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&auto=format&fit=crop&q=85" alt="Counsellor profile">
+      </div>
+      <div class="person-detail">
+        <small>MINISTRY COUNSELLOR</small>
+        <h3>Ms. Counsellor One</h3>
+        <p>Colombo District · Video / Audio</p>
+        <div class="languages">
+          <span>English</span><span>Sinhala</span>
+        </div>
+        <button onclick="showToast('Connect this profile to the counsellor details page.')">Explore profile ↗</button>
+      </div>
+    </article>
+
+    <article class="person-card">
+      <div class="person-photo">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=700&auto=format&fit=crop&q=85" alt="Counsellor profile">
+      </div>
+      <div class="person-detail">
+        <small>MINISTRY COUNSELLOR</small>
+        <h3>Ms. Counsellor Two</h3>
+        <p>Kandy District · Video / Chat</p>
+        <div class="languages">
+          <span>Sinhala</span><span>Tamil</span>
+        </div>
+        <button onclick="showToast('Connect this profile to the counsellor details page.')">Explore profile ↗</button>
+      </div>
+    </article>
+
+    <article class="person-card">
+      <div class="person-photo">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700&auto=format&fit=crop&q=85" alt="Counsellor profile">
+      </div>
+      <div class="person-detail">
+        <small>MINISTRY COUNSELLOR</small>
+        <h3>Mr. Counsellor Three</h3>
+        <p>Galle District · Audio / Chat</p>
+        <div class="languages">
+          <span>English</span><span>Sinhala</span>
+        </div>
+        <button onclick="showToast('Connect this profile to the counsellor details page.')">Explore profile ↗</button>
+      </div>
+    </article>
+
+  </div>
+
+  <div style="margin-top:25px">
+    <a href="#" class="btn btn-border">Explore all counsellors →</a>
+  </div>
+
+</section>
+
+<!-- HUMAN STORY -->
+<section class="message-section">
+<div class="container">
+  <div class="message-layout">
+
+    <div class="message-image">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=1000&auto=format&fit=crop&q=85" alt="A person smiling naturally">
+    </div>
+
+    <div class="message-copy">
+      <div class="quote">“</div>
+      <h2>You deserve to be heard, understood and supported.</h2>
+      <p>
+        Every person has a story. Every feeling matters.
+        Whether you need someone to listen or guidance through
+        a difficult time, reaching out can be a meaningful beginning.
+      </p>
+      <a href="#people" class="btn btn-blue" style="align-self:flex-start">
+        Find your support →
+      </a>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- RESOURCES -->
+<section class="resources container" id="resources">
+
+  <div class="section-top">
+    <div>
+      <div class="section-number">04 — LEARN & GROW</div>
+      <h2>A little knowledge.<br>A little more understanding.</h2>
+      <p>Practical resources to support your everyday wellbeing.</p>
+    </div>
+  </div>
+
+  <div class="resource-layout">
+
+    <a href="#" class="resource" onclick="showResource(event,'Understanding stress','Learn to recognise common signs of stress, understand possible triggers and explore healthy ways of coping.')">
+      <div>
+        <small>01 / WELLBEING</small>
+        <h3>Understanding stress</h3>
+        <p>Recognising when everyday pressure becomes overwhelming.</p>
+      </div>
+      <span class="plus">↗</span>
+    </a>
+
+    <a href="#" class="resource" onclick="showResource(event,'The importance of good sleep','Explore healthy sleep routines, relaxation and the importance of consistent rest.')">
+      <div>
+        <small>02 / HEALTHY HABITS</small>
+        <h3>The importance of good sleep</h3>
+        <p>Building routines that support a healthier lifestyle.</p>
+      </div>
+      <span class="plus">↗</span>
+    </a>
+
+    <a href="#" class="resource" onclick="showResource(event,'Managing anxiety','Explore grounding techniques, ways to recognise worry and when professional support may help.')">
+      <div>
+        <small>03 / MENTAL HEALTH</small>
+        <h3>Managing anxiety</h3>
+        <p>Understanding worry and finding ways to manage it.</p>
+      </div>
+      <span class="plus">↗</span>
+    </a>
+
+    <a href="#" class="resource" onclick="showResource(event,'Being kind to yourself','Learn about self-compassion and how small positive habits can support emotional wellbeing.')">
+      <div>
+        <small>04 / SELF CARE</small>
+        <h3>Being kind to yourself</h3>
+        <p>Why self-compassion matters in everyday life.</p>
+      </div>
+      <span class="plus">↗</span>
+    </a>
+
+  </div>
+
+</section>
+
+<!-- IMPACT -->
+<section class="impact">
+<div class="container">
+  <div class="section-top">
+    <div>
+      <div class="section-number">05 — NATIONWIDE SUPPORT</div>
+      <h2>Support across Sri Lanka.</h2>
+    </div>
+  </div>
+
+  <div class="impact-row">
+    <div class="impact-item">
+      <strong>174</strong>
+      <span>Counsellors</span>
+    </div>
+    <div class="impact-item">
+      <strong>23</strong>
+      <span>Districts</span>
+    </div>
+    <div class="impact-item">
+      <strong>03</strong>
+      <span>Languages + sign language support</span>
+    </div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h2>Care Me <span style="color:var(--blue)">♡</span></h2>
+      <p>
+        Counselling Division, Ministry of Rural Development,
+        Social Security and Community Empowerment.
+        A safe place to connect with the support you need.
+      </p>
+    </div>
+
+    <div class="footer-emergency">
+      <h3>Emergency assistance</h3>
+      <a href="tel:119">☎ 119 — Police emergency</a>
+      <a href="tel:1926">☎ 1926 — National mental health helpline</a>
+      <a href="tel:1990">☎ 1990 — Suwa Seriya ambulance</a>
+    </div>
+  </div>
+
+  <div class="footer-links">
+    <a href="#mood">Wellbeing</a>
+    <a href="#conversation">Self-assessment</a>
+    <a href="#people">Counsellors</a>
+    <a href="#resources">Resources</a>
+    <a href="#">Privacy policy</a>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Care Me. All rights reserved.</span>
+    <span>Designed with care. Built for everyone.</span>
+  </div>
+
+</div>
+</footer>
+
+<!-- INTERACTION MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="section-number">CARE ME · YOUR SPACE</div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* MOBILE NAV */
+
+document.getElementById('menu').onclick = () => {
+  document.getElementById('nav').classList.toggle('open');
+};
+
+document.querySelectorAll('.nav a').forEach(a => {
+  a.onclick = () => document.getElementById('nav').classList.remove('open');
+});
+
+/* MOOD SELECTOR */
+
+const moodMessages = {
+  Happy:"It's wonderful that you are feeling positive. Take a moment to appreciate the things that bring you joy.",
+  Okay:"That's okay too. You don't need to feel a particular way every day. Taking time for yourself matters.",
+  Anxious:"It can be difficult when worry takes over. Try taking a comfortable breath and consider talking to someone you trust.",
+  Stressed:"You don't have to solve everything at once. Taking one small step and asking for support can help.",
+  Sad:"Your feelings matter. You deserve support and kindness, especially during difficult moments."
+};
+
+document.querySelectorAll('.mood').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.mood').forEach(b => b.classList.remove('active'));
+    button.classList.add('active');
+
+    const mood = button.dataset.mood;
+
+    document.getElementById('moodTitle').textContent = `You are feeling ${mood.toLowerCase()}.`;
+    document.getElementById('moodDescription').textContent = moodMessages[mood];
+    document.getElementById('moodResult').classList.add('show');
+  });
+});
+
+/* CHAT INTERACTION */
+
+let chatStep = 0;
+
+function startChat() {
+  document.getElementById('conversation').scrollIntoView({behavior:'smooth'});
+}
+
+function chatAnswer(answer) {
+  const body = document.getElementById('chatBody');
+
+  if(chatStep >= 1) {
+    showToast('This is a demonstration conversation. Connect an approved assessment flow for further questions.');
+    return;
+  }
+
+  body.innerHTML = `
+    <div class="chat-message user">${escapeHTML(answer)}</div>
+    <div class="chat-message bot">
+      Thank you for sharing that with me. 💙
+      <br><br>
+      Would you like to explore a little more, or would you prefer to find a counsellor?
+    </div>
+    <div class="chat-choices">
+      <button onclick="chatFollowUp('Explore my feelings')">Explore my feelings</button>
+      <button onclick="chatFollowUp('Find a counsellor')">Find a counsellor</button>
+    </div>
+  `;
+
+  chatStep++;
+}
+
+function chatFollowUp(answer) {
+  const body = document.getElementById('chatBody');
+
+  if(answer === 'Find a counsellor') {
+    body.innerHTML = `
+      <div class="chat-message user">I'd like to find a counsellor.</div>
+      <div class="chat-message bot">
+        That's a positive step. You can explore counsellor profiles and find someone who speaks your language.
+      </div>
+      <div class="chat-choices">
+        <button onclick="document.querySelector('#people').scrollIntoView({behavior:'smooth'})">Explore counsellors →</button>
+      </div>
+    `;
+  } else {
+    body.innerHTML = `
+      <div class="chat-message user">I'd like to explore my feelings.</div>
+      <div class="chat-message bot">
+        You can start by reflecting on your recent experiences. Remember that this demonstration cannot provide a clinical assessment.
+      </div>
+      <div class="chat-choices">
+        <button onclick="showToast('Connect this interaction to the approved assessment questionnaire.')">Continue</button>
+      </div>
+    `;
+  }
+}
+
+/* COUNSELLOR CAROUSEL */
+
+function slidePeople(direction) {
+  const track = document.getElementById('peopleTrack');
+  const card = track.querySelector('.person-card');
+  if(!card) return;
+
+  track.scrollBy({
+    left: direction * (card.offsetWidth + 22),
+    behavior:'smooth'
+  });
+}
+
+/* RESOURCES */
+
+function showResource(event,title,description) {
+  event.preventDefault();
+
+  document.getElementById('modalContent').innerHTML = `
+    <h2>${escapeHTML(title)}</h2>
+    <p>${escapeHTML(description)}</p>
+    <div style="margin-top:25px">
+      <button class="btn btn-blue" onclick="closeModal()">Close</button>
+    </div>
+  `;
+
+  document.getElementById('modal').classList.add('open');
+}
+
+/* GENERAL */
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  })[char]);
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  },3000);
+}
+
+document.getElementById('modal').addEventListener('click',e => {
+  if(e.target.id === 'modal') closeModal();
+});
+
+document.addEventListener('keydown',e => {
+  if(e.key === 'Escape') closeModal();
+});
+
+</script>
+</body>
+</html>

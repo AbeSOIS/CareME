@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Activity, ClipboardCheck, CloudSun, EyeOff, HeartHandshake, Languages, LockKeyhole, Phone, Siren, Smile, Video, Wind } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
-import { Badge, Button, ButtonLink, Card, PrivacyPill, SectionHeader, Select, StatCard, cardSurface, cardSurfaceLink, cn } from '../../components/ui'
+import { Badge, Button, ButtonLink, Card, PrivacyPill, SectionHeader, Select, Tilt3D, cardSurface, cardSurfaceLink, cn } from '../../components/ui'
 import { KIND_ICON } from './ResourcesPage'
 import { ASSESSMENTS, ASSESSMENT_TYPES } from '../../config/assessments'
 import { EMERGENCY_NUMBERS } from '../../config/defaults'
@@ -16,14 +16,13 @@ import type { CounsellingLanguage, SelfAssessmentType } from '../../types'
 const ASSESS_ICON: Record<SelfAssessmentType, typeof Activity> = { stress: Activity, anxiety: Wind, depression: CloudSun, wellbeing: Smile }
 const FIND_LANGS: CounsellingLanguage[] = ['si', 'ta', 'en']
 
-/** Soft decorative wave behind the hero. Inline SVG: no remote images anywhere. */
-function HeroShape() {
+/** Bold numbered eyebrow above a section heading — purely decorative, no new copy to translate. */
+function SectionNumber({ n }: { n: string }) {
   return (
-    <svg aria-hidden viewBox="0 0 600 600" className="pointer-events-none absolute -top-24 -right-24 size-[32rem] opacity-20">
-      <circle cx="300" cy="300" r="300" fill="var(--color-brand-400)" />
-      <circle cx="300" cy="300" r="200" fill="var(--color-brand-300)" />
-      <circle cx="300" cy="300" r="100" fill="var(--color-brand-200)" />
-    </svg>
+    <div className="mb-3 flex items-center gap-3 text-caption font-extrabold tracking-[0.2em] text-brand-600 dark:text-brand-300">
+      <span aria-hidden className="h-0.5 w-9 bg-brand-600 dark:bg-brand-400" />
+      {n}
+    </div>
   )
 }
 
@@ -47,25 +46,57 @@ export function HomePage() {
   return (
     <div className="space-y-12 sm:space-y-16">
       {/* ---------- Hero: one message, two next steps ---------- */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-900 to-brand-950 px-6 py-12 text-white sm:px-10 sm:py-16">
-        <HeroShape />
-        <div className="relative max-w-2xl">
-          <p className="text-caption font-semibold tracking-wide text-brand-200 uppercase">{t('app.tagline')}</p>
-          <h1 className="mt-3 text-display">{t('home.title')}</h1>
-          <p className="mt-4 max-w-prose text-lead text-brand-50">{t('home.lead')}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonLink to="/self-assessment" size="lg" variant="onDark">
-              {t('home.ctaAssess')}
-            </ButtonLink>
-            <ButtonLink to="/counsellors" size="lg" variant="outlineOnDark">
-              {t('home.ctaFind')}
-            </ButtonLink>
+      <section className="relative overflow-hidden rounded-3xl bg-white/45 px-6 py-12 backdrop-blur-[3px] sm:px-10 sm:py-16 dark:bg-slate-950/55">
+        <div className="relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <div className="max-w-2xl">
+            <p className="flex items-center gap-3 text-caption font-extrabold tracking-[0.2em] text-brand-700 uppercase dark:text-brand-200">
+              <span aria-hidden className="h-0.5 w-9 bg-brand-600 dark:bg-brand-400" />
+              {t('app.tagline')}
+            </p>
+            <h1 className="mt-5 text-[clamp(2.25rem,6vw,4.75rem)] leading-[1.05] font-extrabold tracking-tight text-balance text-slate-900 dark:text-white">
+              {t('home.title')}
+            </h1>
+            <p className="mt-5 max-w-prose text-lead text-slate-600 dark:text-slate-300">{t('home.lead')}</p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <ButtonLink to="/self-assessment" size="lg" className="shadow-xl shadow-brand-900/10">
+                {t('home.ctaAssess')}
+              </ButtonLink>
+              <ButtonLink to="/counsellors" size="lg" variant="secondary">
+                {t('home.ctaFind')}
+              </ButtonLink>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-caption text-slate-600 dark:text-slate-300">
+              <span className="inline-flex items-center gap-2">
+                <EyeOff aria-hidden className="size-4 shrink-0" />
+                {t('home.anonBadgeShort')}
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <LockKeyhole aria-hidden className="size-4 shrink-0" />
+                {t('home.privacyTitle')}
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <Languages aria-hidden className="size-4 shrink-0" />
+                {fmt.number(3)} {t('home.statsLanguages')}
+              </span>
+            </div>
+          </div>
+          {/* Floating highlight card: the visual counterpart to the hero copy, standing in for
+              a photo so the hero never depends on a remote image. */}
+          <div className="relative hidden lg:block">
+            <Tilt3D maxDeg={5} className="relative ml-auto w-64 rounded-2xl border border-brand-900/10 bg-white/90 p-6 shadow-2xl backdrop-blur-sm dark:border-white/15 dark:bg-slate-900/90">
+              <HeartHandshake aria-hidden className="size-8 text-brand-600 dark:text-brand-300" />
+              <p className="mt-4 text-[3.25rem] leading-none font-extrabold tracking-tight text-slate-900 dark:text-white">{fmt.number(174)}</p>
+              <p className="mt-2 text-body-sm text-slate-600 dark:text-slate-300">{t('home.statsCounsellors')}</p>
+              <p className="mt-4 border-t border-brand-900/10 pt-4 text-caption font-semibold tracking-wide text-brand-700 uppercase dark:border-white/15 dark:text-brand-300">
+                {t('home.statsTitle')}
+              </p>
+            </Tilt3D>
           </div>
         </div>
       </section>
 
       {/* ---------- Emergency, kept visually separate from normal booking ---------- */}
-      <section aria-labelledby="home-emergency" className="rounded-2xl border border-red-200 bg-red-50 p-5 dark:border-red-900 dark:bg-red-950/60">
+      <section aria-labelledby="home-emergency" className="rounded-2xl border border-l-4 border-red-200 border-l-red-600 bg-red-50 p-5 dark:border-red-900 dark:border-l-red-600 dark:bg-red-950/60">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p id="home-emergency" className="flex items-center gap-3 text-h3 text-red-900 dark:text-red-100">
             <Siren aria-hidden className="size-6 shrink-0" />
@@ -87,13 +118,14 @@ export function HomePage() {
       </section>
 
       {/* ---------- Quick self-checks ---------- */}
-      <section aria-labelledby="home-quick">
+      <section aria-labelledby="home-quick" className="rounded-3xl bg-brand-50/70 p-5 backdrop-blur-[2px] sm:p-8 dark:bg-slate-900/60">
+        <SectionNumber n="01" />
         <SectionHeader id="home-quick" title={t('home.quickCheckTitle')} lead={t('home.quickCheckLead')} />
         <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {ASSESSMENT_TYPES.map((type) => {
             const Icon = ASSESS_ICON[type]
             return (
-              <li key={type}>
+              <Tilt3D key={type} as="li" maxDeg={6}>
                 <Link
                   to={`/self-assessment/${type}`}
                   className={cn(cardSurfaceLink, "@container flex h-full flex-col p-5")}
@@ -109,7 +141,7 @@ export function HomePage() {
                     <PrivacyPill label={t('home.anonBadge')} shortLabel={t('home.anonBadgeShort')} />
                   </span>
                 </Link>
-              </li>
+              </Tilt3D>
             )
           })}
         </ul>
@@ -117,43 +149,49 @@ export function HomePage() {
 
       {/* ---------- Reassurance ---------- */}
       <section aria-labelledby="anon" className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <span className="inline-flex size-11 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/60">
-            <EyeOff aria-hidden className="size-6 text-brand-700 dark:text-brand-200" />
-          </span>
-          <h2 id="anon" className="mt-3 text-h3 text-slate-900 dark:text-white">
-            {t('home.anonTitle')}
-          </h2>
-          <p className="mt-2 max-w-prose text-body text-slate-600 dark:text-slate-300">{t('home.anonBody')}</p>
-        </Card>
-        <Card>
-          <span className="inline-flex size-11 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/60">
-            <LockKeyhole aria-hidden className="size-6 text-brand-700 dark:text-brand-200" />
-          </span>
-          <h2 className="mt-3 text-h3 text-slate-900 dark:text-white">{t('home.privacyTitle')}</h2>
-          <p className="mt-2 max-w-prose text-body text-slate-600 dark:text-slate-300">{t('home.privacyBody')}</p>
-        </Card>
+        <Tilt3D maxDeg={5}>
+          <Card>
+            <span className="inline-flex size-11 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/60">
+              <EyeOff aria-hidden className="size-6 text-brand-700 dark:text-brand-200" />
+            </span>
+            <h2 id="anon" className="mt-3 text-h3 text-slate-900 dark:text-white">
+              {t('home.anonTitle')}
+            </h2>
+            <p className="mt-2 max-w-prose text-body text-slate-600 dark:text-slate-300">{t('home.anonBody')}</p>
+          </Card>
+        </Tilt3D>
+        <Tilt3D maxDeg={5}>
+          <Card>
+            <span className="inline-flex size-11 items-center justify-center rounded-full bg-brand-100 dark:bg-brand-900/60">
+              <LockKeyhole aria-hidden className="size-6 text-brand-700 dark:text-brand-200" />
+            </span>
+            <h2 className="mt-3 text-h3 text-slate-900 dark:text-white">{t('home.privacyTitle')}</h2>
+            <p className="mt-2 max-w-prose text-body text-slate-600 dark:text-slate-300">{t('home.privacyBody')}</p>
+          </Card>
+        </Tilt3D>
       </section>
 
       {/* ---------- How it works ---------- */}
       <section aria-labelledby="how">
+        <SectionNumber n="02" />
         <SectionHeader id="how" title={t('home.howTitle')} />
         <ol className="grid gap-4 md:grid-cols-3">
           {steps.map(({ icon: Icon, title, body }, i) => (
-            <li key={title} className={cn(cardSurface, "p-5")}>
+            <Tilt3D key={title} as="li" maxDeg={6} className={cn(cardSurface, "p-5")}>
               <div className="flex items-center gap-3">
                 <span className="inline-flex size-9 items-center justify-center rounded-full bg-brand-700 text-body-sm font-bold text-white dark:bg-brand-400 dark:text-slate-950">{i + 1}</span>
                 <Icon aria-hidden className="size-6 text-brand-700 dark:text-brand-300" />
               </div>
               <h3 className="mt-3 text-h3 text-slate-900 dark:text-white">{title}</h3>
               <p className="mt-1 text-body text-slate-600 dark:text-slate-300">{body}</p>
-            </li>
+            </Tilt3D>
           ))}
         </ol>
       </section>
 
       {/* ---------- Find a counsellor: pre-fills the real search filters ---------- */}
-      <section aria-labelledby="find" className="rounded-2xl border border-brand-200 bg-brand-50 p-5 sm:p-8 dark:border-brand-800 dark:bg-slate-900">
+      <section aria-labelledby="find" className="rounded-2xl border border-brand-200 bg-brand-50/70 p-5 backdrop-blur-[2px] sm:p-8 dark:border-brand-800 dark:bg-slate-900/80">
+        <SectionNumber n="03" />
         <SectionHeader id="find" title={t('home.findTitle')} lead={t('home.findLead')} />
         <form
           className="grid gap-4 md:grid-cols-[1fr_1fr_auto] md:items-end"
@@ -188,6 +226,7 @@ export function HomePage() {
       {/* ---------- Resources preview ---------- */}
       {preview.length > 0 && (
         <section aria-labelledby="home-resources">
+          <SectionNumber n="04" />
           <SectionHeader
             id="home-resources"
             title={t('home.resourcesTitle')}
@@ -203,7 +242,7 @@ export function HomePage() {
               const version = r.versions[lang] ?? r.versions.en
               const Icon = KIND_ICON[r.kind]
               return (
-                <li key={r.id}>
+                <Tilt3D key={r.id} as="li" maxDeg={6}>
                   <Link
                     to={`/resources/${r.id}`}
                     className={cn(cardSurfaceLink, "flex h-full flex-col p-5")}
@@ -215,7 +254,7 @@ export function HomePage() {
                     <span className="mt-3 text-h3 text-slate-900 dark:text-white">{version?.title}</span>
                     <span className="mt-1 line-clamp-2 flex-1 text-body-sm text-slate-600 dark:text-slate-300">{version?.summary}</span>
                   </Link>
-                </li>
+                </Tilt3D>
               )
             })}
           </ul>
@@ -223,26 +262,30 @@ export function HomePage() {
       )}
 
       {/* ---------- Reach ---------- */}
-      <section aria-labelledby="stats">
-        <SectionHeader
-          id="stats"
-          title={
-            <span className="flex items-center gap-2">
-              <Languages aria-hidden className="size-6 text-brand-700 dark:text-brand-300" />
-              {t('home.statsTitle')}
-            </span>
-          }
-        />
-        <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <section aria-labelledby="stats" className="rounded-3xl border-y border-brand-900/10 bg-brand-50/70 py-10 backdrop-blur-[2px] sm:py-14 dark:border-white/10 dark:bg-slate-900/60">
+        <div className="px-5 sm:px-8">
+          <SectionNumber n="05" />
+          <SectionHeader
+            id="stats"
+            title={
+              <span className="flex items-center gap-2">
+                <Languages aria-hidden className="size-6 text-brand-700 dark:text-brand-300" />
+                {t('home.statsTitle')}
+              </span>
+            }
+          />
+        </div>
+        <dl className="grid grid-cols-1 divide-y divide-brand-900/10 px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-8 dark:divide-white/10">
           {[
             [fmt.number(174), t('home.statsCounsellors')],
             [fmt.number(23), t('home.statsDistricts')],
             [fmt.number(3), t('home.statsLanguages')],
           ].map(([value, label]) => (
-            <div key={label}>
+            <div key={label} className="px-2 py-6 text-center first:pl-0 last:pr-0 sm:py-0">
               <dt className="sr-only">{label}</dt>
               <dd>
-                <StatCard value={value} label={label} />
+                <p className="text-[clamp(2.75rem,5vw,4.25rem)] leading-none font-extrabold tracking-tight text-brand-700 dark:text-brand-300">{value}</p>
+                <p className="mt-2 text-body-sm text-slate-600 dark:text-slate-300">{label}</p>
               </dd>
             </div>
           ))}

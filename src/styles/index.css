@@ -8,22 +8,24 @@
   --font-sans: "Noto Sans", "Noto Sans Sinhala", "Noto Sans Tamil", ui-sans-serif, system-ui, sans-serif;
 
   /*
-   * Calm, trustworthy blue. The token name stays `brand` so every existing
-   * brand-* utility keeps working. Contrast on white: 600 = 5.2:1 (links),
-   * 700 = 6.7:1 (buttons, active nav), 800 = 8.7:1, 900 = 9.5:1.
+   * Cool denim blue. 200/300/400/500/900 are the client-supplied swatches
+   * (#b1c9ef, #95bbe3, #8aaee0, #6286bd, #1d396b); 50/100/600/700/800/950 are
+   * interpolated within the same hue to fill out the ramp. The token name stays
+   * `brand` so every existing brand-* utility keeps working. Contrast on white:
+   * 600 = 5.4:1 (links), 700 = 7.6:1 (buttons, active nav), 800 = 10.3:1, 900 = 11.4:1.
    * brand-500 is for charts and illustrations only — never text on white.
    */
-  --color-brand-50: #eff6ff;
-  --color-brand-100: #dbeafe;
-  --color-brand-200: #bfdbfe;
-  --color-brand-300: #93c5fd;
-  --color-brand-400: #60a5fa;
-  --color-brand-500: #3b82f6;
-  --color-brand-600: #2563eb;
-  --color-brand-700: #1d4ed8;
-  --color-brand-800: #1e40af;
-  --color-brand-900: #1e3a8a;
-  --color-brand-950: #172554;
+  --color-brand-50: #eef3fb;
+  --color-brand-100: #dde8f8;
+  --color-brand-200: #b1c9ef;
+  --color-brand-300: #95bbe3;
+  --color-brand-400: #8aaee0;
+  --color-brand-500: #6286bd;
+  --color-brand-600: #4a6ba3;
+  --color-brand-700: #375387;
+  --color-brand-800: #28406c;
+  --color-brand-900: #1d396b;
+  --color-brand-950: #142544;
 
   /*
    * Semantic tones map onto Tailwind's stock scales, which already carry the
@@ -252,6 +254,58 @@
   --series-7: #4a3aa7;
   --series-8: #e34948;
 }
+/*
+ * Pointer-tracked 3D tilt for cards (see Tilt3D.tsx / useTilt3D.ts). The
+ * rotation itself lives in --tilt-x/--tilt-y, set by JS on pointermove; this
+ * class only wires those vars into a transform and adds a light-glare layer
+ * so the surface reads as something with depth, not just a hover color change.
+ * Already covered by the prefers-reduced-motion block above (transition-duration
+ * collapses to ~0), so it never needs its own reduced-motion branch.
+ */
+.tilt-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 150ms ease-out;
+  will-change: transform;
+}
+.tilt-3d:hover,
+.tilt-3d:focus-within {
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateZ(6px);
+}
+.tilt-3d-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+  background: radial-gradient(
+    circle at var(--tilt-glare-x, 50%) var(--tilt-glare-y, 50%),
+    color-mix(in oklab, white 35%, transparent) 0%,
+    transparent 55%
+  );
+}
+.tilt-3d:hover .tilt-3d-glare,
+.tilt-3d:focus-within .tilt-3d-glare {
+  opacity: 1;
+}
+
+/*
+ * Wing flap for the site's flying butterfly (FlyingButterfly.tsx). Both wing groups
+ * scale from the body hinge (x=60 in the SVG's 120x100 viewBox), not individually
+ * timed, so the wings close and open together like a real flap.
+ */
+@keyframes wing-flap {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.55); }
+}
+.wing-left,
+.wing-right {
+  transform-origin: 60px 50px;
+  animation: wing-flap 0.6s ease-in-out infinite;
+}
+
 .dark {
   --chart-surface: #0f172a;
   --chart-grid: #334155;

@@ -7,6 +7,7 @@ import { useUi } from '../../store/ui'
 import { cn } from '../ui'
 import { Brand } from './Brand'
 import { EmergencyButton } from './EmergencyButton'
+import { FlyingButterfly } from '../feature/FlyingButterfly'
 import { Footer } from './Footer'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { MaintenanceBanner } from './MaintenanceBanner'
@@ -48,11 +49,15 @@ export function AppShell() {
     <div className="flex min-h-dvh flex-col">
       <SkipLink />
       <MaintenanceBanner />
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
-        <div className="mx-auto flex max-w-6xl min-w-0 items-center gap-2 px-4 py-2">
+      <header className="sticky top-0 z-30 border-b border-brand-900/10 bg-white/92 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/95">
+        <div className="mx-auto flex max-w-6xl min-w-0 items-center gap-2 px-4 py-2 md:min-h-[4.25rem]">
           <Brand />
-          <nav aria-label={t('nav.mainNav')} className="ml-4 hidden min-w-0 flex-1 xl:block">
-            <ul className="flex items-center gap-1">
+          <nav aria-label={t('nav.mainNav')} className="ml-6 hidden min-w-0 flex-1 xl:block">
+            {/* overflow-x-auto: if the right-side cluster (language, theme, bell, user menu)
+                leaves too little room, links scroll within this box instead of spilling out
+                over the neighbouring controls — flex items can't shrink below their own
+                whitespace-nowrap content width, so without this they'd overlap instead. */}
+            <ul className="scrollbar-thin flex items-center gap-1 overflow-x-auto">
               {links.map((l) => (
                 <li key={l.to}>
                   <NavLink to={l.to} end={l.end} className={linkCls}>
@@ -113,6 +118,9 @@ export function AppShell() {
       </main>
       <Footer />
       <EmergencyButton />
+      {/* Mounted once here, not per-page, so it keeps flying across route changes
+          instead of resetting every time you navigate. */}
+      <FlyingButterfly />
     </div>
   )
 }
