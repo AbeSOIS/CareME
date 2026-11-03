@@ -158,6 +158,19 @@
     "stepsLabel": "How Care Me works",
     "anonBadgeShort": "Anonymous"
   },
+  "breathe": {
+    "kicker": "A small moment of calm",
+    "title": "Let's take one slow breath together.",
+    "lead": "Sometimes, giving yourself a moment to pause can make a difference. Follow the circle and breathe at a comfortable pace. Stop whenever you need to.",
+    "start": "Begin breathing",
+    "stop": "Stop exercise",
+    "ready": "Ready?",
+    "inhale": "Breathe in",
+    "exhale": "Breathe out",
+    "inhaleCaption": "Gently breathe in · 4 seconds",
+    "exhaleCaption": "Slowly breathe out · 4 seconds",
+    "disclaimer": "A gentle breathing exercise. Stop at any time if it feels uncomfortable."
+  },
   "auth": {
     "loginTitle": "Log in",
     "loginLead": "Log in to manage your appointments, or as Ministry staff.",

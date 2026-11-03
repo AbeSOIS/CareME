@@ -3,6 +3,7 @@ import { Activity, ClipboardCheck, CloudSun, EyeOff, HeartHandshake, Languages, 
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 import { Badge, Button, ButtonLink, Card, PrivacyPill, SectionHeader, Select, Tilt3D, cardSurface, cardSurfaceLink, cn } from '../../components/ui'
+import { BreathingExercise } from '../../components/feature/BreathingExercise'
 import { KIND_ICON } from './ResourcesPage'
 import { ASSESSMENTS, ASSESSMENT_TYPES } from '../../config/assessments'
 import { EMERGENCY_NUMBERS } from '../../config/defaults'
@@ -97,20 +98,17 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ---------- Emergency, kept visually separate from normal booking ----------
-          Pink rather than the site's usual red for this one banner, by request — the
-          floating EmergencyButton, /emergency page and danger-styled controls elsewhere
-          keep red, since that's still the safety-critical convention everywhere else. */}
-      <section aria-labelledby="home-emergency" className="rounded-2xl border border-l-4 border-[#e6cfb8] border-l-pink-400 bg-[#f2e4d9] p-5 dark:border-pink-900 dark:border-l-pink-500 dark:bg-pink-950/40">
+      {/* ---------- Emergency, kept visually separate from normal booking ---------- */}
+      <section aria-labelledby="home-emergency" className="rounded-2xl border border-l-4 border-red-200 border-l-red-600 bg-red-50 p-5 dark:border-red-900 dark:border-l-red-600 dark:bg-red-950/60">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p id="home-emergency" className="flex items-center gap-3 text-h3 text-pink-900 dark:text-pink-100">
+          <p id="home-emergency" className="flex items-center gap-3 text-h3 text-red-900 dark:text-red-100">
             <Siren aria-hidden className="size-6 shrink-0" />
             {t('home.emergencyStrip')}
           </p>
           <div className="flex flex-wrap gap-3">
             <a
               href={`tel:${EMERGENCY_NUMBERS[0].number}`}
-              className="inline-flex min-h-13 items-center gap-2 rounded-xl bg-pink-600 px-5 text-body font-bold text-white transition-colors duration-150 hover:bg-pink-700"
+              className="inline-flex min-h-13 items-center gap-2 rounded-xl bg-red-600 px-5 text-body font-bold text-white transition-colors duration-150 hover:bg-red-700"
             >
               <Phone aria-hidden className="size-5" />
               {t('emergency.call', { number: EMERGENCY_NUMBERS[0].number })}
@@ -176,9 +174,15 @@ export function HomePage() {
         </Tilt3D>
       </section>
 
+      {/* ---------- A moment to breathe ---------- */}
+      <div>
+        <SectionNumber n="02" />
+        <BreathingExercise />
+      </div>
+
       {/* ---------- How it works ---------- */}
       <section aria-labelledby="how">
-        <SectionNumber n="02" />
+        <SectionNumber n="03" />
         <SectionHeader id="how" title={t('home.howTitle')} />
         <ol className="grid gap-4 md:grid-cols-3">
           {steps.map(({ icon: Icon, title, body }, i) => (
@@ -196,7 +200,7 @@ export function HomePage() {
 
       {/* ---------- Find a counsellor: pre-fills the real search filters ---------- */}
       <section aria-labelledby="find" className="rounded-2xl border border-brand-200 bg-brand-50/70 p-5 backdrop-blur-[2px] sm:p-8 dark:border-brand-800 dark:bg-slate-900/80">
-        <SectionNumber n="03" />
+        <SectionNumber n="04" />
         <SectionHeader id="find" title={t('home.findTitle')} lead={t('home.findLead')} />
         <form
           className="grid gap-4 md:grid-cols-[1fr_1fr_auto] md:items-end"
@@ -231,7 +235,7 @@ export function HomePage() {
       {/* ---------- Resources preview ---------- */}
       {preview.length > 0 && (
         <section aria-labelledby="home-resources">
-          <SectionNumber n="04" />
+          <SectionNumber n="05" />
           <SectionHeader
             id="home-resources"
             title={t('home.resourcesTitle')}
@@ -269,7 +273,7 @@ export function HomePage() {
       {/* ---------- Reach ---------- */}
       <section aria-labelledby="stats" className="rounded-3xl border-y border-brand-900/10 bg-brand-50/70 py-10 backdrop-blur-[2px] sm:py-14 dark:border-white/10 dark:bg-slate-900/60">
         <div className="px-5 sm:px-8">
-          <SectionNumber n="05" />
+          <SectionNumber n="06" />
           <SectionHeader
             id="stats"
             title={
