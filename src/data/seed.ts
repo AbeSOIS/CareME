@@ -252,7 +252,7 @@ export function buildSeed(now: Date): DB {
     pendingRegistration: true,
     consents: [],
   })
-  for (let i = 12; i <= 24; i++) {
+  for (let i = 12; i <= 34; i++) {
     const female = rng.chance(0.65)
     addBeneficiary({
       id: `b${String(i).padStart(3, '0')}`,
@@ -359,9 +359,20 @@ export function buildSeed(now: Date): DB {
   addApt('b014', 'c001', at(15, 0, -28), 'completed', 3)
   addApt('b014', 'c001', at(15, 0, -14), 'completed', 4)
   addApt('b015', 'c001', at(16, 0, -1), 'completed', 1)
-  // Two more for today specifically, so the dashboard's "Today" list has more than one line.
+  // More for today specifically, so the dashboard's "Today" list has a full, busy day —
+  // morning slots already in the past (completed), afternoon ones still ahead (confirmed).
   addApt('b016', 'c001', at(8, 30, 0), 'completed', 1)
   addApt('b017', 'c001', at(17, 0, 0), 'confirmed', 1)
+  addApt('b025', 'c001', at(9, 0, 0), 'completed', 1)
+  addApt('b026', 'c001', at(9, 30, 0), 'completed', 1)
+  addApt('b027', 'c001', at(10, 0, 0), 'completed', 1)
+  addApt('b028', 'c001', at(10, 30, 0), 'completed', 1)
+  addApt('b029', 'c001', at(12, 0, 0), 'confirmed', 1)
+  addApt('b030', 'c001', at(12, 30, 0), 'confirmed', 1)
+  addApt('b031', 'c001', at(13, 0, 0), 'confirmed', 1)
+  addApt('b032', 'c001', at(14, 0, 0), 'confirmed', 1)
+  addApt('b033', 'c001', at(15, 0, 0), 'confirmed', 1)
+  addApt('b034', 'c001', at(16, 0, 0), 'confirmed', 1)
   addApt('b008', 'c002', at(9, 0, -12), 'completed', 1, 'video', 'ta')
   addApt('b008', 'c002', at(9, 0, 2), 'confirmed', 2, 'video', 'ta')
   addApt('b009', 'c002', at(11, 0, -6), 'completed', 1, 'audio', 'ta')
@@ -492,6 +503,16 @@ export function buildSeed(now: Date): DB {
     simpleCase('b015', 'c001', -1, 'education', 'Exam-related anxiety ahead of the A/L results. Single session so far.'),
     simpleCase('b016', 'c001', 0, 'mentalDisorder', 'Walk-in client seen this morning; first session, assessing general wellbeing.'),
     simpleCase('b017', 'c001', 0, 'relationship', 'Referred by a colleague; confirmed for a first session later today.'),
+    simpleCase('b025', 'c001', 0, 'mentalDisorder', 'Seen this morning; low mood, first session.'),
+    simpleCase('b026', 'c001', 0, 'family', 'Seen this morning; family conflict, first session.'),
+    simpleCase('b027', 'c001', 0, 'economic', 'Seen this morning; financial stress, first session.'),
+    simpleCase('b028', 'c001', 0, 'relationship', 'Seen this morning; relationship concerns, first session.'),
+    simpleCase('b029', 'c001', 0, 'education', 'Confirmed for midday; exam-related stress.'),
+    simpleCase('b030', 'c001', 0, 'mentalDisorder', 'Confirmed for midday; anxiety symptoms.'),
+    simpleCase('b031', 'c001', 0, 'drugRelated', 'Confirmed for early afternoon; alcohol use concerns.'),
+    simpleCase('b032', 'c001', 0, 'family', 'Confirmed for the afternoon; family mediation requested.'),
+    simpleCase('b033', 'c001', 0, 'economic', 'Confirmed for the afternoon; debt-related stress.'),
+    simpleCase('b034', 'c001', 0, 'relationship', 'Confirmed for late afternoon; marital conflict.'),
     simpleCase('b008', 'c002', -12, 'family', 'Family conflict after migration of spouse for work.'),
     simpleCase('b009', 'c002', -6, 'drugRelated', 'Concern about cannabis use; motivated to cut down.'),
     simpleCase('b010', 'c002', 1, 'mentalDisorder', 'New request.'),

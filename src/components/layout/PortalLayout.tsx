@@ -107,7 +107,7 @@ export function PortalLayout({ items, title, homeTo }: { items: SidebarItem[]; t
           </button>
           <Brand to={homeTo} subtitle={title} compactOnMobile />
           <div className="ml-auto flex shrink-0 items-center gap-1">
-            <LanguageSwitcher className="max-md:hidden" />
+            <LanguageSwitcher variant="dropdown" className="max-sm:hidden" />
             <ThemeToggle />
             <NotificationsMenu />
             <UserMenu />

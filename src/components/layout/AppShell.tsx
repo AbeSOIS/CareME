@@ -6,8 +6,8 @@ import { useAuth } from '../../store/auth'
 import { useUi } from '../../store/ui'
 import { cn } from '../ui'
 import { Brand } from './Brand'
+import { ButterflyScene3D } from '../feature/ButterflyScene3D'
 import { EmergencyButton } from './EmergencyButton'
-import { FlyingButterfly } from '../feature/FlyingButterfly'
 import { Footer } from './Footer'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { MaintenanceBanner } from './MaintenanceBanner'
@@ -123,9 +123,9 @@ export function AppShell() {
       </main>
       <Footer />
       <EmergencyButton />
-      {/* Mounted once here, not per-page, so it keeps flying across route changes
+      {/* Mounted once here, not per-page, so the swarm keeps flying across route changes
           instead of resetting every time you navigate. */}
-      <FlyingButterfly />
+      <ButterflyScene3D />
     </div>
   )
 }
