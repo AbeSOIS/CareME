@@ -370,6 +370,42 @@ export function buildSeed(now: Date): DB {
   addApt('b029', 'c001', at(12, 0, 0), 'confirmed', 1)
   addApt('b030', 'c001', at(12, 30, 0), 'confirmed', 1)
   addApt('b031', 'c001', at(13, 0, 0), 'confirmed', 1)
+
+  // Spread the rest of the current Mon–Sun week (and a little history) so the dashboard's
+  // weekly chart, status/mode charts and completion/no-show metrics all have data to show.
+  const dow = (now.getDay() + 6) % 7 // Monday = 0
+  const wk = (d: number) => d - dow // day offset from today for weekday d
+  const weekPlan: Array<[ID, number, number, number, AppointmentStatus, SessionMode]> = [
+    ['b002', 0, 9, 15, 'completed', 'video'],
+    ['b012', 0, 11, 15, 'completed', 'audio'],
+    ['b013', 0, 14, 15, 'completed', 'chat'],
+    ['b014', 1, 10, 15, 'completed', 'video'],
+    ['b003', 1, 13, 15, 'noShow', 'video'],
+    ['b004', 1, 15, 15, 'completed', 'inPerson'],
+    ['b015', 2, 9, 15, 'completed', 'audio'],
+    ['b002', 2, 11, 15, 'completed', 'video'],
+    ['b012', 2, 16, 15, 'completed', 'chat'],
+    ['b013', 3, 10, 15, 'confirmed', 'video'],
+    ['b014', 3, 14, 15, 'confirmed', 'audio'],
+    ['b004', 4, 9, 15, 'confirmed', 'video'],
+    ['b015', 4, 11, 15, 'requested', 'chat'],
+    ['b003', 4, 15, 15, 'confirmed', 'inPerson'],
+    ['b002', 5, 9, 15, 'confirmed', 'video'],
+    ['b012', 5, 11, 15, 'requested', 'audio'],
+    ['b013', 6, 10, 15, 'confirmed', 'video'],
+    ['b014', 6, 14, 15, 'lateCancelled', 'video'],
+  ]
+  for (const [b, d, h, m, st, mode] of weekPlan) {
+    const off = wk(d)
+    if (off === 0) continue // today already has its own busy schedule above
+    // Keep the time-vs-status story consistent: past days are done, future days are upcoming.
+    const status: AppointmentStatus = off < 0 ? (st === 'confirmed' ? 'completed' : st === 'requested' ? 'noShow' : st) : st === 'completed' || st === 'noShow' ? 'confirmed' : st
+    addApt(b, 'c001', at(h, m, off), status, 1, mode)
+  }
+  // Earlier weeks: a few rejected / cancelled requests round out the status mix.
+  addApt('b005', 'c001', at(10, 15, -9), 'rejected', 1)
+  addApt('b006', 'c001', at(14, 15, -12), 'cancelled', 2, 'audio')
+  addApt('b007', 'c001', at(16, 15, -16), 'lateCancelled', 2, 'chat')
   addApt('b032', 'c001', at(14, 0, 0), 'confirmed', 1)
   addApt('b033', 'c001', at(15, 0, 0), 'confirmed', 1)
   addApt('b034', 'c001', at(16, 0, 0), 'confirmed', 1)

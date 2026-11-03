@@ -655,7 +655,30 @@
     "riskAlertOpen": "Open alert",
     "slotOpen": "Open",
     "slotBlocked": "Blocked",
-    "slotLegend": "What the colours mean"
+    "slotLegend": "What the colours mean",
+    "dash": {
+      "chartWeek": "Sessions this week",
+      "chartStatus": "Appointments by status",
+      "chartMode": "Sessions by type",
+      "chartCases": "Caseload progress (sessions per client)",
+      "kpiCompletion": "Completion rate",
+      "kpiTotal": "Total appointments",
+      "kpiClients": "Active clients",
+      "kpiAvg": "Avg. sessions per client",
+      "kpiNoShow": "No-show rate",
+      "kpiHours": "Hours counselled",
+      "colDay": "Day",
+      "colSessions": "Sessions",
+      "colStatus": "Status",
+      "colCount": "Count",
+      "colType": "Type",
+      "colRange": "Sessions",
+      "colClients": "Clients",
+      "next": "Next sessions",
+      "noNext": "No upcoming sessions.",
+      "sessionsShort": "sessions",
+      "insights": "At a glance"
+    }
   },
   "case": {
     "title": "Case record",

@@ -655,7 +655,30 @@
     "riskAlertOpen": "විවෘත ඇඟවීමක්",
     "slotOpen": "විවෘතයි",
     "slotBlocked": "අවහිර කළ",
-    "slotLegend": "වර්ණවල අර්ථය"
+    "slotLegend": "වර්ණවල අර්ථය",
+    "dash": {
+      "chartWeek": "මෙම සතියේ සැසි",
+      "chartStatus": "තත්ත්වය අනුව හමුවීම්",
+      "chartMode": "වර්ගය අනුව සැසි",
+      "chartCases": "සේවාලාභී ප්‍රගතිය (එක් අයෙකුට සැසි)",
+      "kpiCompletion": "සම්පූර්ණ කිරීමේ අනුපාතය",
+      "kpiTotal": "මුළු හමුවීම්",
+      "kpiClients": "සක්‍රිය සේවාලාභීන්",
+      "kpiAvg": "සේවාලාභියෙකුට සාමාන්‍ය සැසි",
+      "kpiNoShow": "නොපැමිණීමේ අනුපාතය",
+      "kpiHours": "උපදේශන පැය",
+      "colDay": "දිනය",
+      "colSessions": "සැසි",
+      "colStatus": "තත්ත්වය",
+      "colCount": "ගණන",
+      "colType": "වර්ගය",
+      "colRange": "සැසි",
+      "colClients": "සේවාලාභීන්",
+      "next": "ඉදිරි සැසි",
+      "noNext": "ඉදිරි සැසි නැත.",
+      "sessionsShort": "සැසි",
+      "insights": "එක බැල්මකින්"
+    }
   },
   "case": {
     "title": "නඩු වාර්තාව",

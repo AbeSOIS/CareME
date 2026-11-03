@@ -4,6 +4,7 @@ import { CalendarDays, FolderHeart, Inbox, Share2, Siren, Video } from 'lucide-r
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { AppointmentStatusBadge } from '../../components/feature/AppointmentStatusBadge'
+import { CounsellorInsights } from '../../components/feature/CounsellorInsights'
 import { HandoverBanner } from '../../components/feature/HandoverBanner'
 import { KpiTile } from '../../components/feature/KpiTile'
 import { Badge, ButtonLink, Card, EmptyState, PageHeader } from '../../components/ui'
@@ -114,6 +115,8 @@ export default function CounsellorHome() {
           </ul>
         )}
       </Card>
+
+      <CounsellorInsights appointments={apts} cases={cases} now={now} formatTime={fmt.time} />
     </>
   )
 }

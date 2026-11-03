@@ -30,9 +30,8 @@ function writePref(key: string, value: string) {
 }
 
 function initialTheme(): Theme {
-  const stored = readPref<Theme | 'system'>(THEME_KEY, ['light', 'dark', 'system'], 'system')
-  if (stored !== 'system') return stored
-  return typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  // Light is the default; only an explicit user choice switches to dark.
+  return readPref<Theme>(THEME_KEY, ['light', 'dark'], 'light')
 }
 
 interface UiState {
