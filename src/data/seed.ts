@@ -98,8 +98,8 @@ export function buildSeed(now: Date): DB {
       signLanguage: false,
       remoteAllowed: true,
       active: true,
-      bio: 'Counselling in Sinhala and English. Works with families, young people, and people under stress.',
-      qualifications: ['MSc in Counselling', 'Diploma in Counselling'],
+      bio: 'Counselling in Sinhala and English. Works with families, young people, and people under stress, with nine years supporting clients across the Horana area through workplace pressure, exam anxiety, and family conflict.',
+      qualifications: ['MSc in Counselling', 'Diploma in Counselling', 'Certificate in Trauma-Informed Care', 'Certificate in Cognitive Behavioural Techniques'],
     },
     {
       id: 'c002',
@@ -347,6 +347,21 @@ export function buildSeed(now: Date): DB {
   addApt('b005', 'c001', at(11, 0, 2), 'requested', 1, 'audio')
   addApt('b006', 'c001', at(14, 0, -3), 'noShow', 1)
   addApt('b007', 'c001', at(11, 0, -5), 'cancelled', 1)
+  // More of Dilini's caseload: a steady long-running client, a brand-new one, a nearly
+  // finished course, and a client seen yesterday.
+  addApt('b012', 'c001', at(10, 0, -28), 'completed', 1)
+  addApt('b012', 'c001', at(10, 0, -14), 'completed', 2)
+  addApt('b012', 'c001', at(10, 0, 5), 'confirmed', 3)
+  addApt('b013', 'c001', at(13, 0, -4), 'completed', 1)
+  addApt('b013', 'c001', at(13, 0, 8), 'requested', 2)
+  addApt('b014', 'c001', at(15, 0, -56), 'completed', 1)
+  addApt('b014', 'c001', at(15, 0, -42), 'completed', 2)
+  addApt('b014', 'c001', at(15, 0, -28), 'completed', 3)
+  addApt('b014', 'c001', at(15, 0, -14), 'completed', 4)
+  addApt('b015', 'c001', at(16, 0, -1), 'completed', 1)
+  // Two more for today specifically, so the dashboard's "Today" list has more than one line.
+  addApt('b016', 'c001', at(8, 30, 0), 'completed', 1)
+  addApt('b017', 'c001', at(17, 0, 0), 'confirmed', 1)
   addApt('b008', 'c002', at(9, 0, -12), 'completed', 1, 'video', 'ta')
   addApt('b008', 'c002', at(9, 0, 2), 'confirmed', 2, 'video', 'ta')
   addApt('b009', 'c002', at(11, 0, -6), 'completed', 1, 'audio', 'ta')
@@ -471,6 +486,12 @@ export function buildSeed(now: Date): DB {
     simpleCase('b004', 'c001', -14, 'economic', 'Referred by Base Hospital Horana after job loss.'),
     simpleCase('b005', 'c001', -2, 'relationship', 'New client — request pending.'),
     simpleCase('b006', 'c001', -3, 'drugRelated', 'Did not attend first appointment.'),
+    simpleCase('b012', 'c001', -28, 'relationship', 'Marital conflict following a long separation for work abroad. Two sessions in, building trust.'),
+    simpleCase('b013', 'c001', -4, 'mentalDisorder', 'New client referred by the family health worker for persistent low mood.'),
+    simpleCase('b014', 'c001', -56, 'economic', 'Debt-related stress after a cooperative loan default. Four sessions completed; finishing the course.'),
+    simpleCase('b015', 'c001', -1, 'education', 'Exam-related anxiety ahead of the A/L results. Single session so far.'),
+    simpleCase('b016', 'c001', 0, 'mentalDisorder', 'Walk-in client seen this morning; first session, assessing general wellbeing.'),
+    simpleCase('b017', 'c001', 0, 'relationship', 'Referred by a colleague; confirmed for a first session later today.'),
     simpleCase('b008', 'c002', -12, 'family', 'Family conflict after migration of spouse for work.'),
     simpleCase('b009', 'c002', -6, 'drugRelated', 'Concern about cannabis use; motivated to cut down.'),
     simpleCase('b010', 'c002', 1, 'mentalDisorder', 'New request.'),
@@ -488,7 +509,7 @@ export function buildSeed(now: Date): DB {
       primaryCategory: category,
       assessments: [],
       notes:
-        openedOffset < 0
+        openedOffset <= 0
           ? [{ id: `note_${beneficiaryId}`, date: iso(at(9, 0, openedOffset)), mode: 'video', durationMin: 50, category, note: summary, authorId: counsellorId === 'c001' ? 'u_c1' : 'u_c2' }]
           : [],
       followUps: [],
@@ -554,6 +575,25 @@ export function buildSeed(now: Date): DB {
       enteredByUserId: 'u_c1',
       createdAt: iso(subDays(now, 7)),
     },
+    {
+      id: 'ref_004',
+      direction: 'inbound',
+      source: 'other',
+      sourceOrganisation: 'Workplace counselling liaison, Horana garment zone',
+      referralDate: day(now),
+      receivingDistrictId: 'kalutara',
+      receivingDsDivisionId: 'horana',
+      beneficiaryId: 'b017',
+      contactName: 'Supervisor on behalf of client',
+      reason: 'Workplace conflict and stress; colleague suggested counselling.',
+      urgency: 'routine',
+      consentStatus: 'obtained',
+      counsellorId: 'c001',
+      status: 'received',
+      actions: [],
+      enteredByUserId: 'u_c1',
+      createdAt: iso(now),
+    },
   ]
 
   /* ---------------- Emergency roster, alerts, handovers ---------------- */
@@ -602,6 +642,19 @@ export function buildSeed(now: Date): DB {
     message: 'I need to talk to someone now.',
     raisedAt: iso(addMinutes(now, -3)),
     assignedOfficerUserId: currentOfficer,
+    escalations: [],
+    status: 'open',
+  })
+  // A risk flag on one of Dilini's own clients, so her dashboard's risk-flagged list isn't empty.
+  alerts.push({
+    id: 'al_open2',
+    source: 'counsellorRisk',
+    beneficiaryId: 'b006',
+    message: 'Missed first appointment and not answering calls. Raising as a welfare check.',
+    raisedAt: iso(addMinutes(now, -45)),
+    assignedOfficerUserId: currentOfficer,
+    acknowledgedAt: iso(addMinutes(now, -40)),
+    acknowledgedByUserId: currentOfficer,
     escalations: [],
     status: 'open',
   })

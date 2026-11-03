@@ -12,7 +12,7 @@ export function Footer() {
   return (
     // pb-28 clears the fixed EmergencyButton (bottom-4 + 52px) so it never covers the footer.
     <footer className="mt-16 bg-brand-950 pb-28 text-slate-200">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-[1.5fr_1fr_auto]">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:grid-cols-[1.5fr_1fr_auto]">
         <div className="space-y-2">
           <p className="text-body font-semibold text-white">{t('app.division')}</p>
           <p className="text-body-sm text-slate-300">{t('app.ministry')}</p>

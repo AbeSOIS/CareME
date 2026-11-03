@@ -50,7 +50,12 @@ export function AppShell() {
       <SkipLink />
       <MaintenanceBanner />
       <header className="sticky top-0 z-30 border-b border-brand-900/10 bg-white/92 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/95">
-        <div className="mx-auto flex max-w-6xl min-w-0 items-center gap-2 px-4 py-2 md:min-h-[4.25rem]">
+        {/* Centered within the same reading-width container as the page body. The
+            language switcher collapses to a one-button dropdown here (see
+            LanguageSwitcher's `variant="dropdown"`) specifically to free up the width
+            that caused this to overflow and scroll when signed in — the nav still has
+            overflow-x-auto as a safety net below that, but shouldn't need it now. */}
+        <div className="mx-auto flex max-w-7xl min-w-0 items-center gap-2 px-4 py-2 md:min-h-[4.25rem]">
           <Brand />
           <nav aria-label={t('nav.mainNav')} className="ml-6 hidden min-w-0 flex-1 xl:block">
             {/* overflow-x-auto: if the right-side cluster (language, theme, bell, user menu)
@@ -68,7 +73,7 @@ export function AppShell() {
             </ul>
           </nav>
           <div className="ml-auto flex shrink-0 items-center gap-1">
-            <LanguageSwitcher className="max-md:hidden" />
+            <LanguageSwitcher variant="dropdown" className="max-sm:hidden" />
             <ThemeToggle />
             <NotificationsMenu />
             <UserMenu />
@@ -113,7 +118,7 @@ export function AppShell() {
           </div>
         )}
       </header>
-      <main id="main" tabIndex={-1} className="mx-auto w-full max-w-6xl flex-1 px-4 pt-8 pb-24 focus:outline-none">
+      <main id="main" tabIndex={-1} className="mx-auto w-full max-w-7xl flex-1 px-4 pt-8 pb-24 focus:outline-none">
         <Outlet />
       </main>
       <Footer />

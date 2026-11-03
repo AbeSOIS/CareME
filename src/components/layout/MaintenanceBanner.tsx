@@ -9,7 +9,7 @@ export function MaintenanceBanner() {
   if (!notice) return null
   return (
     <div role="status" className="bg-amber-100 text-amber-950 dark:bg-amber-900 dark:text-amber-50">
-      <div className="mx-auto flex max-w-6xl items-start gap-2 px-4 py-2 text-body-sm">
+      <div className="mx-auto flex max-w-7xl items-start gap-2 px-4 py-2 text-body-sm">
         <Wrench aria-hidden className="mt-0.5 size-4 shrink-0" />
         <p>
           <strong>{t('common.maintenance')}:</strong> {notice} {t('common.emergencyAlwaysAvailable')}
